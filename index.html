@@ -133,6 +133,53 @@ a:active {
 }
 </style>
 <link rel=icon href=https://raw.githubusercontent.com/ChocoTaco1/Discord_Web/master/images/favicon.png>
+
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+.container {
+  position: relative;
+  width: 50%;
+}
+
+.image {
+  opacity: 1;
+  display: block;
+  width: 100%;
+  height: auto;
+  transition: .5s ease;
+  backface-visibility: hidden;
+}
+
+.middle {
+  transition: .5s ease;
+  opacity: 0;
+  position: absolute;
+  top: 50%;
+  left: 100%;
+  transform: translate(-50%, -50%);
+  -ms-transform: translate(-50%, -50%);
+  text-align: center;
+}
+
+.container:hover .image {
+  opacity: 0.6;
+}
+
+.container:hover .middle {
+  opacity: 1;
+}
+
+.text {
+  font-weight: bold;
+  font-size: 13px; 
+  line-height: 1.1;
+  font-family: sans-serif;
+  background-color: #232323;
+  color: white;
+  padding: 16px 20px;
+}
+</style>
+
 </head>
 <body bgcolor="#2E2E2E" text="#FFFFFF" style="margin: 0;" width="100%" yahoo="yahoo">
 <table cellpadding="0" cellspacing="0" border="0" height="100%" width="100%" bgcolor="#e0e0e0" style="border-collapse:collapse;">
@@ -153,7 +200,7 @@ a:active {
           <!-- Email Header : BEGIN -->
           <table cellspacing="0" cellpadding="0" border="0" align="center" width="100%" style="max-width: 680px;">
             <tr>
-              <td style="padding: 12px 0px 10px 0px; text-align: left; font-family: Myriad Pro; font-size: 35px; mso-height-rule: exactly; line-height: 30px; color: #ffffff;">Play Tribes 2</td>
+              <td style="padding: 12px 0px 10px 0px; text-align: left; font-family: sans-serif; font-size: 35px; mso-height-rule: exactly; line-height: 30px; color: #ffffff;">Play Tribes 2</td>
             </tr>
           </table>
           <!-- Email Header : END --> 
@@ -220,7 +267,7 @@ a:active {
                         <![endif]--></td>
             </tr>
             <!-- Background Image with Text : END --> 
-            <td style="padding: 20px 0px 0px 0px; text-align: center; font-family: Myriad Pro; font-size: 30px; mso-height-rule: exactly; line-height: 30px; color: #ffffff;">Get Tribes</td>
+            <td style="padding: 20px 0px 0px 0px; text-align: center; font-family: sans-serif; font-size: 30px; mso-height-rule: exactly; line-height: 30px; color: #ffffff;">Get Tribes</td>
             <!-- Two Even Columns : BEGIN -->
             <tr>
               <td bgcolor="#2E2E2E" align="center" height="100%" valign="top" width="100%"><!--[if mso]>
@@ -242,7 +289,15 @@ a:active {
                           <tr>
                             <td style="padding: 10px 10px;"><table cellspacing="0" cellpadding="0" border="0" width="100%" style="font-size: 14px;text-align: left;">
                                 <tr>
-                                  <td><a href="http://www.tribalwar.com/forums/showthread.php?t=688267"><img src="images/Image_310x310_1.png" width="310" alt="" style="border: 0;width: 100%;max-width: 310px;height: auto;" class="center-on-narrow"></a></td>
+                                  <td><a href="http://www.tribalwar.com/forums/showthread.php?t=688267">
+                                  <div class="container">
+  									<img src="images/Image_310x310_1.png" alt="Avatar" class="image" style="width: 310px;height: 174px;" >
+									  <div class="middle">
+    									<div class="text">Download</div>
+  										</div>
+									</div>
+                              </a>
+                               </td>
                                 </tr>
                                 <tr>
                                   <td style="font-family: sans-serif; font-size: 15px; mso-height-rule: exactly; line-height: 20px; color: #ffffff; padding-top: 10px;" class="stack-column-center"> Tribes 2 Config - Maps, scripts, interpolation, and textures are already included. Ready to play. </td>
@@ -262,7 +317,14 @@ a:active {
                           <tr>
                             <td style="padding: 10px 10px;"><table cellspacing="0" cellpadding="0" border="0" width="100%" style="font-size: 14px;text-align: left;">
                                 <tr>
-                                  <td><a href="https://www.tribesnext.com/"><img src="images/Image_310x310_2.png" width="310" alt="" style="border: 0;width: 100%;max-width: 310px;height: auto;" class="center-on-narrow"></a></td>
+                                  <td><a href="https://www.tribesnext.com/">
+	                               <div class="container">
+  									<img src="images/Image_310x310_2.png" alt="Avatar" class="image" style="width: 310px;height: 174px;" >
+									  <div class="middle">
+    									<div class="text">Download</div>
+  										</div>
+									</div>
+                                  </a></td>
                                 </tr>
                                 <tr>
                                   <td style="font-family: sans-serif; font-size: 15px; mso-height-rule: exactly; line-height: 20px; color: #ffffff; padding-top: 10px;" class="stack-column-center"> Vanilla Tribes - From TribesNext. Install with the Setup package from Vivaldi. Install scripts, networking, fov, etc yourself.</td>
@@ -320,7 +382,7 @@ a:active {
                         <![endif]--></td>
             </tr>
             <!-- Background Image with Text : END --> 
-            <td style="padding: 20px 0px 0px 0px; text-align: center; font-family: Myriad Pro; font-size: 30px; mso-height-rule: exactly; line-height: 30px; color: #ffffff;">Join the Community</td>
+            <td style="padding: 20px 0px 0px 0px; text-align: center; font-family: sans-serif; font-size: 30px; mso-height-rule: exactly; line-height: 30px; color: #ffffff;">Join the Community</td>
             <!-- Three Even Columns : BEGIN -->
             <tr>
               <td bgcolor="#2E2E2E" align="center" height="100%" valign="top" width="100%" style="padding: 10px 0;"><!--[if mso]>
@@ -441,7 +503,7 @@ a:active {
                         <![endif]--></td>
             </tr>
             <!-- Background Image with Text : END -->  
-            <td style="padding: 20px 0px 0px 0px; text-align: center; font-family: Myriad Pro; font-size: 30px; mso-height-rule: exactly; line-height: 30px; color: #ffffff;">Game Modes</td>
+            <td style="padding: 20px 0px 0px 0px; text-align: center; font-family: sans-serif; font-size: 30px; mso-height-rule: exactly; line-height: 30px; color: #ffffff;">Game Modes</td>
             <!-- Thumbnail Left, Text Right : BEGIN -->
             <tr>
               <td dir="ltr" bgcolor="#2E2E2E" align="center" height="100%" valign="top" width="100%" style="padding: 10px 0;"><!--[if mso]>
