@@ -1,0 +1,562 @@
+<!doctype html>
+<html>
+<head>
+
+<link rel=icon href=https://raw.githubusercontent.com/ChocoTaco1/Discord_Web/master/images/favicon.png>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<meta charset="utf-8">
+<!-- utf-8 works for most cases -->
+<meta name="viewport" content="width=device-width">
+<!-- Forcing initial-scale shouldn't be necessary -->
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<!-- Use the latest (edge) version of IE rendering engine -->
+<title>Play Tribes 2 - About</title>
+<!-- The title tag shows in email notifications, like Android 4.4. -->
+
+<!-- Please use an inliner tool to convert all CSS to inline as inpage or external CSS is removed by email clients -->
+<!-- important in CSS is used to prevent the styles of currently inline CSS from overriding the ones mentioned in media queries when corresponding screen sizes are encountered -->
+
+<style>
+
+/* Navigation Bar */
+ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  background-color: #2F2F2F;
+  position: -webkit-sticky; /* Safari */
+  position: sticky;
+  z-index:5;
+  top: 0;
+}
+
+li {
+  float: left;
+}
+
+li a {
+  display: block;
+  color: white;
+  font-family: sans-serif;
+  text-align: center;
+  padding: 14px 12px;
+  text-decoration: none;
+}
+
+li a:hover {
+  background-color: #1F1F1F;
+  color: white;
+}
+
+.active {
+  background-color: #3F3F3F;
+}
+body {
+  font-size: 16px;
+}
+
+ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  background-color: #2F2F2F;
+  color: #e2e5e5;
+  position: -webkit-sticky; /* Safari */
+  position: sticky;
+  top: 0;
+}
+
+li {
+  float: left;
+  color: #e2e5e5;
+}
+
+li a {
+  display: block;
+  color: white;
+  text-align: center;
+  padding: 12px 12px;
+  text-decoration: none;
+}
+
+li a:hover {
+  background-color: #1F1F1F;
+  color: #e2e5e5;
+}
+
+.active {
+  background-color: #3E3E3E;
+  color: #e2e5e5;
+}
+	
+</style>
+
+<!-- CSS Reset -->
+<style type="text/css">
+/* What it does: Remove spaces around the email design added by some email clients. */
+      /* Beware: It can remove the padding / margin and add a background color to the compose a reply window. */
+html, body {
+	margin: 0 !important;
+	padding: 0 !important;
+	height: 100% !important;
+	width: 100% !important;
+}
+/* What it does: Stops email clients resizing small text. */
+* {
+	-ms-text-size-adjust: 100%;
+	-webkit-text-size-adjust: 100%;
+}
+/* What it does: Forces Outlook.com to display emails full width. */
+.ExternalClass {
+	width: 100%;
+}
+/* What is does: Centers email on Android 4.4 */
+div[style*="margin: 16px 0"] {
+	margin: 0 !important;
+}
+/* What it does: Stops Outlook from adding extra spacing to tables. */
+table, td {
+	mso-table-lspace: 0pt !important;
+	mso-table-rspace: 0pt !important;
+}
+/* What it does: Fixes webkit padding issue. Fix for Yahoo mail table alignment bug. Applies table-layout to the first 2 tables then removes for anything nested deeper. */
+table {
+	border-spacing: 0 !important;
+	border-collapse: collapse !important;
+	table-layout: fixed !important;
+	margin: 0 auto !important;
+}
+table table table {
+	table-layout: auto;
+}
+/* What it does: Uses a better rendering method when resizing images in IE. */
+img {
+	-ms-interpolation-mode: bicubic;
+}
+/* What it does: Overrides styles added when Yahoo's auto-senses a link. */
+.yshortcuts a {
+	border-bottom: none !important;
+}
+/* What it does: Another work-around for iOS meddling in triggered links. */
+a[x-apple-data-detectors] {
+	color: inherit !important;
+}
+	
+/* Get Mappacks Button */
+.button {
+  background-color: #048d99; /* Teal */
+  border: none;
+  color: white;
+  padding: 4px 0px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 26px;
+  font-weight: bold;
+  line-height: 1.0;
+  font-family: sans-serif;
+  margin: 0px 0px 0px 0px;
+  -webkit-transition-duration: 0.4s; /* Safari */
+  transition-duration: 0.4s;
+  cursor: pointer;
+  width: 100%
+}
+.button1 {
+  background-color: #048d99; 
+  color: black; 
+  border: 0px solid #048d99;
+}
+.button1:hover {
+  background-color: #0fcfb9;
+  color: black;
+}
+</style>
+
+<!-- Progressive Enhancements -->
+<style type="text/css">
+/* All Other Buttons */
+.button-td, .button-a {
+	transition: all .3s ease-in;
+}
+.button-td:hover, .button-a:hover {
+	background: #4E4E4E !important;
+	border-color: #4E4E4E !important;
+}
+
+/* Media Queries */
+@media screen and (max-width: 480px) {
+/* What it does: Forces elements to resize to the full width of their container. Useful for resizing images beyond their max-width. */
+.fluid, .fluid-centered {
+	width: 100% !important;
+	max-width: 100% !important;
+	height: auto !important;
+	margin-left: auto !important;
+	margin-right: auto !important;
+}
+/* And center justify these ones. */
+.fluid-centered {
+	margin-left: auto !important;
+	margin-right: auto !important;
+}
+/* What it does: Forces table cells into full-width rows. */
+.stack-column, .stack-column-center {
+	display: block !important;
+	width: 100% !important;
+	max-width: 100% !important;
+	direction: ltr !important;
+}
+/* And center justify these ones. */
+.stack-column-center {
+	text-align: center !important;
+}
+/* What it does: Generic utility class for centering. Useful for images, buttons, and nested tables. */
+.center-on-narrow {
+	text-align: center !important;
+	display: block !important;
+	margin-left: auto !important;
+	margin-right: auto !important;
+	float: none !important;
+}
+	
+table.center-on-narrow {
+	display: inline-block !important;
+}
+	
+}
+body {
+	margin-left: 20px;
+	background-color: #1F1F1F;
+}
+	
+body,td,th {
+	color: #F8F8F8;
+}
+a:link {
+	color: #A6A6A6;
+}
+a:visited {
+	color: #A6A6A6;
+}
+a:active {
+	color: #A6A6A6;
+}
+</style>
+
+<style>
+.container {
+  align: center;
+  position: relative;
+  width: 100%;
+}
+
+/* Download Image Button */
+
+.image {
+  opacity: 1;
+  display: block;
+  width: 100%;
+  height: auto;
+  transition: .9s ease;
+  backface-visibility: hidden;
+}
+
+.middle {
+  transition: .9s ease;
+  opacity: 0;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  -ms-transform: translate(-50%, -50%);
+  text-align: center;
+}
+
+.container:hover .image {
+  opacity: .8;
+}
+
+.container:hover .middle {
+  opacity: 1;
+}
+
+.text {
+  font-weight: bold;
+  font-size: 13px; 
+  line-height: 1.0;
+  font-family: sans-serif;
+  background-color: #1F1F1F;
+  color: white;
+  padding: 10px 20px;
+}
+	
+body {
+	margin:0;
+	overflow-y: scroll;
+	
+}
+
+</style>
+
+</head>
+<body text="#e2e5e5" style="margin: 0;" width="100%" >
+<table cellpadding="0" cellspacing="0" border="0" height="100%" width="100%" bgcolor="#e0e0e0" style="border-collapse:collapse;">
+  <tr>
+    <td bgcolor="#1F1F1F" background="images/bglogo3.png" style="vertical-align:top;"><center style="width: 100%;">
+        
+        <!-- Visually Hidden Preheader Text : BEGIN -->
+        <div style="display:none;font-size:1px;line-height:1px;max-height:0px;max-width:0px;opacity:0;overflow:hidden;mso-hide:all;font-family: sans-serif;"> Team Combat on an epic scale! </div>
+        <!-- Visually Hidden Preheader Text : END -->
+        
+        <div style="max-width: 800px;"> 
+          <!--[if (gte mso 9)|(IE)]>
+            <table cellspacing="0" cellpadding="0" border="0" width="680" align="center">
+            <tr>
+            <td>
+            <![endif]--> 
+          
+          <!-- Email Header : BEGIN -->
+          <table cellspacing="0" cellpadding="0" border="0" align="center" width="100%" style="max-width: 800px;">
+            <tr>
+              <td style="padding: 5px 0px 7px 5px; text-align: left; font-family: sans-serif; font-size: 35px; mso-height-rule: exactly; line-height: 45px; color: #e2e5e5;"><img src="images/play.png" width="250" alt="" border="0"  style="padding: 0px 0px 0px 0px; width: 100%; max-width: 250px; height: auto;" align="center"></td>
+              <td class="full-width-image" align="center"><img src="images/logo.png" width="322" alt="" border="0"  style="padding: 0px 5px 0px 0px; width: 100%; max-width: 45px; height: auto;" align="center"></td>
+              <td style="padding: 5px 5px 5px 0px; text-align: right; font-family: sans-serif; font-size: 16px; line-height: 20px; color: #e2e5e5;"></td>
+            </tr>
+          </table>
+          <!-- Email Header : END --> 
+          
+          <!-- Navigation : BEGIN --> 
+		  
+		  <ul class="horizontal">
+			  <li><a href="index.html">Home</a></li>
+			  <li><a href="downloads.html">Downloads</a></li>
+			  <!--<li><a href="guides.html">Guides</a></li>-->
+			  <li><a href="stats.html">Stats</a></li>
+			  <li class="rightli" style="float:right"><a href="about.html">About</a></li>
+		  </ul>
+          <!-- Navigation : END --> 
+          
+          <!-- Email Body : BEGIN -->
+          <table cellspacing="0" cellpadding="0" border="0" align="center" bgcolor="2F2F2F" width="100%" style="max-width: 800px;">
+            
+
+            <!-- Background Image with Text : END -->  
+            <td bgcolor="#3E3E3E" style="padding: 12px 0px 9px 0px; text-align: center; font-family: sans-serif; font-size: 30px; mso-height-rule: exactly; line-height: 30px; color: #e2e5e5;"><img src="review/review.png" width="260" alt="" style="border: 0;width: 100%;max-width: 260px;height: auto;" class="center-on-narrow"></td>
+            <!-- Thumbnail Left, Text Right : BEGIN -->
+            <tr>
+              <td dir="ltr" bgcolor="#2E2E2E" align="center" height="100%" valign="top" width="100%" style="padding: 10px 0px 0px 0px;">
+                       <!--[if mso]>
+                        <table border="0" cellspacing="0" cellpadding="0" align="center" width="660">
+                        <tr>
+                        <td align="center" valign="top" width="660">
+                        <![endif]-->
+                        
+                            <!-- 1 Column Text : BEGIN -->
+            <tr>
+              <td>
+                 <table cellspacing="0" cellpadding="0" border="0" height="100" width="100%">
+                  <tr>
+                    <td bgcolor="#2E2E2E" style="padding: 0px 40px 0px 40px; text-align: center; font-family: sans-serif; font-size: 15px; mso-height-rule: exactly; line-height: 30px; color: #e2e5e5;"><p style="font-style: italic; font-weight: normal; text-shadow: -1px 1px 1px #111111;"><italic style="color:#e2e5e5;padding: 0px 0px 0px 0px;"><a href="https://www.gamespot.com/reviews/tribes-2-review/1900-2705268/"><img src="review/gamespot.png" alt="" width="30" class="center" style="border: 0;width: 100%;max-width:30px;height: auto;padding: 0px 0px 10px 0px;" align="center"></a>
+                    <br>Tribes 2 isn't easy to master, and it won't play well on every gaming PC, but when you're up and running it's a tremendous amount of fun.
+                    <br>By 
+                    <a href="https://www.gamespot.com/profile/SamP/">Sam Parker</a> |
+                    <a href="https://twitter.com/RenR">@RenR</a> on May 17, 2006 at 3:09PM PDT
+					<br>
+                       
+                
+                <table border="0" cellpadding="0" cellspacing="0" align="center" width="100%" style="max-width:770px;">
+                  <tr>
+                    <td align="center" valign="top" style="font-size:0; padding: 10px 0;"><!--[if mso]>
+                                    <table border="0" cellspacing="0" cellpadding="0" align="center" width="660">
+                                    <tr>
+                                    <td align="left" valign="top" width="220">
+                                    <![endif]-->
+                      
+                      <div style="display:inline-block; margin: 0 0px; max-width:33.33%; min-width:160px; vertical-align:top; width:100%;" class="stack-column">
+                        <table cellspacing="0" cellpadding="0" border="0" width="100%">
+                          <tr>
+                            <td dir="ltr" style="padding: 40px 30px 10px 30px;"><img src="review/1.png" alt="" width="400" class="center-on-narrow" style="border: 0;width: 100%;max-width:400px;height: auto;box-shadow: -2px 2px 3px #212121;" align="right">
+                            </td>
+                          </tr>
+                        </table>
+                        <table cellspacing="0" cellpadding="0" border="0" width="100%">
+                          <tr>
+                            <td dir="ltr" style="padding: 60px 30px 10px 30px;">
+                            <img src="review/2.png" alt="" width="400" class="center-on-narrow" style="border: 0;width: 100%;max-width:400px;height: auto; box-shadow: -2px 2px 3px #212121;" align="right"></td>
+                          </tr>
+                        </table>
+                      </div>
+                      
+                      <!--[if mso]>
+                                    </td>
+                                    <td align="left" valign="top" width="440">
+                                    <![endif]-->
+                      
+                      <div style="display:inline-block; margin: 0 0px; max-width:66.66%; min-width:320px; vertical-align:top;" class="stack-column">
+                        <table cellspacing="0" cellpadding="0" border="0" width="100%">
+                          <tr>
+                            <td dir="ltr" style="font-family: sans-serif; font-size: 15px; mso-height-rule: exactly; line-height: 30px; color: #e2e5e5; padding: 0px 0px 0; text-align: center; text-shadow: -1px 1px 1px #111111;">
+							When Starsiege: Tribes came out at the very end of 1998, it was the first of its kind: a retail first-person shooter designed specifically for multiplayer competition. The intervening years have seen other popular action games focused primarily on multiplayer competition, but none have had the same emphasis on teamplay in large, wide-open areas, with plenty of players participating in each match. Not until Tribes 2. Experienced Tribes players will find that the sequel makes relatively few changes to the successful core mechanics of the original but that it features substantially improved graphics, even larger network games, and more items, vehicles, and equipment to use in battle. For those new to the series, Tribes 2 also offers extensive offline training options. Unfortunately, a number of technical problems in the initial retail release have dampened some players' enthusiasm for what is otherwise an outstanding multiplayer action game. <br>
+                          </tr>
+                        </table>
+                      </div>
+                      
+                      <!--[if mso]>
+                                    </td>
+                                    </tr>
+                                    </table>
+                                    <![endif]--></td>
+                  </tr>
+                </table>
+                
+                <!--[if mso]>
+                        </td>
+                        </tr>
+                        </table>
+                        <![endif]--></td>
+            </tr>
+            <!-- Thumbnail Left, Text Right : END --> 
+            
+                        <!-- 1 Column Text : BEGIN -->
+            <tr>
+              <td><table cellspacing="0" cellpadding="0" border="0" height="100" width="100%">
+                  <tr>
+                    <td bgcolor="#2E2E2E" style="padding: 0px 25px 0px 25px; text-align: center; font-family: sans-serif; font-size: 15px; mso-height-rule: exactly; line-height: 30px; color: #e2e5e5;"><p style="font-style: normal; font-weight: normal; text-shadow: -1px 1px 1px #111111;">Tribes 2 inherits its sci-fi setting from Dynamix's series of mech games, including Earthsiege and Starsiege. Much of what distinguishes Tribes 2's style from that of other first-person shooters stems from this background, including the distinctively large outdoor settings in the game, and also the focus on high-tech equipment such as jump jets and mobile armor suits. Most of the contextual story built up in the earlier games has since fallen away, along with the "Starsiege" surname, since most players came to refer to the original simply as "Tribes" anyway. But the context of Tribes 2 still lends some coherence to the in-game taunts and the mix of harsh environments that will become your playground. You have the choice of three classes of mobile armor suits to wear in battle--the light scout, medium assault, and heavy juggernaut--and they differ in mobility and arsenal. All the classes have a lot of equipment choices and can carry three to five weapons, plus grenades, mines, and a special equipment pack all at once. The inventory system has been significantly streamlined in the new game, so you can set up equipment presets that go into effect when you use a base inventory station anytime during a match.
+					<br><br>
+					Tribes 2's different style extends to its pacing, which is somewhat slower and more deliberate than what you'd find in some other popular shooters such as Unreal Tournament and Counter-Strike. The first thing you'll notice in comparison is the effect that the jetpack has on combat. The jetpack gives you limited upward or directional thrust, and though it takes a while to learn how to combine this with ordinary ground movement, the combination is potent, so players in light and medium suits move very quickly over rough terrain. Players jetting through the air are quite difficult to hit with the game's slow projectile weapons, so combat between aerial players often focuses on trying to lead an opponent's landing to deliver explosive splash damage. The game's direct attack weapons make it possible to fell a flying opponent, and the new heat-seeking missile launcher adds an additional threat that's hard to shake once it locks on. The net effect of the game's mobile armors suits and jetpacks is to make combat less decisive and less deadly in wide-open outdoor terrain, while the explosive heavy weapons and turret defenses tend to keep indoor brawls vicious and short. But there's room for you to play various niche roles, such as when you're equipped with the cloaking pack and the game's new melee weapon, the shocklance--a combination that can be used to sneak up on enemies inside their own base for a fatal backstab. Tribes 2 inherits its sci-fi setting from Dynamix's series of mech games, including Earthsiege and Starsiege. Much of what distinguishes Tribes 2's style from that of other first-person shooters stems from this background, including the distinctively large outdoor settings in the game, and also the focus on high-tech equipment such as jump jets and mobile armor suits. Most of the contextual story built up in the earlier games has since fallen away, along with the "Starsiege" surname, since most players came to refer to the original simply as "Tribes" anyway. But the context of Tribes 2 still lends some coherence to the in-game taunts and the mix of harsh environments that will become your playground. You have the choice of three classes of mobile armor suits to wear in battle--the light scout, medium assault, and heavy juggernaut--and they differ in mobility and arsenal. All the classes have a lot of equipment choices and can carry three to five weapons, plus grenades, mines, and a special equipment pack all at once. The inventory system has been significantly streamlined in the new game, so you can set up equipment presets that go into effect when you use a base inventory station anytime during a match.
+					<br><br>
+					Tribes 2's different style extends to its pacing, which is somewhat slower and more deliberate than what you'd find in some other popular shooters such as Unreal Tournament and Counter-Strike. The first thing you'll notice in comparison is the effect that the jetpack has on combat. The jetpack gives you limited upward or directional thrust, and though it takes a while to learn how to combine this with ordinary ground movement, the combination is potent, so players in light and medium suits move very quickly over rough terrain. Players jetting through the air are quite difficult to hit with the game's slow projectile weapons, so combat between aerial players often focuses on trying to lead an opponent's landing to deliver explosive splash damage. The game's direct attack weapons make it possible to fell a flying opponent, and the new heat-seeking missile launcher adds an additional threat that's hard to shake once it locks on. The net effect of the game's mobile armors suits and jetpacks is to make combat less decisive and less deadly in wide-open outdoor terrain, while the explosive heavy weapons and turret defenses tend to keep indoor brawls vicious and short. But there's room for you to play various niche roles, such as when you're equipped with the cloaking pack and the game's new melee weapon, the shocklance--a combination that can be used to sneak up on enemies inside their own base for a fatal backstab. <br>
+            
+            <!-- Thumbnail Right, Text Left : BEGIN -->
+            <tr>
+              <td dir="rtl" bgcolor="#2E2E2E" align="center" height="100%" valign="top" width="100%" style="padding: 10px 0;"><!--[if mso]>
+                        <table border="0" cellspacing="0" cellpadding="0" align="center" width="660">
+                        <tr>
+                        <td align="center" valign="top" width="660">
+                        <![endif]-->
+                
+                <table border="0" cellpadding="0" cellspacing="0" align="center" width="100%" style="max-width:750px;">
+                  <tr>
+                    <td align="center" valign="top" style="font-size:0; padding: 10px 0;"><!--[if mso]>
+                                    <table border="0" cellspacing="0" cellpadding="0" align="center" width="660">
+                                    <tr>
+                                    <td align="left" valign="top" width="220">
+                                    <![endif]-->
+                      
+                    <div style="display:inline-block; margin: 0 0px; max-width:33.33%; min-width:160px; vertical-align:top; width:100%;" class="stack-column">
+                        <table cellspacing="0" cellpadding="0" border="0" width="100%">
+                          <tr>
+                            <td dir="ltr" style="padding: 40px 30px 10px 30px;"><img src="review/3.png" alt="" width="400" class="center-on-narrow" style="border: 0;width: 100%;max-width:400px;height: auto;box-shadow: -2px 2px 3px #212121;" align="right">
+                            </td>
+                          </tr>
+                        </table>
+                        <table cellspacing="0" cellpadding="0" border="0" width="100%">
+                          <tr>
+                            <td dir="ltr" style="padding: 60px 30px 10px 30px;">
+                            <img src="review/4.png" alt="" width="400" class="center-on-narrow" style="border: 0;width: 100%;max-width:400px;height: auto;box-shadow: -2px 2px 3px #212121;" align="right"></td>
+                          </tr>
+                        </table>
+                      </div>
+                      
+                      <!--[if mso]>
+                                    </td>
+                                    <td align="left" valign="top" width="440">
+                                    <![endif]-->
+                      
+                      <div style="display:inline-block; margin: 0px 0px 0px 0px; max-width:66.66%; min-width:320px; vertical-align:top;" class="stack-column">
+                        <table cellspacing="0" cellpadding="0" border="0" width="100%">
+                          <tr>
+                            <td dir="ltr" style="font-family: sans-serif; font-size: 15px; mso-height-rule: exactly; line-height: 30px; color: #e2e5e5; padding: 50px 20px 0px 0px; text-align: center;" class="center"text-shadow: -1px 1px 1px #111111;>
+  								The game offers a lot more than just deathmatch and capture-the-flag game modes. The free-for-all variations derived from popular Starsiege: Tribes mods are good for games with fewer players and make the most of Tribes 2's map style. Rabbit is a single-flag game where the player who carries the flag is "it." There's often a terrific scrimmage as other players try to grab the flag and make a run back to their bases. Hunters is reminiscent of the headhunter mods for other multiplayer games. As players die, they drop flags that can be collected for points at a central location. The real scramble happens when someone who's gathered a lot of flags is fragged, an event that's greeted with a jubilant "Yard sale!" voice-over as opponents gather to fight over the remains.
+							</td>
+                          </tr>
+                        </table>
+                      </div>
+                      
+                      <!--[if mso]>
+                                    </td>
+                                    </tr>
+                                    </table>
+                                    <![endif]--></td>
+                  </tr>
+                </table>
+                
+                <!--[if mso]>
+                        </td>
+                        </tr>
+                        </table>
+                        <![endif]--></td>
+            </tr>
+            <!-- Thumbnail Right, Text Left : END -->
+            
+          </table>
+          <!-- Email Body : END --> 
+          
+                      <!-- 1 Column Text : BEGIN -->
+            <tr>
+              <td><table cellspacing="0" cellpadding="0" border="0" height="100" width="100%">
+                  <tr>
+                    <td bgcolor="#2E2E2E" style="padding: 0px 25px 0px 25px; text-align: center; font-family: sans-serif; font-size: 15px; mso-height-rule: exactly; line-height: 30px; color: #e2e5e5;"><p style="font-style: normal; font-weight: normal; text-shadow: -1px 1px 1px #111111;"> However, it's with the large team games that Tribes 2 is really impressive. The scale of these games is unmatched; there will often be 40 to 60 (or even more) players on a single server. The game's network code is quite good and supports these numbers well on servers with sufficient dedicated bandwidth, but some warping does occur in games containing many more than 60 players. The larger maps easily accommodate this many players and generally feature vehicle pads so that a portion of each team spends its time in the game's six vehicles.
+					<br><br>
+					There are many roles you can fill during a game of Tribes 2: these include sniping, setting up defenses, and going on runs in the three-man bomber to destroy enemy structures and turrets. It's easy enough to switch roles to do whatever needs to be done to help the team, so casual matches without explicit team planning can still be quite enjoyable. The game's command map makes the chaos of the battlefield a little easier to understand. It shows the status of teammates, base facilities, and the team sensor network that ties into each player's HUD. While the command interface is cumbersome, it does give you a fairly effective system for suggesting what team tasks need to be accomplished. 
+                	<br><br>
+                	While having vehicles in smaller games, those with fewer than 20 people, can dilute the action, overall they add an extra dimension to the combat in Tribes 2. There are three ground vehicles and three air vehicles, divided among scout, assault, and support craft. Half of these (the larger ones) let two or more players jump on board, which can require some coordination around a map's vehicle pad. However, the tank and bomber craft require such particular cooperation between the pilot and gunner that it can be very frustrating to pair up with someone who's less experienced. Additionally, the larger vehicles are sluggish and can be fairly difficult to control, and you may even find that the nose of the larger ground vehicles will occasionally pitch up or down unrealistically on rough but relatively level terrain, seemingly due to problems with the game's physics. It's also frustrating that a mere brush with a tree at low speeds can inflict inordinate damage to the most imposing hovertank.
+					<br><br>
+					To make it easier to talk to other players in between games and organize teams, Tribes 2 has a number of online community features built right into the game. The active Starsiege: Tribes community is a strong point in favor of Tribes 2, and right from the start there have been hundreds of game servers to choose from. In fact, high loads on the central authentication and community servers since the release of Tribes 2 have made it impossible for Dynamix to run all the community services, but the game finder, news, and chat functions are up and working. The other features, like pages for team and player information as well as integrated e-mail and Web browsing, were working in the beta tests but have been temporarily disabled until the servers can be upgraded.
+					<br><br>
+					Tribes 2 is primarily an online game, but it does include more solo options than its predecessor. It includes five tutorials to ease the learning curve and introduce new players to the game's unique movement, numerous items, and command options. Many of the maps can also be played against computer-controlled bot opponents, which can help you get used to the game before jumping online. The bots aren't really capable enough to make offline games very interesting, and though they do manage to carry out team functions, like setting up basic defenses and executing flag runs, they aren't particularly good at it. They also seem to stand in place more often than you'd expect. 
+					<br><br>
+					The most obvious difference between Tribes and Tribes 2 is the new graphics engine in the sequel, which was completely reworked to take advantage of hardware acceleration and more powerful PCs. If you do have a high-end system, the game looks good. On the maps that aren't fogged in by design, the visible horizon is distant and sharp. The explosions are suitably impressive, and there are some nice effects like footsteps on snow maps and variable precipitation. A fractal system also produces smoothly varying terrain textures that have a surprising amount of detail up close. However, as a result of these effects and the game's large environments, many mainstream systems play the game sluggishly unless many of the effects are turned off and textures are turned down. At these lower levels of detail, the game doesn't look particularly good at all, even compared to the original Tribes. To play the game well, we'd recommend a system with at least a 600MHz Pentium III and a GeForce or Radeon graphics card. As ambitious shooters tend to, the Tribes 2 engine has room to grow as faster systems become more common. For example, one of the systems we tried the game on, a Pentium 4 1.5GHz with GeForce2 Ultra, had no trouble maintaining a very smooth frame rate at 1024x768 with maximum detail turned on.
+					<br><br>
+					A lot of effort obviously went into rounding out the game, but it still has some rough edges. The game's sound is quite polished, including many prerecorded voice taunts that you can use in-game by selecting them from a series of quick chat menus. Tribes 2 includes a custom soundtrack--an unsurprising mix of electronica and guitar that you'll probably turn down before long. But the game's biggest shortcoming is that it released with several significant technical problems, which Dynamix is progressively addressing in frequent patches. The game runs without problems on many systems, but some players have had difficulty getting it to work at all.
+					<br><br>
+					Tribes 2 is an ambitious follow-up to the game that single-handedly led the charge of multiplayer-only action games into retail. The deep teamplay that you can find in large matches is incredibly addicting and offers some interesting opportunities to cobble together team strategies. The game takes advantage of skills developed in twitch shooters like Quake, but its slower pacing requires a more deliberate and diverse range of tactics. In the end, this will help give Tribes 2 tremendous longevity, especially considering that the original Tribes still rivals both Unreal Tournament and Quake III Arena as one of the most played multiplayer action games. Tribes 2 isn't easy to master, and it won't play well on every gaming PC, but when you're up and running it's a tremendous amount of fun.
+                         </tr>
+                        </table>
+                      </div>
+                      
+                      <!--[if mso]>
+                                    </td>
+                                    </tr>
+                                    </table>
+                                    <![endif]--></td>
+                  </tr>
+                </table>
+                
+                <!--[if mso]>
+                        </td>
+                        </tr>
+                        </table>
+                        <![endif]--></td>
+            </tr>
+            <!-- Thumbnail Right, Text Left : END -->
+            
+          </table>
+          <!-- Email Body : END -->       
+          
+         <!-- Email Footer : BEGIN -->
+          <table cellspacing="0" cellpadding="0" border="0" align="center" width="100%" style="max-width: 800px;">
+            <tr>
+              <td style="text-shadow: -1px 1px 1px #111111; padding: 20px 5px;width: 100%;font-size: 12px; font-family: sans-serif; mso-height-rule: exactly; line-height:18px; text-align: center; color: #888888;"><webversion style="color:#cccccc; text-decoration:underline;"><a href="https://github.com/ChocoTaco1/TacoServer">TacoServer</a></webversion> - <a href="https://bit.ly/2NNPXhA">Mappacks</a> - <a href="https://tinyurl.com/T2Netclient">TourneyNetClient</a> - <a href="http://tinyurl.com/t2master">Servers</a><br>
+                <br>
+                Tribes 2 Discord<br>
+                <span class="mobile-link--footer">Technical Support, P.O. Box 85006 Bellevue, WA 98015-8506</span> <br>
+                <br>
+                <unsubscribe style="color:#888888; text-decoration:underline;"><a href="mailto:chocotaco@tuta.io">Contact</a></unsubscribe></td>
+            </tr>
+          </table>
+          <!-- Email Footer : END --> 
+          
+          <!--[if (gte mso 9)|(IE)]>
+            </td>
+            </tr>
+            </table>
+            <![endif]--> 
+        </div>
+      </center></td>
+  </tr>
+</table>
+</body>
+</html>
