@@ -275,7 +275,11 @@ a:active {
 }
 
 .container:hover .image {
-  opacity: .8;
+  filter: grayscale(1) blur(1px);
+  -webkit-filter: grayscale(1) blur(1px);
+  -webkit-transform: scale(1.1);
+  -ms-transform: scale(1.1);
+  transform: scale(1.1);
 }
 
 .container:hover .middle {
@@ -290,6 +294,49 @@ a:active {
   background-color: #1F1F1F;
   color: white;
   padding: 10px 20px;
+}
+
+.hovereffect {
+  width: 100%;
+  height: 100%;
+  float: left;
+  overflow: hidden;
+  position: relative;
+  text-align: center;
+  cursor: default;
+}
+
+.hovereffect .overlay {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  overflow: hidden;
+  top: 0;
+  left: 0;
+}
+
+.hovereffect img {
+  display: block;
+  position: relative;
+  -webkit-transition: all 0.5s ease-in;
+  transition: all 0.5s ease-in;
+}
+
+.hovereffect:hover img {
+  filter: grayscale(1) blur(1px);
+  -webkit-filter: grayscale(1) blur(1px);
+  -webkit-transform: scale(1.1);
+  -ms-transform: scale(1.1);
+  transform: scale(1.1);
+}
+
+
+.hovereffect:hover a.info, .hovereffect:hover h2 {
+  opacity: 1;
+  filter: alpha(opacity=100);
+  -webkit-transform: scale(1);
+  -ms-transform: scale(1);
+  transform: scale(1);
 }
 	
 body {
@@ -420,12 +467,14 @@ body {
                         <table width="100%" border="0" align="center" cellpadding="0" cellspacing="0">
                           <tr>
                             <td style="padding: 20px 20px;"><table cellspacing="0" cellpadding="0" border="0" width="100%" style="font-size: 14px;text-align: left;">
-                                <tr>
-                                  <td><a href="https://ln.sync.com/dl/a9e991050/sqgw33yv-wisbfp8m-h7bbyxye-pqi7e9u2">
-                                  <div class="container">
-  									<img src="images/Image_310x310_1.jpg" alt="Avatar" class="image" style="width: 100%;height: auto;box-shadow: -2px 2px 3px #212121;" align="center" >
+                                <tr>  
+                            <td><a href="https://ln.sync.com/dl/a9e991050/sqgw33yv-wisbfp8m-h7bbyxye-pqi7e9u2">
+							<div class="col-lg-3 col-md-4 col-sm-6 col-xs-12">
+								<div class="hovereffect" style="box-shadow: -2px 2px 3px #212121;">
+                                 <div class="container">
+  									<img src="images/Image_310x310_1.jpg" alt="Avatar" class="image" style="width: 100%;height: auto; box-shadow: -2px 2px 3px #212121;" align="center" >
 									  <div class="middle">
-    									<div class="text">Download</div>
+    									<div class="text" style="background: #222222; border: 12px solid #222222; padding: 0 9px;color: #e2e5e5; font-family: sans-serif; line-height: 1.0; text-align: center; text-decoration: none; display: block; border-radius: 3px; font-weight: bold;">Download</div>
 									  </div>
 									</div>
                               </a>
@@ -451,10 +500,12 @@ body {
                             <td style="padding: 20px 20px;"><table cellspacing="0" cellpadding="0" border="0" width="100%" style="font-size: 14px;text-align: left;">
                                 <tr>
                                   <td><a href="http://xfer1.the-construct.net/tribes2/tribes2gsi.exe">
-	                               <div class="container">
+							<div class="col-lg-3 col-md-4 col-sm-6 col-xs-12">
+								<div class="hovereffect" style="box-shadow: -2px 2px 3px #212121;">
+                                 <div class="container">
   									<img src="images/Image_310x310_2.jpg" alt="Avatar" class="image" style="width: 100%;height: auto;box-shadow: -2px 2px 3px #212121;" align="center" >
 									  <div class="middle">
-    									<div class="text">Download</div>
+    									<div class="text" style="background: #222222; border: 12px solid #222222; padding: 0 9px;color: #e2e5e5; font-family: sans-serif; line-height: 1.0; text-align: center; text-decoration: none; display: block; border-radius: 3px; font-weight: bold;">Download</div>
 									  </div>
 									</div>
                                   </a></td>
