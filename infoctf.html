@@ -1,0 +1,1256 @@
+<!doctype html>
+<html>
+<head>
+
+<link rel=icon href=https://raw.githubusercontent.com/ChocoTaco1/Discord_Web/master/images/favicon.png>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<meta charset="utf-8">
+<!-- utf-8 works for most cases -->
+<meta name="viewport" content="width=device-width">
+<!-- Forcing initial-scale shouldn't be necessary -->
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<!-- Use the latest (edge) version of IE rendering engine -->
+<title>Play Tribes 2 - Review</title>
+<!-- The title tag shows in email notifications, like Android 4.4. -->
+
+<!-- Please use an inliner tool to convert all CSS to inline as inpage or external CSS is removed by email clients -->
+<!-- important in CSS is used to prevent the styles of currently inline CSS from overriding the ones mentioned in media queries when corresponding screen sizes are encountered -->
+
+<style>
+
+/* Navigation Bar */
+ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  background-color: #2F2F2F;
+  position: -webkit-sticky; /* Safari */
+  position: sticky;
+  z-index:5;
+  top: 0;
+}
+
+li {
+  float: left;
+}
+
+li a {
+  display: block;
+  color: white;
+  font-family: sans-serif;
+  text-align: center;
+  padding: 14px 12px;
+  text-decoration: none;
+}
+
+li a:hover {
+  background-color: #1F1F1F;
+  color: white;
+}
+
+.active {
+  background-color: #3F3F3F;
+}
+body {
+  font-size: 16px;
+}
+
+ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  background-color: #2F2F2F;
+  color: #e2e5e5;
+  position: -webkit-sticky; /* Safari */
+  position: sticky;
+  top: 0;
+}
+
+li {
+  float: left;
+  color: #e2e5e5;
+}
+
+li a {
+  display: block;
+  color: white;
+  text-align: center;
+  padding: 12px 12px;
+  text-decoration: none;
+}
+
+li a:hover {
+  background-color: #1F1F1F;
+  color: #e2e5e5;
+}
+
+.active {
+  background-color: #3E3E3E;
+  color: #e2e5e5;
+}
+	
+</style>
+
+<!-- CSS Reset -->
+<style type="text/css">
+/* What it does: Remove spaces around the email design added by some email clients. */
+      /* Beware: It can remove the padding / margin and add a background color to the compose a reply window. */
+html, body {
+	margin: 0 !important;
+	padding: 0 !important;
+	height: 100% !important;
+	width: 100% !important;
+}
+/* What it does: Stops email clients resizing small text. */
+* {
+	-ms-text-size-adjust: 100%;
+	-webkit-text-size-adjust: 100%;
+}
+/* What it does: Forces Outlook.com to display emails full width. */
+.ExternalClass {
+	width: 100%;
+}
+/* What is does: Centers email on Android 4.4 */
+div[style*="margin: 16px 0"] {
+	margin: 0 !important;
+}
+/* What it does: Stops Outlook from adding extra spacing to tables. */
+table, td {
+	mso-table-lspace: 0pt !important;
+	mso-table-rspace: 0pt !important;
+}
+/* What it does: Fixes webkit padding issue. Fix for Yahoo mail table alignment bug. Applies table-layout to the first 2 tables then removes for anything nested deeper. */
+table {
+	border-spacing: 0 !important;
+	border-collapse: collapse !important;
+	table-layout: fixed !important;
+	margin: 0 auto !important;
+}
+table table table {
+	table-layout: auto;
+}
+/* What it does: Uses a better rendering method when resizing images in IE. */
+img {
+	-ms-interpolation-mode: bicubic;
+}
+/* What it does: Overrides styles added when Yahoo's auto-senses a link. */
+.yshortcuts a {
+	border-bottom: none !important;
+}
+/* What it does: Another work-around for iOS meddling in triggered links. */
+a[x-apple-data-detectors] {
+	color: inherit !important;
+}
+	
+/* Get Mappacks Button */
+.button {
+  background-color: #048d99; /* Teal */
+  border: none;
+  color: white;
+  padding: 4px 0px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 26px;
+  font-weight: bold;
+  line-height: 1.0;
+  font-family: sans-serif;
+  margin: 0px 0px 0px 0px;
+  -webkit-transition-duration: 0.4s; /* Safari */
+  transition-duration: 0.4s;
+  cursor: pointer;
+  width: 100%
+}
+.button1 {
+  background-color: #048d99; 
+  color: black; 
+  border: 0px solid #048d99;
+}
+.button1:hover {
+  background-color: #0fcfb9;
+  color: black;
+}
+</style>
+
+<!-- Progressive Enhancements -->
+<style type="text/css">
+/* All Other Buttons */
+.button-td, .button-a {
+	transition: all .3s ease-in;
+}
+.button-td:hover, .button-a:hover {
+	background: #4E4E4E !important;
+	border-color: #4E4E4E !important;
+}
+
+/* Media Queries */
+@media screen and (max-width: 480px) {
+/* What it does: Forces elements to resize to the full width of their container. Useful for resizing images beyond their max-width. */
+.fluid, .fluid-centered {
+	width: 100% !important;
+	max-width: 100% !important;
+	height: auto !important;
+	margin-left: auto !important;
+	margin-right: auto !important;
+}
+/* And center justify these ones. */
+.fluid-centered {
+	margin-left: auto !important;
+	margin-right: auto !important;
+}
+/* What it does: Forces table cells into full-width rows. */
+.stack-column, .stack-column-center {
+	display: block !important;
+	width: 100% !important;
+	max-width: 100% !important;
+	direction: ltr !important;
+}
+/* And center justify these ones. */
+.stack-column-center {
+	text-align: center !important;
+}
+/* What it does: Generic utility class for centering. Useful for images, buttons, and nested tables. */
+.center-on-narrow {
+	text-align: center !important;
+	display: block !important;
+	margin-left: auto !important;
+	margin-right: auto !important;
+	float: none !important;
+}
+	
+table.center-on-narrow {
+	display: inline-block !important;
+}
+	
+}
+body {
+	margin-left: 20px;
+	background-color: #1F1F1F;
+}
+	
+body,td,th {
+	color: #F8F8F8;
+}
+a:link {
+	color: #A6A6A6;
+}
+a:visited {
+	color: #A6A6A6;
+}
+a:active {
+	color: #A6A6A6;
+}
+</style>
+
+<style>
+.container {
+  align: center;
+  position: relative;
+  width: 100%;
+}
+
+/* Download Image Button */
+
+.image {
+  opacity: 1;
+  display: block;
+  width: 100%;
+  height: auto;
+  transition: .9s ease;
+  backface-visibility: hidden;
+}
+
+.middle {
+  transition: .9s ease;
+  opacity: 0;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  -ms-transform: translate(-50%, -50%);
+  text-align: center;
+}
+
+.container:hover .image {
+  opacity: .8;
+}
+
+.container:hover .middle {
+  opacity: 1;
+}
+
+.text {
+  font-weight: bold;
+  font-size: 13px; 
+  line-height: 1.0;
+  font-family: sans-serif;
+  background-color: #1F1F1F;
+  color: white;
+  padding: 10px 20px;
+}
+	
+body {
+	margin:0;
+	overflow-y: scroll;
+	
+}
+
+</style>
+
+</head>
+<body text="#e2e5e5" style="margin: 0;" width="100%" >
+<table cellpadding="0" cellspacing="0" border="0" height="100%" width="100%" bgcolor="#e0e0e0" style="border-collapse:collapse;">
+  <tr>
+    <td bgcolor="#1F1F1F" background="images/bglogo3.png" style="vertical-align:top;"><center style="width: 100%;">
+        
+        <!-- Visually Hidden Preheader Text : BEGIN -->
+        <div style="display:none;font-size:1px;line-height:1px;max-height:0px;max-width:0px;opacity:0;overflow:hidden;mso-hide:all;font-family: sans-serif;"> Team Combat on an epic scale! </div>
+        <!-- Visually Hidden Preheader Text : END -->
+        
+        <div style="max-width: 800px;"> 
+          <!--[if (gte mso 9)|(IE)]>
+            <table cellspacing="0" cellpadding="0" border="0" width="680" align="center">
+            <tr>
+            <td>
+            <![endif]--> 
+          
+          <!-- Email Header : BEGIN -->
+          <table cellspacing="0" cellpadding="0" border="0" align="center" width="100%" style="max-width: 800px;">
+            <tr>
+              <td style="padding: 5px 0px 7px 5px; text-align: left; font-family: sans-serif; font-size: 35px; mso-height-rule: exactly; line-height: 45px; color: #e2e5e5;"><img src="images/play.png" width="250" alt="" border="0"  style="padding: 0px 0px 0px 0px; width: 100%; max-width: 250px; height: auto;" align="center"></td>
+              <td class="full-width-image" align="center"><img src="images/logo.png" width="322" alt="" border="0"  style="padding: 0px 5px 0px 0px; width: 100%; max-width: 45px; height: auto;" align="center"></td>
+              <td style="padding: 5px 5px 5px 0px; text-align: right; font-family: sans-serif; font-size: 16px; line-height: 20px; color: #e2e5e5;"></td>
+            </tr>
+          </table>
+          <!-- Email Header : END --> 
+          
+          <!-- Navigation : BEGIN --> 
+		  
+		  <ul class="horizontal">
+			  <li><a href="index.html">Home</a></li>
+			  <li><a href="downloads.html">Downloads</a></li>
+			  <!--<li><a href="guides.html">Guides</a></li>-->
+			  <li><a href="stats.html">Stats</a></li>
+			  <li class="rightli" style="float:right"><a href="about.html">About</a></li>
+		  </ul>
+          <!-- Navigation : END --> 
+          
+          <!-- Email Body : BEGIN -->
+          <table cellspacing="0" cellpadding="0" border="0" align="center" bgcolor="2F2F2F" width="100%" style="max-width: 800px;">
+            
+
+            <!-- Background Image with Text : END -->  
+            <td bgcolor="#3E3E3E" style="padding: 12px 0px 9px 0px; text-align: center; font-family: sans-serif; font-size: 30px; mso-height-rule: exactly; line-height: 30px; color: #e2e5e5;"><img src="guides/ctf.png" width="320" alt="" style="border: 0;width: 100%;max-width: 320px;height: auto;" class="center-on-narrow"></td>
+            <!-- Thumbnail Left, Text Right : BEGIN -->
+            <tr>
+              <td dir="ltr" bgcolor="#2E2E2E" align="center" height="100%" valign="top" width="100%" style="padding: 0px 0px 0px 0px;">
+                       <!--[if mso]>
+                        <table border="0" cellspacing="0" cellpadding="0" align="center" width="660">
+                        <tr>
+                        <td align="center" valign="top" width="660">
+                        <![endif]-->
+                        
+                            <!-- 1 Column Text : BEGIN -->
+            <tr>
+              <td>
+                 <table cellspacing="0" cellpadding="0" border="0" height="100" width="100%">
+                  <tr>
+                    <td bgcolor="#2E2E2E" style="padding: 20px 20px 0px 20px; text-align: center; font-family: sans-serif; font-size: 16px; mso-height-rule: exactly; line-height: 25px; color: #e2e5e5;">
+                    <iframe width="770" height="443" src="https://www.youtube.com/embed/b_MMgBp80Gs" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen style="box-shadow: -2px 2px 3px #212121;"></iframe>
+                    <br><br>
+                    
+                  <tr>
+                    <td align="center" valign="top" style="font-size:0; padding: 0px 0px 0px 0px;"><!--[if mso]>
+                                    <table border="0" cellspacing="0" cellpadding="0" align="center" width="660">
+                                    <tr>
+                                    <td align="left" valign="top" width="220">
+                                    <![endif]-->                
+                      <!--[if mso]>
+                                    </td>
+                                    <td align="left" valign="top" width="440">
+                                    <![endif]-->
+                      
+                      <div style="display:inline-block; margin: 0px 0px 0px 0px; max-width:100%; min-width:320px; vertical-align:top;" class="stack-column">
+                        <table cellspacing="0" cellpadding="0" border="0" width="100%">
+                          <tr>         
+                            <td dir="ltr" style="font-style: normal; font-family: sans-serif; font-size: 16px; mso-height-rule: exactly; line-height: 25px; color: #e2e5e5; padding: 0px 10px 0px 10px; text-align: center; align: center; text-shadow: -1px 1px 1px #111111;">
+								Capture the Flag is easily the most popular type of game in Tribes 2.
+							CTF is a team based game where the objective is to get the enemies flag from
+							their base while ensuring that your own flag is defended.
+							<br><br>
+									To capture, you must grab the enemies flag by touching it and return it
+							to your flagstand. Your flag MUST be at it's stand in order to capture. If a
+							player is killed while in possession of the flag, the flag drops to the ground.
+							Unless it's grabbed by another teammate it will remain on the ground until it
+							either returns to the flag stand by the enemy touching it or the return limit
+							running out.
+							<br><br>
+									It should be noted that if a player goes out of bounds while in
+							possession of the flag that the flag will be dropped on the edge of the out of
+							bounds boundary.
+							<br><br>
+									When the flag is captured the capturing team receives 100 points. When
+							the flag is grabbed from the enemy flag stand the grabbing team receives 1
+							point. The game ends when either time runs out (in which the team with
+							the most points wins) or when the target number of captures have been met by
+							a team (Usually 800 points).
+							<br><br>
+                          </tr>
+                        </table>
+                      </div>
+					  <div style="display:inline-block; margin: 0px 0px 0px 0px; max-width:100%; min-width:320px; vertical-align:top;" class="stack-column">
+                        <table cellspacing="0" cellpadding="0" border="0" width="100%">
+                          <tr>         
+                            <td dir="ltr" style="font-style: normal; font-family: sans-serif; font-size: 16px; mso-height-rule: exactly; line-height: 25px; color: #e2e5e5; padding: 0px 10px 0px 10px; text-align: center; align: center; text-shadow: -1px 1px 1px #111111;">
+                            <strong style="color:#CDCDCD;text-shadow: -1px 1px 1px #111111;font-size: 16px;">Strategy:</strong>
+                            <br>
+							The most underlooked aspect of the game by newbies. You have
+							to remember that THIS IS NOT YOUR STANDARD FPS. T2 is not just a run and gun
+							shoot `em up. It's a thinking mans game, and if you don't act accordingly you
+							won't last long.
+							<br><br>
+							<strong style="color:#CDCDCD;text-shadow: -1px 1px 1px #111111;font-size: 16px;">Communicate!:</strong>
+							<br>
+							In *any* team based game communication is essential. Let your team know
+							what you're doing. Tell them the status of the enemy base. Give them as much
+							information as possible so they know where your team stands and what they
+							should be doing. Also, listen to what they're telling you. If the flag carrier is
+							requesting backup, go give him a hand. If someone informs you of an enemy
+							attacking the generators, go assist them. Respond to your teams requests
+							whenever possible. I assure you it's worth the time and effort.
+							<br><br>
+							<strong style="color:#CDCDCD;text-shadow: -1px 1px 1px #111111;font-size: 16px;">Move, Move, Move:</strong>
+							<br>
+							As the title suggests, keep yourself mobile. A stationary target is an
+							easy target, something you don't want to be. The obvious exceptions here are
+							when you're in need of greater accuracy for, say, locking on with a Missile
+							Launcher, or using the chaingun to pick off a damaged airborne enemy.  Even
+							still, in these situations keep aware of enemy positions. If you see an inbound
+							Scout with his Disc Launcher pointed at you, get outta there. At any time when you're in the open and not moving, you make a very
+							tempting target for snipers. This can be a problem, especially when in Scout
+							armor. Keep this in mind when using outdoor Inv. Stations and Vehicle Pads as
+							they are hotspots for sniper attacks.
+							<br><br>
+							<strong style="color:#CDCDCD;text-shadow: -1px 1px 1px #111111;font-size: 16px;">Dress For Success:</strong>
+							<br>
+							Equipment loadouts need to be suited to the task at hand. Going on a
+							flag run? It's a good idea not to be wearing Juggernaut armor, as speed and
+							mobility are essential. Defending indoors? Leave the Scout at home and get
+							yourself some Jug. Think about what you're doing, what is required to do it,
+							and equip yourself accordingly.
+							<br><br>
+							<strong style="color:#CDCDCD;text-shadow: -1px 1px 1px #111111;font-size: 16px;">Loot the Corpses:</strong>
+							<br>
+							When you kill a player he drops all of his equipment, ammo, and packs.
+							When you run over said corpses you automatically pick up any needed equipment
+							and ammo. This can be extremely valuable as running over every corpse you see
+							will keep you well supplied and prolong your battle readiness. There's nothing
+							worse than running out of ammo in the middle of a duel, so make sure you're
+							well supplied at all times.
+							<br><br>
+							<strong style="color:#CDCDCD;text-shadow: -1px 1px 1px #111111;font-size: 16px;">Remember the Health Kit:</strong>
+							<br>
+							A number of times I've been in a duel with a player, and when I kill
+							him I'll run over his corpse and pick up a health kit. This shouldn't be
+							happening. The health kit can give you that little extra edge that means
+							survival. Use it.
+							<br><br>
+							<strong style="color:#CDCDCD;text-shadow: -1px 1px 1px #111111;font-size: 16px;">Know Your Role:</strong>
+							<br>
+							Yeah, The Rock knows his stuff. Pick a task and stay with it. Decide
+							what you're going to do, attack, defend, deploy equipment, and let your team
+							know. When possible try to fill in where it's needed. If your flag is being
+							captured every 2 minutes, defend. If no one is attacking, go offence. Try to
+							be where you're most useful.
+							<br><br>
+                          </tr>
+                        </table>
+                      </div>
+                      <!--[if mso]>
+                                    </td>
+                                    </tr>
+                                    </table>
+                                    <![endif]--></td>
+                  </tr>
+                </table>
+                
+                <!--[if mso]>
+                        </td>
+                        </tr>
+                        </table>
+                        <![endif]--></td>
+            </tr>
+            <!-- Thumbnail Left, Text Right : END --> 
+            
+          <!-- Email Body : BEGIN -->
+          <table cellspacing="0" cellpadding="0" border="0" align="center" bgcolor="2F2F2F" width="100%" style="max-width: 800px;">
+            <tr>
+              <td dir="ltr" bgcolor="#2E2E2E" align="center" height="100%" valign="top" width="100%" style="padding: 10px 0;"><!--[if mso]>
+                        <table border="0" cellspacing="0" cellpadding="0" align="center" width="660">
+                        <tr>
+                        <td align="center" valign="top" width="660">
+                        <![endif]-->
+                
+                <table border="0" cellpadding="0" cellspacing="0" align="center" width="100%" style="max-width:770px;">
+                 <strong style="color:#CDCDCD; text-shadow: -1px 1px 1px #111111;font-size: 16px; font-family: sans-serif; mso-height-rule: exactly; line-height: 10px;padding: 0px 0px 0px 0px;">Armors:</strong>
+                  <tr>
+                    <td align="center" valign="top" style="font-size:0; padding: 10px 0;"><!--[if mso]>
+                                    <table border="0" cellspacing="0" cellpadding="0" align="center" width="660">
+                                    <tr>
+                                    <td align="left" valign="top" width="220">
+                                    <![endif]-->
+                      
+                      <div style="display:inline-block; margin: 0 0px; max-width:33.33%; min-width:160px; vertical-align:top; width:100%;" class="stack-column">
+                        <table cellspacing="0" cellpadding="0" border="0" width="100%">
+                          <tr>
+                            <td dir="ltr" style="padding: 10px 10px 10px 10px;"><img src="guides/scout.png" alt="" width="400" class="center-on-narrow" style="border: 0;width: 100%;max-width:250px;height: auto;box-shadow: -2px 2px 3px #212121;" align="right"></td>
+                          </tr>
+                        </table>
+                      </div>
+                      
+                      <!--[if mso]>
+                                    </td>
+                                    <td align="left" valign="top" width="440">
+                                    <![endif]-->
+                      
+                      <div style="display:inline-block; margin: 0 -2px; max-width:66.66%; min-width:320px; vertical-align:top;text-shadow: -1px 1px 1px #111111;" class="stack-column">
+                        <table cellspacing="0" cellpadding="0" border="0" width="100%">
+                          <tr>
+                            <td dir="ltr" style="padding: 0px 20px 0px 15px; font-family: sans-serif; font-size: 16px; mso-height-rule: exactly; line-height: 23px; color: #e2e5e5; text-align: left;" class="center-on-narrow">
+							The 
+							<strong style="color:#CDCDCD;text-shadow: -1px 1px 1px #111111;font-size: 16px;">Scout </strong>
+							class armor is the lightest and fastest armor available for 
+							use. If mobility and agility are your thing, then Scout armor is what 
+							you'll need. A Scout can be in, flatten an enemy, and be gone before 
+							the enemy knows what hit them. Scout armor is limited in that it may
+							not use certain heavy weapons, cannot carry certain deployables, and
+							may only carry 3 weapons at a time.
+							<br><br>
+							Durability: Low<br>
+							Mobility: High<br>
+							Weapon Capacity: 3<br>
+							Ammunition Capacity: Low<br>
+							Specialties: Laser Rifle, Grav Cycle, Cloaking Pack<br>
+							Restricted: Fusion Mortar, Missile Launcher, Remote Inventory,
+									Landspike & Spider-Clamp Turrets, Turret Barrels<br><br>
+							<div style="display:inline-block; max-width:45%; margin: 0 0px; min-width:235px; vertical-align:top; width:100%;" class="stack-column">
+							Pros:<br>
+								+ Fastest and most agile <br>
+								+ Only class that can use the Laser Rifle<br>
+								+ Can pilot ALL vehicles<br><br>
+							</div>
+							<div style="display:inline-block; max-width:45%; margin: 0 -0px; min-width:235px; vertical-align:top; width:100%;" class="stack-column">
+							Cons:<br>
+								- Take the least damage of all armors<br>
+								- Can't use some heavy weapons<br>
+								- Can't carry certain deployables<br>
+							</div>
+                        </table>
+                      </div>
+                      
+                      <!--[if mso]>
+                                    </td>
+                                    </tr>
+                                    </table>
+                                    <![endif]--></td>
+                  </tr>
+                </table>
+                
+                <!--[if mso]>
+                        </td>
+                        </tr>
+                        </table>
+                        <![endif]--></td>
+            </tr> 
+          <!-- Email Body : END -->
+           
+          <!-- Email Body : BEGIN -->
+          <table cellspacing="0" cellpadding="0" border="0" align="center" bgcolor="2F2F2F" width="100%" style="max-width: 800px;">
+            <tr>
+              <td dir="ltr" bgcolor="#2E2E2E" align="center" height="100%" valign="top" width="100%" style="padding: 10px 0;"><!--[if mso]>
+                        <table border="0" cellspacing="0" cellpadding="0" align="center" width="660">
+                        <tr>
+                        <td align="center" valign="top" width="660">
+                        <![endif]-->
+                <table border="0" cellpadding="0" cellspacing="0" align="center" width="100%" style="max-width:770px;">
+                  <tr>
+                    <td align="center" valign="top" style="font-size:0; padding: 10px 0;"><!--[if mso]>
+                                    <table border="0" cellspacing="0" cellpadding="0" align="center" width="660">
+                                    <tr>
+                                    <td align="left" valign="top" width="220">
+                                    <![endif]-->
+                      
+                      <!--[if mso]>
+                                    </td>
+                                    <td align="left" valign="top" width="440">
+                                    <![endif]-->
+                      
+                      <div style="display:inline-block; margin: 0 -2px; max-width:66.66%; min-width:320px; vertical-align:top;text-shadow: -1px 1px 1px #111111;" class="stack-column">
+                        <table cellspacing="0" cellpadding="0" border="0" width="100%">
+                          <tr>
+                            <td dir="ltr" style="padding: 0px 20px 0px 15px; font-family: sans-serif; font-size: 16px; mso-height-rule: exactly; line-height: 23px; color: #e2e5e5; text-align: left;" class="center-on-narrow">
+							The 
+							<strong style="color:#CDCDCD;text-shadow: -1px 1px 1px #111111;font-size: 16px;">Assault </strong>
+							class armor is the all around mix of the best of the
+							Scout and the Juggernaut. It can take more damage than the scout, isn't as
+							slow as the Juggernaut, and has only minor limitations compared to the other
+							two. On the flip side, the Assault is not nearly as fast as the Scout, and
+							can't sustain as much damage as the Juggernaut.
+							<br><br>
+							Durability: Medium<br>
+							Mobility: Medium<br>
+							Weapon Capacity: 4<br>
+							Ammunition Capacity: Medium<br>
+							Specialties: None<br>
+							Restricted: Fusion Mortar, Laser Rifle, Grav Cycle<br><br>
+							<div style="display:inline-block; max-width:45%; margin: 0 0px; min-width:235px; vertical-align:top; width:100%;" class="stack-column">
+							Pros:<br>
+								+ Can take more hits and carry more weapons than the Scout<br>
+								+ Faster and more agile than the Juggernaut<br>
+								+ Minor restrictions<br>
+							</div>
+							<div style="display:inline-block; max-width:45%; margin: 0 -0px; min-width:235px; vertical-align:top; width:100%;" class="stack-column">
+							Cons:<br>
+								- Slower than the Scout<br>
+								- Not as durable as the Juggernaut<br>
+								- Suitable for almost all tasks, but excels at few<br>
+							</div>
+                        </table>
+                      </div>
+					  <div style="display:inline-block; margin: 0 -2px; max-width:33.33%; min-width:160px; vertical-align:top; width:100%;" class="stack-column">
+                        <table cellspacing="0" cellpadding="0" border="0" width="100%">
+                          <tr>
+                            <td dir="ltr" style="padding: 10px 10px 10px 10px;"><img src="guides/assault.png" alt="" width="400" class="center-on-narrow" style="border: 0;width: 100%;max-width:250px;height: auto;box-shadow: -2px 2px 3px #212121;" align="right"></td>
+                          </tr>
+                        </table>
+                      </div>
+                      
+                      <!--[if mso]>
+                                    </td>
+                                    </tr>
+                                    </table>
+                                    <![endif]--></td>
+                  </tr>
+                </table>
+                
+                <!--[if mso]>
+                        </td>
+                        </tr>
+                        </table>
+                        <![endif]--></td>
+            </tr> 
+          <!-- Email Body : END -->
+           
+          <!-- Email Body : BEGIN -->
+          <table cellspacing="0" cellpadding="0" border="0" align="center" bgcolor="2F2F2F" width="100%" style="max-width: 800px;">
+            <tr>
+              <td dir="ltr" bgcolor="#2E2E2E" align="center" height="100%" valign="top" width="100%" style="padding: 10px 0;"><!--[if mso]>
+                        <table border="0" cellspacing="0" cellpadding="0" align="center" width="660">
+                        <tr>
+                        <td align="center" valign="top" width="660">
+                        <![endif]-->
+                <table border="0" cellpadding="0" cellspacing="0" align="center" width="100%" style="max-width:770px;">
+                  <tr>
+                    <td align="center" valign="top" style="font-size:0; padding: 10px 0;"><!--[if mso]>
+                                    <table border="0" cellspacing="0" cellpadding="0" align="center" width="660">
+                                    <tr>
+                                    <td align="left" valign="top" width="220">
+                                    <![endif]-->
+                      
+                      <div style="display:inline-block; margin: 0 -2px; max-width:33.33%; min-width:160px; vertical-align:top; width:100%;" class="stack-column">
+                        <table cellspacing="0" cellpadding="0" border="0" width="100%">
+                          <tr>
+                            <td dir="ltr" style="padding: 10px 10px 10px 10px;"><img src="guides/jug.png" alt="" width="400" class="center-on-narrow" style="border: 0;width: 100%;max-width:250px;height: auto;box-shadow: -2px 2px 3px #212121;" align="right"></td>
+                          </tr>
+                        </table>
+                      </div>
+                      
+                      <!--[if mso]>
+                                    </td>
+                                    <td align="left" valign="top" width="440">
+                                    <![endif]-->
+                      
+                      <div style="display:inline-block; margin: 0 -2px; max-width:66.66%; min-width:320px; vertical-align:top;text-shadow: -1px 1px 1px #111111;" class="stack-column">
+                        <table cellspacing="0" cellpadding="0" border="0" width="100%">
+                          <tr>
+                            <td dir="ltr" style="padding: 0px 20px 0px 15px; font-family: sans-serif; font-size: 16px; mso-height-rule: exactly; line-height: 23px; color: #e2e5e5; text-align: left;" class="center-on-narrow">
+							The 
+							<strong style="color:#CDCDCD;text-shadow: -1px 1px 1px #111111;font-size: 16px;">Juggernaut </strong>
+							class armor is the big boy. When it comes to raw firepower, the
+							Juggernaut is the only choice. A walking fortress, the Jug can flatten
+							the opposition in a matter of seconds. Capable of carrying 5 weapons, 
+							including all heavy weapons, the Jug is a fearsome sight. It's main 
+							weakness is that it suffers a huge penalty in speed, making it easy pickins
+							for a Scout or Assault class warrior. 
+							<br><br>
+							Durability: High<br>
+							Mobility: Low<br>
+							Weapon Capacity: 5<br>
+							Ammunition Capacity: High<br>
+							Specialties: Fusion Mortar<br>
+							Restricted: Laser Rifle, Cannot Pilot Vehicles<br><br>
+							<div style="display:inline-block; max-width:45%; margin: 0 0px; min-width:235px; vertical-align:top; width:100%;" class="stack-column">
+							Pros:<br>
+								+ Ability to sustain the most damage<br>
+								+ Able to equip all heavy weapons<br>
+								+ Able to carry the most ammunition of all Armors<br>
+							</div>
+							<div style="display:inline-block; max-width:45%; margin: 0 -0px; min-width:235px; vertical-align:top; width:100%;" class="stack-column">
+							Cons:<br>
+								- Painfully slow, minimum mobility<br>
+								- Cannot pilot vehicles<br>
+								- Can be a walking target for lighter armors<br>
+							</div>
+                        </table>
+                      </div>
+                      
+                      <!--[if mso]>
+                                    </td>
+                                    </tr>
+                                    </table>
+                                    <![endif]--></td>
+                  </tr>
+                </table>
+                
+                <!--[if mso]>
+                        </td>
+                        </tr>
+                        </table>
+                        <![endif]--></td>
+            </tr> 
+          <!-- Email Body : END -->
+           
+           
+           
+          <!-- Email Body : BEGIN -->
+          <table cellspacing="0" cellpadding="0" border="0" align="center" bgcolor="2F2F2F" width="100%" style="max-width: 800px;">
+            <tr>
+              <td dir="ltr" bgcolor="#2E2E2E" align="center" height="100%" valign="top" width="100%" style="padding: 10px 0;"><!--[if mso]>
+                        <table border="0" cellspacing="0" cellpadding="0" align="center" width="660">
+                        <tr>
+                        <td align="center" valign="top" width="660">
+                        <![endif]-->
+                        
+				<strong style="color:#CDCDCD; text-shadow: -1px 1px 1px #111111;font-size: 16px;padding: 0px 0px 0px 0px; font-family: sans-serif; mso-height-rule: exactly; line-height: 10px;">Weapons:</strong>
+                <table border="0" cellpadding="0" cellspacing="0" align="center" width="100%" style="max-width:770px;">
+                  <tr>
+                    <td align="center" valign="top" style="font-size:0; padding: 10px 0;"><!--[if mso]>
+                                    <table border="0" cellspacing="0" cellpadding="0" align="center" width="660">
+                                    <tr>
+                                    <td align="left" valign="top" width="220">
+                                    <![endif]-->         
+                        <div style="display:inline-block; margin: 0px 0px 0px 0px; max-width:100%; min-width:320px; vertical-align:top;" class="stack-column">
+                        <table cellspacing="0" cellpadding="0" border="0" width="100%">
+                          <tr>         
+                            <td dir="ltr" style="font-style: normal; font-family: sans-serif; font-size: 16px; mso-height-rule: exactly; line-height: 25px; color: #e2e5e5; padding: 0px 10px 0px 10px; text-align: center; align: center; text-shadow: -1px 1px 1px #111111;">
+								Primary weapons are the weapons a warrior carries in his hands. These
+							can be divided into two types; Energy and limited ammo. Energy based weapons
+							have unlimited ammo due to the fact that they draw from the users energy 
+							reserve to fire. Limited ammo weapons have a finite amount of ammunition that
+							depends on the armor of the user.
+							<br><br>
+								Weapon damage is broken into two categories. Direct Contact and Splash. 
+							Direct Contact means that the weapons projectile must physically touch
+							the enemy to inflict damage. Splash damage indicates that direct contact with
+							the target is not necessary to inflict damage. The projectile will explode on
+							whatever it hits first; enemy, wall, ground, etc. The resulting explosion 
+							inflicts the most damage at "ground zero", with decreasing damage inflicted
+							in the area surrounding the explosion.
+							<br><br>
+							</tr></td>
+                        </table>
+                      </div>
+                      
+                      <div style="display:inline-block; margin: 0 -2px; max-width:45%; min-width:160px; vertical-align:top; width:100%;" class="stack-column">
+                        <table cellspacing="0" cellpadding="0" border="0" width="100%">
+                          <tr>
+                            <td dir="ltr" style="padding: 60px 20px 60px 20px;"><img src="guides/weapons/twb_Blaster.png" alt="" width="400" class="center-on-narrow" style="border: 0;width: 100%;max-width:300px;height: auto;box-shadow: -2px 2px 3px #212121;" align="right"></td>
+                          </tr>
+                        </table>
+                      </div>            
+                      <div style="display:inline-block; margin: 0 -2px; max-width:55%; min-width:320px; vertical-align:top;text-shadow: -1px 1px 1px #111111;" class="stack-column">
+                        <table cellspacing="0" cellpadding="0" border="0" width="100%">
+                          <tr>
+                            <td dir="ltr" style="padding: 0px 20px 0px 15px; font-family: sans-serif; font-size: 15px; mso-height-rule: exactly; line-height: 20px; color: #e2e5e5; text-align: left;" class="center-on-narrow">
+							The 
+							<strong style="color:#CDCDCD;text-shadow: -1px 1px 1px #111111;font-size: 16px;">Blaster </strong>
+							is an energy based weapon with a high rate of fire. Think
+							Star Wars.. same idea. The blast emitted from the blaster bounces off walls
+							making it an effective indoor weapon.
+							<br><br>
+								Ammo: Energy<br>
+								Rate of Fire: Fast<br>
+								Projectile Speed: Very Fast<br>
+								Damage: Low<br>
+								Damage Type: Direct Contact<br>
+								Aim: Manual<br>
+								Max Effective Range: Medium<br>
+								<br>
+								Use For: Indoor fights, can be good for taking out snipers at med.
+										range<br><br>
+                        </table>
+                      </div>
+					  <div style="display:inline-block; margin: 0 -2px; max-width:55%; min-width:320px; vertical-align:top;text-shadow: -1px 1px 1px #111111;" class="stack-column">
+                        <table cellspacing="0" cellpadding="0" border="0" width="100%">
+                          <tr>
+                            <td dir="ltr" style="padding: 0px 20px 0px 15px; font-family: sans-serif; font-size: 15px; mso-height-rule: exactly; line-height: 20px; color: #e2e5e5; text-align: left;" class="center-on-narrow">
+							The 
+							<strong style="color:#CDCDCD;text-shadow: -1px 1px 1px #111111;font-size: 15px;">Chaingun </strong>
+							is a limited ammo weapon that fires explosive bullets in a
+							spread pattern. Due to the spread pattern of the projectiles fired, the
+							chainguns effectiveness severely deteriorates as range increases. The chaingun
+							is useful for picking off damaged airborne enemies.
+							<br><br>
+							Ammo: Limited<br>
+							Rate of Fire: Very Fast<br>
+							Projectile Speed: Very Fast<br>
+							Damage: High at close range, decreases with distance<br>
+							Damage Type: Direct Contact<br>
+							Aim: Manual<br>
+							Max Effective Range: Medium
+							<br><br>
+							Use For: Picking off damaged enemies, close range/indoor fights<br><br>
+                        </table>
+                      </div>
+					  <div style="display:inline-block; margin: 0 -2px; max-width:45%; min-width:160px; vertical-align:top; width:100%;" class="stack-column">
+                        <table cellspacing="0" cellpadding="0" border="0" width="100%">
+                          <tr>
+                            <td dir="ltr" style="padding: 60px 10px 60px 10px;"><img src="guides/weapons/twb_Chaingun.png" alt="" width="400" class="center-on-narrow" style="border: 0;width: 100%;max-width:300px;height: auto;box-shadow: -2px 2px 3px #212121;" align="right"></td>
+                          </tr>
+                        </table>
+                      </div>
+					  <div style="display:inline-block; margin: 0 -2px; max-width:45%; min-width:160px; vertical-align:top; width:100%;" class="stack-column">
+                        <table cellspacing="0" cellpadding="0" border="0" width="100%">
+                          <tr>
+                            <td dir="ltr" style="padding: 60px 20px 60px 20px;"><img src="guides/weapons/twb_Elfprojector.png" alt="" width="400" class="center-on-narrow" style="border: 0;width: 100%;max-width:300px;height: auto;box-shadow: -2px 2px 3px #212121;" align="right"></td>
+                          </tr>
+                        </table>
+                      </div>
+                      
+                      <!--[if mso]>
+                                    </td>
+                                    <td align="left" valign="top" width="440">
+                                    <![endif]-->
+                      
+                      <div style="display:inline-block; margin: 0 -2px; max-width:55%; min-width:320px; vertical-align:top;text-shadow: -1px 1px 1px #111111;" class="stack-column">
+                        <table cellspacing="0" cellpadding="0" border="0" width="100%">
+                          <tr>
+                            <td dir="ltr" style="padding: 0px 20px 0px 15px; font-family: sans-serif; font-size: 15px; mso-height-rule: exactly; line-height: 20px; color: #e2e5e5; text-align: left;" class="center-on-narrow">
+							The 
+							<strong style="color:#CDCDCD;text-shadow: -1px 1px 1px #111111;font-size: 15px;">Elf (Electron Flex Projector) </strong>
+							is an energy based weapon that causes no damage to the 
+							target. Instead, it drains the targets energy reserve, severely limiting the
+							targets mobility. Caution should be used when using the ELF gun, as it will 
+							attack the closest target be it friend or foe.
+							<br><br>
+							Ammo: Energy<br>
+							Rate of Fire: Continuous<br>
+							Projectile Speed: Instant<br>
+							Damage: None<br>
+							Damage Type: Direct Contact<br>
+							Aim: Auto<br>
+							Max Effective Range: Very Short<br>
+							Restrictions: Non-functional under water
+							<br><br>
+							Use For: Especially useful for flag defence<br><br>
+                        </table>
+                      </div>
+					  <div style="display:inline-block; margin: 0 -2px; max-width:55%; min-width:320px; vertical-align:top;text-shadow: -1px 1px 1px #111111;" class="stack-column">
+                        <table cellspacing="0" cellpadding="0" border="0" width="100%">
+                          <tr>
+                            <td dir="ltr" style="padding: 0px 20px 0px 15px; font-family: sans-serif; font-size: 15px; mso-height-rule: exactly; line-height: 20px; color: #e2e5e5; text-align: left;" class="center-on-narrow">
+							The 
+							<strong style="color:#CDCDCD;text-shadow: -1px 1px 1px #111111;font-size: 15px;">Fusion Mortar </strong>
+							is the most devastating weapon in Tribes 2, a limited
+							ammo weapon that lobs large mortars at the enemy. The mortar is primarily used
+							as an offensive weapon, as it easily wipes out enemy defenses.
+							<br><br>
+							Ammo: Limited<br>
+							Rate of Fire: Slow<br>
+							Projectile Speed: Medium<br>
+							Damage: Very High<br>
+							Damage Type: Splash<br>
+							Aim: Manual, Lead Calculation with Targeting Laser/Beacon<br>
+							Max Effective Range: Very Long
+							<br><br>
+							Use For: Long range bombardment<br><br>
+                        </table>
+                      </div>
+					  <div style="display:inline-block; margin: 0 -2px; max-width:45%; min-width:160px; vertical-align:top; width:100%;" class="stack-column">
+                        <table cellspacing="0" cellpadding="0" border="0" width="100%">
+                          <tr>
+                            <td dir="ltr" style="padding: 60px 10px 60px 10px;"><img src="guides/weapons/twb_Fusionmortar.png" alt="" width="400" class="center-on-narrow" style="border: 0;width: 100%;max-width:300px;height: auto;box-shadow: -2px 2px 3px #212121;" align="right"></td>
+                          </tr>
+                        </table>
+                      </div>
+					  <div style="display:inline-block; margin: 0 -2px; max-width:45%; min-width:160px; vertical-align:top; width:100%;" class="stack-column">
+                        <table cellspacing="0" cellpadding="0" border="0" width="100%">
+                          <tr>
+                            <td dir="ltr" style="padding: 60px 20px 60px 20px;"><img src="guides/weapons/twb_Grenadelauncher.png" alt="" width="400" class="center-on-narrow" style="border: 0;width: 100%;max-width:300px;height: auto;box-shadow: -2px 2px 3px #212121;" align="right"></td>
+                          </tr>
+                        </table>
+                      </div>
+                      
+                      <!--[if mso]>
+                                    </td>
+                                    <td align="left" valign="top" width="440">
+                                    <![endif]-->
+                      
+                      <div style="display:inline-block; margin: 0 -2px; max-width:55%; min-width:320px; vertical-align:top;text-shadow: -1px 1px 1px #111111;" class="stack-column">
+                        <table cellspacing="0" cellpadding="0" border="0" width="100%">
+                          <tr>
+                            <td dir="ltr" style="padding: 0px 20px 0px 15px; font-family: sans-serif; font-size: 15px; mso-height-rule: exactly; line-height: 20px; color: #e2e5e5; text-align: left;" class="center-on-narrow">
+							The 
+							<strong style="color:#CDCDCD;text-shadow: -1px 1px 1px #111111;font-size: 15px;">Grenade Launcher </strong>
+							fires standard explosive grenades at high
+							velocity. It is a limited ammo weapon that is well rounded for both indoor and
+							outdoor use. One of the main advantages of the Grenade launcher is that the
+							grenades can be bounced off walls and around corners, making it ideal for
+							clearing indoor rooms.
+							<br><br>
+							Ammo: Limited<br>
+							Rate of Fire: Slow<br>
+							Projectile Speed: Medium<br>
+							Damage: High<br>
+							Damage Type: Explosive Spread<br>
+							Aim: Manual, Lead Calculator with Targeting Laser/Beacon<br>
+							Max Effective Range: Medium
+							<br><br>
+							Use For: Clearing rooms, medium range bombardment<br><br>
+                        </table>
+                      </div>
+					  <div style="display:inline-block; margin: 0 -2px; max-width:55%; min-width:320px; vertical-align:top;text-shadow: -1px 1px 1px #111111;" class="stack-column">
+                        <table cellspacing="0" cellpadding="0" border="0" width="100%">
+                          <tr>
+                            <td dir="ltr" style="padding: 0px 20px 0px 15px; font-family: sans-serif; font-size: 15px; mso-height-rule: exactly; line-height: 20px; color: #e2e5e5; text-align: left;" class="center-on-narrow">
+							The 
+							<strong style="color:#CDCDCD;text-shadow: -1px 1px 1px #111111;font-size: 15px;">Laser Rifle </strong>
+							is the snipers best friend. This energy based weapon
+							shoots a extremely high velocity laser in a straight line with almost unlimited
+							range and precise accuracy. The damage inflicted by this laser depends on the
+							location of the hit, the armor of the target, and the amount of energy the user
+							has in reserve. The drawback of the Laser Rifle is that it it completely drains
+							the users energy reserve with each shot.
+							<br><br>
+							Ammo: Energy<br>
+							Rate of Fire: Slow<br>
+							Projectile Speed: Instant<br>
+							Damage Type: Direct Contact<br>
+							Aim: Manual<br>
+							Max Effective Range: Very Long<br>
+							Restrictions: Requires Energy Pack
+							<br><br>
+                        </table>
+                      </div>
+					  <div style="display:inline-block; margin: 0 -2px; max-width:45%; min-width:160px; width:100%;" class="stack-column">
+                        <table cellspacing="0" cellpadding="0" border="0" width="100%">
+                          <tr>
+                            <td dir="ltr" style="padding: 60px 10px 60px 10px;"><img src="guides/weapons/twb_Laserrifle.png" alt="" width="400" class="center-on-narrow" style="border: 0;width: 100%;max-width:300px;height: auto;box-shadow: -2px 2px 3px #212121;" align="right"></td>
+                          </tr>
+                        </table>
+                      </div>
+                      <div style="display:inline-block; margin: 0 -2px; max-width:45%; min-width:160px; vertical-align:top; width:100%;" class="stack-column">
+                        <table cellspacing="0" cellpadding="0" border="0" width="100%">
+                          <tr>
+                            <td dir="ltr" style="padding: 60px 20px 60px 20px;"><img src="guides/weapons/twb_Missilelauncher.png" alt="" width="400" class="center-on-narrow" style="border: 0;width: 100%;max-width:300px;height: auto;box-shadow: -2px 2px 3px #212121;" align="right"></td>
+                          </tr>
+                        </table>
+                      </div>
+                      
+                      <!--[if mso]>
+                                    </td>
+                                    <td align="left" valign="top" width="440">
+                                    <![endif]-->
+                      
+                      <div style="display:inline-block; margin: 0 -2px; max-width:55%; min-width:320px; vertical-align:top;text-shadow: -1px 1px 1px #111111;" class="stack-column">
+                        <table cellspacing="0" cellpadding="0" border="0" width="100%">
+                          <tr>
+                            <td dir="ltr" style="padding: 0px 20px 0px 15px; font-family: sans-serif; font-size: 15px; mso-height-rule: exactly; line-height: 20px; color: #e2e5e5; text-align: left;" class="center-on-narrow">
+							The 
+							<strong style="color:#CDCDCD;text-shadow: -1px 1px 1px #111111;font-size: 15px;">Missile Launcher </strong>
+							is a very versatile weapon. With it's ability to
+							automatically lock on to suitable targets, it can be used for both offensive
+							and defensive purposes.
+							Targets that can be locked on to are enemy sensors and base turrets,
+							enemy vehicles, and enemy players who's jet packs are heated from use.
+							<br><br>
+							Ammo: Limited<br>
+							Rate of Fire: Slow<br>
+							Projectile Speed: Medium<br>
+							Damage: Very High<br>
+							Aim: Manual until lock-on, missile follows target automatically<br>
+							Damage Type: Splash<br>
+							Max Effective Range: Very Long
+							<br><br>
+							Use For: Anti-Vehicle, flag defence, Attacking enemy sensors & base
+									 turrets
+                       		<br><br>
+                        </table>
+                      </div>
+					  <div style="display:inline-block; margin: 0 -2px; max-width:55%; min-width:320px; vertical-align:top;text-shadow: -1px 1px 1px #111111;" class="stack-column">
+                        <table cellspacing="0" cellpadding="0" border="0" width="100%">
+                          <tr>
+                            <td dir="ltr" style="padding: 0px 20px 0px 15px; font-family: sans-serif; font-size: 15px; mso-height-rule: exactly; line-height: 20px; color: #e2e5e5; text-align: left;" class="center-on-narrow">
+							The 
+							<strong style="color:#CDCDCD;text-shadow: -1px 1px 1px #111111;font-size: 15px;">Plasma Rifle </strong>
+							shoots super-heated balls of burning plasma at the
+							enemy. You'll notice the firing rate is higher than 
+							that of the spinfuser, making it deadly if consecutive 
+							shots are achieved.
+							<br><br>
+							Ammo: Limited<br>
+							Rate of Fire: Medium<br>
+							Projectile Speed: Low<br>
+							Damage: High<br>
+							Aim: Manual<br>
+							Damage Type: Splash<br>
+							Max Effective Range: Medium<br>
+							Restrictions: Non-functional under water
+							<br><br>
+							Use For: Indoor combat, enemies using Shield Pack. Attacking enemy assets.
+							<br><br>
+                        </table>
+                      </div>
+					  <div style="display:inline-block; margin: 0 -2px; max-width:45%; min-width:160px; width:100%;" class="stack-column">
+                        <table cellspacing="0" cellpadding="0" border="0" width="100%">
+                          <tr>
+                            <td dir="ltr" style="padding: 60px 10px 60px 10px;"><img src="guides/weapons/twb_Plasmarifle.png" alt="" width="400" class="center-on-narrow" style="border: 0;width: 100%;max-width:300px;height: auto;box-shadow: -2px 2px 3px #212121;" align="right"></td>
+                          </tr>
+                        </table>
+                      </div>
+					  <div style="display:inline-block; margin: 0 -2px; max-width:45%; min-width:160px; vertical-align:top; width:100%;" class="stack-column">
+                        <table cellspacing="0" cellpadding="0" border="0" width="100%">
+                          <tr>
+                            <td dir="ltr" style="padding: 60px 20px 60px 20px;"><img src="guides/weapons/twb_shocklance.png" alt="" width="400" class="center-on-narrow" style="border: 0;width: 100%;max-width:300px;height: auto;box-shadow: -2px 2px 3px #212121;" align="right"></td>
+                          </tr>
+                        </table>
+                      </div>
+                      
+                      <!--[if mso]>
+                                    </td>
+                                    <td align="left" valign="top" width="440">
+                                    <![endif]-->
+                      
+                      <div style="display:inline-block; margin: 0 -2px; max-width:55%; min-width:320px; vertical-align:top;text-shadow: -1px 1px 1px #111111;" class="stack-column">
+                        <table cellspacing="0" cellpadding="0" border="0" width="100%">
+                          <tr>
+                            <td dir="ltr" style="padding: 0px 20px 0px 15px; font-family: sans-serif; font-size: 15px; mso-height-rule: exactly; line-height: 20px; color: #e2e5e5; text-align: left;" class="center-on-narrow">
+							The 
+							<strong style="color:#CDCDCD;text-shadow: -1px 1px 1px #111111;font-size: 15px;">Shocklance </strong>
+							is a close range weapon that gives the enemy a zap!
+							Taking a large chunk of health with each hit, the main 
+							advantage is the one-shot kill from behind.
+							<br><br>
+							Ammo: Energy<br>
+							Rate of Fire: Slow<br>
+							Projectile Speed: Instant<br>
+							Damage: Varies on location<br>
+							Aim: Manual<br>
+							Damage Type: Direct Contact<br>
+							Max Effective Range: Very Short<br>
+							Restrictions: Non-functional under water
+							<br><br>
+							Use For: Light-defense against Juggernauts, disruption of incoming flag carriers, flipping enemy vehicles.
+                       		<br><br>
+                        </table>
+                      </div>
+                      					  <div style="display:inline-block; margin: 0 -2px; max-width:55%; min-width:320px; vertical-align:top;text-shadow: -1px 1px 1px #111111;" class="stack-column">
+                        <table cellspacing="0" cellpadding="0" border="0" width="100%">
+                          <tr>
+                            <td dir="ltr" style="padding: 0px 20px 0px 15px; font-family: sans-serif; font-size: 15px; mso-height-rule: exactly; line-height: 20px; color: #e2e5e5; text-align: left;" class="center-on-narrow">
+							The 
+							<strong style="color:#CDCDCD;text-shadow: -1px 1px 1px #111111;font-size: 15px;">Spinfuser </strong>
+							is a long range weapon that is general purpose or the swiss army knife of the game.<br>
+							It is the main weapon included in every load-out.
+							It has good range, fly straight, and is much easier to midair with than the plasma rifle.
+							The only drawback being reload time.
+							<br><br>
+							Ammo: Limited<br>
+							Rate of Fire: Slow<br>
+							Projectile Speed: Very Fast<br>
+							Damage: High<br>
+							Aim: Manual<br>
+							Damage Type: Splash<br>
+							Max Effective Range: Long
+							<br><br>
+							Use For: General purpose, Indoor and Outdoor combat. Offense and Defense.
+							<br><br>
+                        </table>
+                      </div>
+					  <div style="display:inline-block; margin: 0 -2px; max-width:45%; min-width:160px; width:100%;" class="stack-column">
+                        <table cellspacing="0" cellpadding="0" border="0" width="100%">
+                          <tr>
+                            <td dir="ltr" style="padding: 60px 10px 60px 10px;"><img src="guides/weapons/twb_Spinfusor.png" alt="" width="400" class="center-on-narrow" style="border: 0;width: 100%;max-width:300px;height: auto;box-shadow: -2px 2px 3px #212121;" align="right"></td>
+                          </tr>
+                        </table>
+                      </div>
+                      <!--[if mso]>
+                                    </td>
+                                    </tr>
+                                    </table>
+                                    <![endif]--></td>
+                  </tr>
+                </table>
+                
+                <!--[if mso]>
+                        </td>
+                        </tr>
+                        </table>
+                        <![endif]--></td>
+            </tr> 
+          <!-- Email Body : END -->
+            
+          
+          
+          <!-- 1 Column Text : BEGIN -->
+            <tr>
+              <td><table cellspacing="0" cellpadding="0" border="0" height="100" width="100%">
+                  <tr>
+				   <td dir="ltr" style="padding: 0px 30px 0px 30px; font-family: sans-serif; font-size: 15px; mso-height-rule: exactly; line-height: 23px; color: #CDCDCD; text-align: center;" class="center-on-narrow"><strong style="color:#CDCDCD;text-shadow: -1px 1px 1px #111111;font-size: 16px;">Grenades:</strong>
+                    <br>
+					<strong style="color:#e2e5e5;text-shadow: -1px 1px 1px #111111;font-size: 15px;">Basic Grenade:</strong> The Basic Grenade is an explosive grenade that detonates after a few second delay. The resulting explosion inflicts moderate damage to the enemy;
+					the severity of which depends on the enemies proximity to the explosion.<br>
+					<strong style="color:#e2e5e5;text-shadow: -1px 1px 1px #111111;font-size: 15px;">Concussion Grenade:</strong> This grenade inflicts minimal damage to the enemy. Instead, it creates a concussion blast that causes the enemy to drop weapons, packs, and flags.
+					Caution should be used with the Concussion Grenade, as it can also cause the
+					user and any teammates within range to drop their equipment.<br>
+					<strong style="color:#e2e5e5;text-shadow: -1px 1px 1px #111111;font-size: 15px;">Flare Grenade:</strong> This grenade inflicts no damage to the enemy. Instead, it creates a bright flare that serves two main purposes. The first and most useful is that 
+					it will decoy any missiles that are locked on to the user or his vehicle,
+					drawing the missile away and disabling it's lock. Alternatively it can be used 
+					to signal teammates to a location.<br>
+					<strong style="color:#e2e5e5;text-shadow: -1px 1px 1px #111111;font-size: 15px;">Whiteout Grenade:</strong> This grenade inflicts minimal damage to the enemy. Instead, it creates a blinding flash that can distract the enemy for a few seconds. The severity of
+					the blindness depends on the enemies proximity to the detonation. The Whiteout
+					Grenade has an effective range of 20 meters. Caution should be used with the
+					Whiteout Grenade, as it will also blind teammates.<br>
+					<strong style="color:#e2e5e5;text-shadow: -1px 1px 1px #111111;font-size: 15px;">Deployable Camera:</strong> This item is not actually a grenade, but it's included here because it is equipped in place of grenades, and activated by pressing the grenade button.
+					The Deployable Camera, when activated, will be tossed like a grenade
+					and stick to whatever surface it comes in contact with. The user can then leave
+					the location and remotely view activity in the area via the Command Circuit. Can be used to detect Sensor Jammers.
+					<br><br>
+					<strong style="color:#e2e5e5;text-shadow: -1px 1px 1px #111111;font-size: 16px;">Gear:</strong>
+					<br>
+					<strong style="color:#e2e5e5;text-shadow: -1px 1px 1px #111111;font-size: 15px;">Targeting Laser:</strong> The Targeting Laser is used for marking targets from a distance. When a target is marked by the laser, teammates are able to instantly lock on with the
+					Missile Launcher, and will have lead calculation enabled with the Mortar and
+					Grenade Launcher. It is also useful for defence by pointing out targets that 
+					need to be defended or the flag carrier.<br>
+					<strong style="color:#e2e5e5;text-shadow: -1px 1px 1px #111111;font-size: 15px;">Mine:</strong> The Mine is a weapon that is dropped on the ground. Once deployed the mine lies in wait for a passing warrior or vehicle to run over it. When this 
+					happens, the mine explodes causing moderate to severe damage. Mines will 
+					explode regardless of friend or foe coming in contact with it. Only 3 mines may
+					be carried at a time by a user, regardless of armor equipped.<br>
+					<strong style="color:#e2e5e5;text-shadow: -1px 1px 1px #111111;font-size: 15px;">Beacon:</strong> The Beacon works like the Targeting Laser, but it can only be deployed by physically being in range of the target. Once in range, the user deploys the
+					beacon which then allows for teammates to instantly lock on with the Missile
+					Launcher, and lead calculation for the Mortar and Grenade Launcher.
+					The beacon can also be used as a marker. If the user immediately 
+					presses H again after deploying the beacon, it will switch to marker mode.
+					Marker mode removes the lead calculation on a target and simply marks it by a 
+					small circle. This signifies to the team that the beacon is not displaying a 
+					target for attack, but rather a position on the map that could, for example, 
+					have a Remote Inventory Station available for use.<br>
+					<strong style="color:#e2e5e5;text-shadow: -1px 1px 1px #111111;font-size: 15px;">Health Kit:</strong> The Health Kit is an item that will restore a small amount of damage to the user. A Health Kit may only be used once and only one may be carried at
+					a time regardless of the armor equipped. The exception is if the user is 
+					wearing an Ammo Pack in which case two Health Kits are allotted for use.<br>
+
+            
+            <!-- Thumbnail Right, Text Left : BEGIN -->
+            <tr>
+              <td dir="rtl" bgcolor="#2E2E2E" align="center" height="100%" valign="top" width="100%" style="padding: 10px 0;"><!--[if mso]>
+                        <table border="0" cellspacing="0" cellpadding="0" align="center" width="660">
+                        <tr>
+                        <td align="center" valign="top" width="660">
+                        <![endif]-->
+                
+                <table border="0" cellpadding="0" cellspacing="0" align="center" width="100%" style="max-width:770px;">
+                  <tr>
+                    <td align="center" valign="top" style="font-size:0; padding: 0px 0px 0px 0px;"><!--[if mso]>
+                                    <table border="0" cellspacing="0" cellpadding="0" align="center" width="660">
+                                    <tr>
+                                    <td align="left" valign="top" width="220">
+                                    <![endif]-->
+                      <!--[if mso]>
+                                    </td>
+                                    <td align="left" valign="top" width="440">
+                                    <![endif]-->
+                      
+                      <div style="display:inline-block; margin: 0px 0px 0px 0px; max-width:100%; min-width:320px; vertical-align:top;" class="stack-column">
+                        <table cellspacing="0" cellpadding="0" border="0" width="100%">
+                          <tr>
+                            <td dir="ltr" style="font-family: sans-serif; font-size: 14px; mso-height-rule: exactly; line-height: 20px; color: #e2e5e5; padding: 15px 10px 0px 10px; text-align: center; text-shadow: -1px 1px 1px #111111;" class="center">
+							<strong style="color:#e2e5e5;text-shadow: -1px 1px 1px #111111;font-size: 16px;">Credits:</strong><br>
+							<strong style="color:#e2e5e5;text-shadow: -1px 1px 1px #111111;font-size: 14px;">ScratchMonkey</strong> - First person to submit a tip and info. Thanks man! =)<br>
+							<strong style="color:#e2e5e5;text-shadow: -1px 1px 1px #111111;font-size: 14px;">Sleef Barmer</strong> - Sent in some good sniping tips.<br>
+							<strong style="color:#e2e5e5;text-shadow: -1px 1px 1px #111111;font-size: 14px;">Doh!</strong> - Havok Piloting tips.<br>
+							<strong style="color:#e2e5e5;text-shadow: -1px 1px 1px #111111;font-size: 14px;">DigitalBlaze</strong> - Contributed some FAQ's that I should've remembered to add. ;)
+						    <br><br>
+							</td>
+                          </tr>
+                        </table>
+                      </div>
+                      
+                      <!--[if mso]>
+                                    </td>
+                                    </tr>
+                                    </table>
+                                    <![endif]--></td>
+                  </tr>
+                </table>
+                
+                <!--[if mso]>
+                        </td>
+                        </tr>
+                        </table>
+                        <![endif]--></td>
+            </tr>
+            <!-- Thumbnail Right, Text Left : END -->
+            
+          </table>
+          <!-- Email Body : END --> 
+          
+                      <!-- 1 Column Text : BEGIN -->
+            <tr>
+              <td>              </div>
+                      
+                      <!--[if mso]>
+                                    </td>
+                                    </tr>
+                                    </table>
+                                    <![endif]--></td>
+                  </tr>
+                </table>
+                
+                <!--[if mso]>
+                        </td>
+                        </tr>
+                        </table>
+                        <![endif]--></td>
+            </tr>
+            <!-- Thumbnail Right, Text Left : END -->
+            
+          </table>
+          <!-- Email Body : END -->       
+          
+         <!-- Email Footer : BEGIN -->
+          <table cellspacing="0" cellpadding="0" border="0" align="center" width="100%" style="max-width: 800px;">
+            <tr>
+              <td style="text-shadow: -1px 1px 1px #111111; padding: 20px 5px;width: 100%;font-size: 13px; font-family: sans-serif; mso-height-rule: exactly; line-height:18px; text-align: center; color: #888888;"><webversion style="color:#cccccc; text-decoration:underline;"><a href="https://github.com/ChocoTaco1/TacoServer">TacoServer</a></webversion> - <a href="https://bit.ly/2NNPXhA">Mappacks</a> - <a href="https://tinyurl.com/T2Netclient">TourneyNetClient</a> - <a href="http://tinyurl.com/t2master">Servers</a><br>
+                <br>
+                Tribes 2 Discord<br>
+                <span class="mobile-link--footer">Technical Support, P.O. Box 85006 Bellevue, WA 98015-8506</span> <br>
+                <br>
+                <unsubscribe style="color:#888888; text-decoration:underline;"><a href="mailto:chocotaco@tuta.io">Contact</a></unsubscribe></td>
+            </tr>
+          </table>
+          <!-- Email Footer : END --> 
+          
+          <!--[if (gte mso 9)|(IE)]>
+            </td>
+            </tr>
+            </table>
+            <![endif]--> 
+        </div>
+      </center></td>
+  </tr>
+</table>
+</body>
+</html>
