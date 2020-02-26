@@ -14,7 +14,7 @@ $(document).ready(function () {
         var template = "<div><strong>"+data.info_hostname+"</strong></div>";
         var template = template + "<div>"+ data.info_map+" — "+data.info_maptype+"</div>";
         var template = template + "<div>"+data.num_players+" / "+ data.info_flags.max_players +"</div>";
-        $serverStatContainer.html('<div bgcolor="" style="text-shadow: -1px 1px 1px #111111;line-height: 16px;font-size:13px; color:#0fcfb9;text-align: right; font-family: sans-serif;">'+ template + '</div>');
+        $serverStatContainer.html('<div bgcolor="" style="padding: 0px 0px 0px 0px;text-shadow: -1px 1px 1px #111111;line-height: 16px;font-size:13px; color:#0fcfb9;text-align: right; font-family: sans-serif;">'+ template + '</div>');
     }
 
     getServerData(discordServerIP)
