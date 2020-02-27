@@ -22,7 +22,7 @@ $(document).ready(function () {
 
 $(document).ready(function () {
     var $FULLserverStatContainer = $('#FULLserverStatContainer');
-    var discordServerIP = "67.222.138.12:28000";
+    var discordServerIP = "91.55.60.117:28000";
     function getServerData(ip) {
         $.getJSON('https://www.tribesnext.com/json', function (tnMasterServerData) {
             var result = tnMasterServerData.find(function (server) {
