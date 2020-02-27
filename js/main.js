@@ -39,7 +39,7 @@ $(document).ready(function () {
 		var template = template + "<div></div>";
 		var template = template + "<div>"+data.info_players.map(
 			function(players){
-			return data.info_players[1].name
+			return +data.info_players[0].name+" "+data.info_players[1].name+" "+data.info_players[2].name+
 			}
 		).join('')+"</div>";
         $FULLserverStatContainer.html('<div bgcolor="" style="padding: 0px 0px 0px 0px;text-shadow: -1px 1px 1px #111111;line-height: 20px;color:#cccccc;font-size:14px;text-align: right; font-family: sans-serif;">'+ template + '</div>');
