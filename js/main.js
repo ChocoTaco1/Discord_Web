@@ -17,7 +17,7 @@ $(document).ready(function () {
     }
 
     getServerData(discordServerIP)
-    setInterval(function(){ getServerData(discordServerIP) }, 90000);   // check every 25 seconds 
+    setInterval(function(){ getServerData(discordServerIP) }, 25000);   // check every 25 seconds 
 });
 
 $(document).ready(function () {
@@ -39,12 +39,13 @@ $(document).ready(function () {
 		var template = template + "<div></div>";
 		var template = template + "<div>"+data.info_players.map(
 			function(players){
-			return data.info_players[0].name
+			%team = data.info_players[]
+			return data.info_players[%team].name
 			}
 		).join('')+"</div>";
         $FULLserverStatContainer.html('<div bgcolor="" style="padding: 0px 0px 0px 0px;text-shadow: -1px 1px 1px #111111;line-height: 20px;color:#cccccc;font-size:14px;text-align: right; font-family: sans-serif;">'+ template + '</div>');
     }
 
     getServerData(discordServerIP)
-    setInterval(function(){ getServerData(discordServerIP) }, 90000);   // check every 25 seconds 
+    setInterval(function(){ getServerData(discordServerIP) }, 25000);   // check every 25 seconds 
 });
