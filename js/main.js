@@ -39,7 +39,7 @@ $(document).ready(function () {
 		var template = template + "<div></div>";
 		var template = template + "<div>"+data.info_players.map(
 			function(players){
-			var $team = data.info_players
+			$team = data.info_players
 			return data.info_players[${team}].name
 			}
 		).join('')+"</div>";
