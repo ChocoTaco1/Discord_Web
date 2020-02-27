@@ -11,9 +11,9 @@ $(document).ready(function () {
     }
 
     function updateView(data){
-        var template = "<div style=color:#cccccc;"><strong>"+data.info_hostname+"</strong> ["+data.num_players+"&nbsp;/&nbsp;"+ data.info_flags.max_players +"]</div>";
-        var template = template + "<div>"+ data.info_map+" - "+data.info_maptype+"</div>";
-        $serverStatContainer.html('<div bgcolor="" style="padding: 0px 0px 0px 0px;text-shadow: -1px 1px 1px #111111;line-height: 18px;font-size:14px;text-align: right; font-family: sans-serif;mso-height-rule: exactly">'+ template + '</div>');
+        var template = "<div><strong>"+data.info_hostname+"</strong> ["+data.num_players+" / "+ data.info_flags.max_players +"]</div>";
+r template = template + "<div>"+ data.info_map+" - "+data.info_maptype+"</div>";
+        $serverStatContainer.html('<div bgcolor="" style="padding: 0px 0px 0px 0px;text-shadow: -1px 1px 1px #111111;line-height: 18px;color:#cccccc;font-size:14px;text-align: right; font-family: sans-serif;mso-height-rule: exactly">'+ template + '</div>');
     }
 
     getServerData(discordServerIP)
