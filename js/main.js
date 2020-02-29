@@ -22,8 +22,7 @@ $(document).ready(function () {
         var template = "<div><strong>DAMN,</strong></div>"; 
 		var template = template + "<div>there's <strong>"+data.num_players+"</strong></div>";
         var data_players = data.num_players;
-        if(data_players==1){num_players = "player";}else{num_players = "players";}
-		var template = template + "<div>"+num_players+" on</div>";
+		var template = template + "<div>player" + (data_players != 1 ? "s":"") + " on</div>";
 		var template = template + "<div><strong>"+data.info_hostname+"</strong></div>";
         var template = template + "<div>right now</div>";
         $FULLserverStatContainer.html('<div bgcolor="" style="padding: 10px 0px 20px 0px;text-shadow: -1px 1px 1px #111111;line-height: 120px;color:#cccccc;font-size:120px;text-align: center; font-family: sans-serif;">'+ template + '</div>');
