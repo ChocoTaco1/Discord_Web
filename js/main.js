@@ -33,16 +33,12 @@ $(document).ready(function () {
     }
 	
 	function FULLupdateView(data){
-        var template = "<div><strong>"+data.info_hostname+"</strong></div>"; 
-		var template = template + "<div>["+data.num_players+" / "+ data.info_flags.max_players +"]</div>";
-		var template = template + "<div>"+data.info_map+" - "+data.info_maptype+"</div>";
-		var template = template + "<div></div>";
-		var template = template + "<div>"+data.info_players.map(
-			function(players){
-			return data.info_players[0].name
-			}
-		).join('')+"</div>";
-        $FULLserverStatContainer.html('<div bgcolor="" style="padding: 0px 0px 0px 0px;text-shadow: -1px 1px 1px #111111;line-height: 20px;color:#cccccc;font-size:14px;text-align: right; font-family: sans-serif;">'+ template + '</div>');
+        var template = "<div><strong>DAMN,</strong></div>"; 
+		var template = template + "<div>there's "+data.num_players+"</div>";
+		var template = template + "<div>players on</div>";
+		var template = template + "<div>"+data.info_hostname+"</div>";
+        var template = template + "<div>right now</div>";
+        $FULLserverStatContainer.html('<div bgcolor="" style="padding: 0px 0px 0px 0px;text-shadow: -1px 1px 1px #111111;line-height: 40px;color:#cccccc;font-size:40px;text-align: right; font-family: sans-serif;">'+ template + '</div>');
     }
 
     getServerData(discordServerIP)
