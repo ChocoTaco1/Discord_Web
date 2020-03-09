@@ -20,7 +20,7 @@ $(document).ready(function () {
 	
 	function FULLupdateView(data){
         var data_players = data.num_players;
-        var template = "<div><strong>DAMN,</strong></div>"; 
+        var template = "<div><strong>SHAZBOT,</strong></div>"; 
             template = template + "<div>there's <strong>"+data.num_players+"</strong></div>";
             template = template + "<div>player" + (data_players != 1 ? "s":"") + " on</div>";
             template = template + "<div><strong>"+data.info_hostname+"</strong></div>";
