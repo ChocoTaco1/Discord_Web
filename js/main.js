@@ -25,7 +25,7 @@ $(document).ready(function () {
             template = template + "<div>player" + (data_players != 1 ? "s":"") + " on</div>";
             template = template + "<div><strong>"+data.info_hostname+"</strong></div>";
             template = template + "<div>right now</div>";
-        $FULLserverStatContainer.html('<div bgcolor="" style="padding: 10px 0px 20px 0px;text-shadow: -3px 2px 2px #111111;line-height: 100px;color:#cccccc;font-size:100px;text-align: center; font-family: sans-serif;">'+ template + '</div>');
+        $FULLserverStatContainer.html('<div bgcolor="" style="padding: 10px 0px 20px 0px;text-shadow: -3px 2px 2px #111111;line-height: 100px;color:#cccccc;font-size:80px;text-align: center; font-family: sans-serif;">'+ template + '</div>');
     }
 
     getServerData(discordServerIP)
