@@ -1,875 +1,238 @@
-<!doctype html>
+<!DOCTYPE HTML>
+<!--
+	Prologue by HTML5 UP
+	html5up.net | @ajlkn
+	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+-->
 <html>
-<head>
+	<head>
+		<title>Play Tribes 2</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+		<link rel="stylesheet" href="assets/css/main.css" />
+		<link rel=icon href=https://raw.githubusercontent.com/ChocoTaco1/Discord_Web/master/images/favicon.png>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+	</head>
+	<body class="is-preload">
 
-<link rel=icon href=https://raw.githubusercontent.com/ChocoTaco1/Discord_Web/master/images/favicon.png>
-<meta name="viewport" content="width=device-width, initial-scale=1">
+		<!-- Header -->
+			<div id="header">
 
-<meta charset="utf-8">
-<!-- utf-8 works for most cases -->
-<meta name="viewport" content="width=device-width">
-<!-- Forcing initial-scale shouldn't be necessary -->
-<meta http-equiv="X-UA-Compatible" content="IE=edge">
-<!-- Use the latest (edge) version of IE rendering engine -->
-<title>Play Tribes 2 - Home</title>
-<!-- The title tag shows in email notifications, like Android 4.4. -->
+				<div class="top">
 
-<!-- Please use an inliner tool to convert all CSS to inline as inpage or external CSS is removed by email clients -->
-<!-- important in CSS is used to prevent the styles of currently inline CSS from overriding the ones mentioned in media queries when corresponding screen sizes are encountered -->
+					<!-- Logo -->
+						<div id="logo">
+							<span class="image avatar48"><img src="images/avatar.png" alt="" /></span>
+							<h1 id="title">Play Tribes 2</h1>
+							<p>Team Combat on an Epic Scale!</p>
+						</div>
 
-<style>
+					<!-- Nav -->
+						<nav id="nav">
+							<ul>
+								<li><a href="#top" id="top-link"><span class="icon solid fa-home">Intro</span></a></li>
+								<li><a href="#install" id="install-link"><span class="icon solid fa-save">Install</span></a></li>
+								<li><a href="#downloads" id="downloads-link"><span class="icon solid fa-user">Downloads</span></a></li>
+								<li><a href="#gamemodes" id="gamemodes-link"><span class="icon solid fa-flag">Game Modes</span></a></li>
+								<li><a href="#stats" id="stats-link"><span class="icon solid fa-chart-bar">Stats</span></a></li>
+								<li><a href="#discord" id="discord-link"><span class="icon brands fa-discord">Discord</span></a></li>
+							</ul>
+						</nav>
 
-/* Navigation Bar */
-ul {
-  list-style-type: none;
-  margin: 0;
-  padding: 0;
-  overflow: hidden;
-  background-color: #2F2F2F;
-  position: -webkit-sticky; /* Safari */
-  position: sticky;
-  z-index:5;
-  top: 0;
-}
+				</div>
 
-li {
-  float: left;
-}
+				<div class="bottom">
+					<td id="serverStatContainer" style="padding: 4px 5px 0px 0px;"></td>
+					<!-- Social Icons -->
+						<ul class="icons">
+							<li><a href="https://www.reddit.com/r/Tribes/" class="icon brands fa-reddit"><span class="label">/r/Tribes</span></a></li>
+							<li><a href="https://tinyurl.com/T2Netclient" class="icon solid fa-flag-checkered "><span class="label">TourneyNetClient2</span></a></li>
+							<li><a href="https://github.com/ChocoTaco1/TacoServer" class="icon brands fa-github"><span class="label">TacoServer Github</span></a></li>
+							<li><a href="https://www.tribesnext.com/#servers" class="icon solid fa-heartbeat"><span class="label">Master Server</span></a></li>
+							<li><a href="about.html" class="icon solid fa-star"><span class="label">About</span></a></li>
+						</ul>
 
-li a {
-  display: block;
-  color: white;
-  font-family: sans-serif;
-  text-align: center;
-  padding: 14px 12px;
-  text-decoration: none;
-}
+				</div>
 
-li a:hover {
-  background-color: #1F1F1F;
-  color: white;
-}
+			</div>
 
-.active {
-  background-color: #3F3F3F;
-}
-body {
-  font-size: 16px;
-}
+		<!-- Main -->
+			<div id="main">
 
-ul {
-  list-style-type: none;
-  margin: 0;
-  padding: 0;
-  overflow: hidden;
-  background-color: #2F2F2F;
-  color: #e2e5e5;
-  position: -webkit-sticky; /* Safari */
-  position: sticky;
-  top: 0;
-}
+				<!-- Intro -->
+					<section id="top" class="one dark cover">
+						<div class="container">
+							<header>
+								<h2 class="alt">Tribes 2 is the sequel to one of the most innovative and popular first person shooters of all time</a></h2>
+								<p>You take on the role of a lone soldier part of a large and organized team. Through multiple different game modes, you will play capture the flag, destroy the enemy base, hunt down a single person to kill, and participate in large-scale battles. All the time you will have access to multiple forms of armor, deadly weapons, tons of items, and even multiple vehicles to use in your campaign against the opposing team.<br />
+								</p>
+							</header>
 
-li {
-  float: left;
-  color: #e2e5e5;
-}
+							<footer>
+								<a href="review.html" class="button">Read More</a>
+							</footer>
 
-li a {
-  display: block;
-  color: white;
-  text-align: center;
-  padding: 12px 12px;
-  text-decoration: none;
-}
+						</div>
+					</section>
 
-li a:hover {
-  background-color: #1F1F1F;
-  color: #e2e5e5;
-}
+				<!-- Install -->
+					<section id="install" class="two">
+						<div class="container">
+							<header>
+								<h2>Install</h2>
+							</header>
+							<p>Tribes 2 is relatively easy to install and was made shareware upon release of Tribes Vengeance. Any new install will require the use of the Tribesnext patch which replaces the original master server with a new one. New accounts can be created under this system.</p>
 
-.active {
-  background-color: #3E3E3E;
-  color: #e2e5e5;
-}
-	
-</style>
+							<div class="row">
+								<div class="col-6 col-12-mobile">
+									<article class="item">
+										<a href="https://www.dropbox.com/s/qoo8m1dvhypt7zw/Tribes2Config_1.6.1.exe?dl=1" class="image fit"><img src="images/install_1.png" alt="" /></a>
+										<header>
+											<h3>Tribes 2 Config</h3>
+											<p>Fresh install with mappacks, scripts, interpolation settings, and textures preincluded. Great for new players who want a quick and easy process.</p>
+											
+												<footer>
+													<a href="https://www.dropbox.com/s/qoo8m1dvhypt7zw/Tribes2Config_1.6.1.exe?dl=1" class="button">Download</a>
+												</footer>
+											</h3>
+										</header>
+									</article>
+								</div>
+								<div class="col-6 col-12-mobile">
+									<article class="item">
+										<a href="http://xfer1.the-construct.net/tribes2/tribes2gsi.exe" class="image fit"><img src="images/install_2.png" alt="" /></a>
+										<header>
+											<h3>Vanilla Tribes GSI from TribesNext</h3> 
+											<p>This is the stock Tribes2 Installer meaning you'll have to install the <a href="http://www.tribesnext.com/files/TribesNext_rc2a.exe">TribesNext patch</a> and find/configure <a href="http://www.chaingunned.org/sling/">scripts</a> and settings yourself.</p>
+												
+												<footer>
+													<a href="http://www.tribesnext.com/" class="button">Download</a>
+													<a href="wingscript.html" class="button">Script Guide</a>
+												</footer>
+											</h3>
+										</header>
+									</article>
+								</div>
+							</div>
 
-<!-- CSS Reset -->
-<style type="text/css">
-/* What it does: Remove spaces around the email design added by some email clients. */
-      /* Beware: It can remove the padding / margin and add a background color to the compose a reply window. */
-html, body {
-	margin: 0 !important;
-	padding: 0 !important;
-	height: 100% !important;
-	width: 100% !important;
-}
-/* What it does: Stops email clients resizing small text. */
-* {
-	-ms-text-size-adjust: 100%;
-	-webkit-text-size-adjust: 100%;
-}
-/* What it does: Forces Outlook.com to display emails full width. */
-.ExternalClass {
-	width: 100%;
-}
-/* What is does: Centers email on Android 4.4 */
-div[style*="margin: 16px 0"] {
-	margin: 0 !important;
-}
-/* What it does: Stops Outlook from adding extra spacing to tables. */
-table, td {
-	mso-table-lspace: 0pt !important;
-	mso-table-rspace: 0pt !important;
-}
-/* What it does: Fixes webkit padding issue. Fix for Yahoo mail table alignment bug. Applies table-layout to the first 2 tables then removes for anything nested deeper. */
-table {
-	border-spacing: 0 !important;
-	border-collapse: collapse !important;
-	table-layout: fixed !important;
-	margin: 0 auto !important;
-}
-table table table {
-	table-layout: auto;
-}
-/* What it does: Uses a better rendering method when resizing images in IE. */
-img {
-	-ms-interpolation-mode: bicubic;
-}
-/* What it does: Overrides styles added when Yahoo's auto-senses a link. */
-.yshortcuts a {
-	border-bottom: none !important;
-}
-/* What it does: Another work-around for iOS meddling in triggered links. */
-a[x-apple-data-detectors] {
-	color: inherit !important;
-}
-	
-/* Get Mappacks Button */
-.button {
-  background-color: #048d99; /* Teal */
-  border: none;
-  color: white;
-  padding: 4px 0px;
-  text-align: center;
-  text-decoration: none;
-  display: inline-block;
-  font-size: 26px;
-  font-weight: bold;
-  line-height: 1.0;
-  font-family: sans-serif;
-  margin: 0px 0px 0px 0px;
-  -webkit-transition-duration: 0.4s; /* Safari */
-  transition-duration: 0.4s;
-  cursor: pointer;
-  width: 100%
-}
-.button1 {
-  background-color: #048d99; 
-  color: black; 
-  border: 0px solid #048d99;
-}
-.button1:hover {
-  background-color: #0fcfb9;
-  color: black;
-}
-</style>
+						</div>
+					</section>
 
-<!-- Progressive Enhancements -->
-<style type="text/css">
-/* All Other Buttons */
-.button-td, .button-a {
-	transition: all .3s ease-in;
-}
-.button-td:hover, .button-a:hover {
-	background: #4E4E4E !important;
-	border-color: #4E4E4E !important;
-}
+				<!-- Downloads -->
+					<section id="downloads" class="three">
+						<div class="container">
+							<header>
+								<h2>Downloads</h2>
+								<p><img src="images/download.png" alt="" /></p>
+							</header>
+							<div class="row">
+								<div class="col-4 col-12-mobile">
+									 <h3>Tribes 2 Client</h3>
+										  <p><a href="https://www.dropbox.com/s/qoo8m1dvhypt7zw/Tribes2Config_1.6.1.exe?dl=1" style="text-decoration: none">All-In-One Tribes 2 Config</a><br>
+										  <a href="http://xfer1.the-construct.net/tribes2/tribes2gsi.exe" style="text-decoration: none">Vanilla Tribes 2 GSI</a><br>
+										  <a href="http://www.tribesnext.com/files/TribesNext_rc2a.exe" style="padding: 0px 9px 0px 9px; text-decoration: none">TribesNext RC2A Community Patch</a><br>
+										  <a href="https://bit.ly/2NNPXhA" style="padding: 0px 9px 0px 9px; text-decoration: none">Mappacks</a><br>
+										  <a href="https://www.dropbox.com/s/dp8h5izm88zh2km/tournamentNetClient2.vl2?dl=1" style="padding: 0px 9px 0px 9px; text-decoration: none">TourneyNetClient Ver.2</a></p>
+								</div>
+								<div class="col-4 col-12-mobile">
+									 <h3>Useful Scripts</h3>
+										  <p><a href="https://www.dropbox.com/s/p4rzcbyytnpssyz/ScriptPack.zip?dl=1" style="text-decoration: none">All-In-One Script Pack</a><br>
+										  <a href="https://bit.ly/2kFJ5Hg" style="text-decoration: none">Interpolate</a><br>
+										  <a href="https://www.dropbox.com/s/zjfta4akkshy17x/support.vl2?dl=1" style="text-decoration: none">Support.vl2</a><br>
+										  <a href="https://ln2.sync.com/dl/9228e7100/r4zh6ewz-3jp8d7bm-zyrpjx9b-r6y2h4tk" style="text-decoration: none">Voicepacks</a><br>
+										  <a href="http://www.chaingunned.org/sling/" style="text-decoration: none">Sling Scripts</a><br></p>
+								</div>
+								<div class="col-4 col-12-mobile">
+									 <h3>Linux Support</h3>
+										  <p><a href="https://www.dropbox.com/s/ejemimzxjdswtvm/t2-linux.zip?dl=1" style="text-decoration: none">Loki Port Linux Binary</a><br>
+										  <a href="http://t2.plugh.us/tribes2-lan-fix-linux.tar.gz" style="text-decoration: none">Linux LAN Patch</a><br>
+										  <a href="https://lutris.net/files/games/tribes-2/TribesNext_RC2_LinuxVersion.zip" style="text-decoration: none">TribesNext RC2 Linux Version</a><br>
+										  <a href="https://lutris.net/games/tribes-2/" style="text-decoration: none">Lutris Installer</a></p>
+								</div>
+							</div>
+							
+					</section>
 
-/* Media Queries */
-@media screen and (max-width: 480px) {
-/* What it does: Forces elements to resize to the full width of their container. Useful for resizing images beyond their max-width. */
-.fluid, .fluid-centered {
-	width: 100% !important;
-	max-width: 100% !important;
-	height: auto !important;
-	margin-left: auto !important;
-	margin-right: auto !important;
-}
-/* And center justify these ones. */
-.fluid-centered {
-	margin-left: auto !important;
-	margin-right: auto !important;
-}
-/* What it does: Forces table cells into full-width rows. */
-.stack-column, .stack-column-center {
-	display: block !important;
-	width: 100% !important;
-	max-width: 100% !important;
-	direction: ltr !important;
-}
-/* And center justify these ones. */
-.stack-column-center {
-	text-align: center !important;
-}
-/* What it does: Generic utility class for centering. Useful for images, buttons, and nested tables. */
-.center-on-narrow {
-	text-align: center !important;
-	display: block !important;
-	margin-left: auto !important;
-	margin-right: auto !important;
-	float: none !important;
-}
-	
-table.center-on-narrow {
-	display: inline-block !important;
-}
-	
-}
-body {
-	margin-left: 20px;
-	background-color: #1F1F1F;
-}
-	
-body,td,th {
-	color: #F8F8F8;
-}
-a:link {
-	color: #A6A6A6;
-}
-a:visited {
-	color: #A6A6A6;
-}
-a:active {
-	color: #A6A6A6;
-}
-</style>
+				<!-- Gamemodes -->
+					<section id="gamemodes" class="two">
+						<div class="container">
 
-<style>
-.container {
-  align: center;
-  position: relative;
-  width: 100%;
-}
+							<header>
+								<h2>Game Modes</h2>
+							</header>
+							<div class="row">
+								<div class="col-6 col-12-mobile">
+									 <h3>Capture the Flag</h3>
+										  <p>Capture the Flag is the original game mode. CTF makes use of all armors in the game; Scout, Assault, and Juggernaut. Teams have the work to fullfill objectives like going after the enemy flag, destroying enemy assets. All the while, defending theirs. With a full range of vehicles and turrets, the team that works best together wins the match.</p>
+										  
+										  <footer>
+												<a href="infoctf.html" class="button">More Information</a>
+												<a href="demos.html" class="button">Demos</a>
+										  </footer>
+								</div>
+								<div class="col-6 col-12-mobile">
+									 <h3>LakRabbit</h3>
+										  <p>Lakrabbit is a game mode popular among the purists. In Lak, points are given based on the skill of your shots. Not by the time you hold the flag like normal rabbit. With this mindset the rabbit is forced to engage back with the other players. You have to fight to keep it. As the rabbit, you can activate a range of powerups thru specific actions making it a fun alternative to other modes.</p>
+										  
+										  <footer>
+												<a href="infolak.html" class="button">More Information</a>
+												<a href="demoslak.html" class="button">Demos</a>
+										  </footer>
+								</div>	
+							</div>						
+					</section>
+					
+				<!-- Stats -->
+					<section id="stats" class="three">
+						<div class="container">
+							<header>
+								<h2>Stats</h2>
+								<p><img src="images/stats.png" alt="" /></p>
+							</header>
+							<p>In-Game Stats are pulled directly from the Discord PUB server and uploaded to be viewed online.<br>
+							You can view matches previously played with all scores and individual stats viewable. Players can also look at their own stats, as well as the weapons they most often use. This system is also available on the Tribes2 server thru the use of the F2 key (Score window).</p>
+						</div>
+					    <footer>
+							<a href="https://stats.playt2.com" class="button">View Stats</a>
+					    </footer>
+					</section>
+					
+				<!-- Discord -->
+					<section id="discord" class="two">
+						<div class="container">
+							<header>
+								<h2>Discord</h2>
+								<p><img src="images/discord.png" alt="" /></p>
+							</header>
+							<p>Join discord to be updated on the happenings of the Tribes 2 community. Follow on-going games with the use of, Battlebot, a Tribes 2 server query bot. Get help with installing tribes, using scripts, and developing strats. View and post Tribes2 media and content.</p>
+						</div>
+					    <footer>
+							<a href="https://playt2.com/discord" class="button">Join Discord</a>
+					    </footer>
+					</section>
 
-/* Download Image Button */
+			</div>
 
-.image {
-  opacity: 1;
-  display: block;
-  width: 100%;
-  height: auto;
-  transition: .9s ease;
-  backface-visibility: hidden;
-}
+		<!-- Footer -->
+			<div id="footer">
 
-.middle {
-  transition: .9s ease;
-  opacity: 0;
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  -ms-transform: translate(-50%, -50%);
-  text-align: center;
-}
+				<!-- Copyright -->
+					<ul class="copyright">
+						<li>&copy;Dynamix, Technical Support, P.O. Box 85006 Bellevue, WA 98015-8506</li>
+					</ul>
 
-.container:hover .image {
-  filter: grayscale(1) blur(1px);
-  -webkit-filter: grayscale(1) blur(1px);
-  -webkit-transform: scale(1.1);
-  -ms-transform: scale(1.1);
-  transform: scale(1.1);
-}
+			</div>
 
-.container:hover .middle {
-  opacity: 1;
-}
+		<!-- Scripts -->
+			<script src="assets/js/jquery.min.js"></script>
+			<script src="assets/js/jquery.scrolly.min.js"></script>
+			<script src="assets/js/jquery.scrollex.min.js"></script>
+			<script src="assets/js/browser.min.js"></script>
+			<script src="assets/js/breakpoints.min.js"></script>
+			<script src="assets/js/util.js"></script>
+			<script src="assets/js/main.js"></script>
+			<script src="assets/js/tribesnextping.js"></script>
 
-.text {
-  font-weight: normal;
-  font-size: 14px; 
-  line-height: 1.0;
-  font-family: sans-serif;
-  background-color: #1F1F1F;
-  color: white;
-  padding: 10px 20px;
-}
-
-.hovereffect {
-  width: 100%;
-  height: 100%;
-  float: left;
-  overflow: hidden;
-  position: relative;
-  text-align: center;
-  cursor: default;
-}
-
-.hovereffect .overlay {
-  width: 100%;
-  height: 100%;
-  position: absolute;
-  overflow: hidden;
-  top: 0;
-  left: 0;
-}
-
-.hovereffect img {
-  display: block;
-  position: relative;
-  -webkit-transition: all 0.5s ease-in;
-  transition: all 0.5s ease-in;
-}
-
-.hovereffect:hover img {
-  filter: grayscale(1) blur(1px);
-  -webkit-filter: grayscale(1) blur(1px);
-  -webkit-transform: scale(1.1);
-  -ms-transform: scale(1.1);
-  transform: scale(1.1);
-}
-
-
-.hovereffect:hover a.info, .hovereffect:hover h2 {
-  opacity: 1;
-  filter: alpha(opacity=100);
-  -webkit-transform: scale(1);
-  -ms-transform: scale(1);
-  transform: scale(1);
-}
-	
-body {
-	margin:0;
-	overflow-y: scroll;
-}
-
-</style>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-</head>
-<body text="#e2e5e5" style="margin: 0;" width="100%" >
-<table cellpadding="0" cellspacing="0" border="0" height="100%" width="100%" bgcolor="#e0e0e0" style="border-collapse:collapse;">
-  <tr>
-    <td style="vertical-align:top;" bgcolor="#1F1F1F" background="images/bglogo3.png"><center style="width: 100%;">
-        
-        <!-- Visually Hidden Preheader Text : BEGIN -->
-        <div style="display:none;font-size:1px;line-height:1px;max-height:0px;max-width:0px;opacity:0;overflow:hidden;mso-hide:all;font-family: sans-serif;"></div>
-        <!-- Visually Hidden Preheader Text : END -->
-        
-        <div style="max-width: 800px;"> 
-          <!--[if (gte mso 9)|(IE)]>
-            <table cellspacing="0" cellpadding="0" border="0" width="680" align="center">
-            <tr>
-            <td>
-            <![endif]--> 
-          
-          <!-- Email Header : BEGIN -->
-          <table cellspacing="0" cellpadding="0" border="0" align="center" width="100%" style="max-width: 800px;">
-            <tr>
-              <td style="padding: 5px 0px 7px 5px; text-align: left; font-family: sans-serif; font-size: 35px; mso-height-rule: exactly; line-height: 45px; color: #e2e5e5;"><img src="images/play.png" width="250" alt="" border="0"  style="padding: 0px 0px 0px 0px; width: 100%; max-width: 250px; height: auto;" align="center"></td>
-              <td class="full-width-image" align="center"><img src="images/logo.png" width="322" alt="" border="0"  style="padding: 0px 0px 0px 0px; width: 100%; max-width: 45px; height: auto;" align="center"></td>
-              <td id="serverStatContainer" style="padding: 4px 5px 0px 0px;"></td>
-            </tr>
-          </table>
-          </div>
-          <!-- Email Header : END --> 
-          
-          <!-- Navigation : BEGIN --> 
-		  <div style="max-width: 800px;box-shadow: -2px 3px 5px #1F1F1F, 2px 3px 5px #1F1F1F;">
-		  <ul class="horizontal">
-			  <li><a class="active" href="index.html">Home</a></li>
-			  <li><a href="downloads.html">Downloads</a></li>
-			  <!--<li><a href="guides.html">Guides</a></li>-->
-			  <li><a href="stats.html">Stats</a></li>
-			  <li class="rightli" style="float:right"><a href="discord.html">Discord</a></li>
-		  </ul>
-          <!-- Navigation : END --> 
-          
-          <!-- Email Body : BEGIN -->
-          <table cellspacing="0" cellpadding="0" border="0" align="center" bgcolor="2F2F2F" width="100%" style="max-width: 800px;">
-            
-            <!-- Hero Image, Flush : BEGIN -->
-            <tr>
-              <td class="full-width-image" align="center"><img src="images/Image_680x300.jpg" width="800" alt="" border="0"  style="padding: 0px 0px 0px 0px; margin: 0px 0px 0px 0px; width: 100%; max-width: 800px; height: auto;">
-            </tr>
-            <!-- Hero Image, Flush : END --> 
-            
-            <!-- 1 Column Text : BEGIN -->
-            <tr>
-              <td><table cellspacing="0" cellpadding="0" border="0" height="100" width="100%">
-                  <tr>
-                    <td bgcolor="#2E2E2E" style="padding: 0px 25px 25px 25px; text-align: center; font-family: sans-serif; font-size: 16px; mso-height-rule: exactly; line-height: 25px; color: #e2e5e5;"><p style="font-style: normal; font-weight: normal; text-shadow: -1px 1px 1px #111111;">Tribes 2 is the sequel to one of the most innovative and popular first person shooters of all time. You take on the role of a lone soldier part of a large and organized team. Through multiple different game modes, you will play capture the flag, destroy the enemy base, hunt down a single person to kill, and participate in large-scale battles. All the time you will have access to multiple forms of armor, deadly weapons, tons of items, and even multiple vehicles to use in your campaign against the opposing team.<br>
-                        
-                        <!-- Button : Begin --></p>
-                      <table cellspacing="0" cellpadding="0" border="0" align="center" style="margin: auto;">
-                        <tr>
-                          <td style="border-radius: 3px; background: #222222; text-align: center;" class="button-td"><a href="review.html" style="background: #222222; border: 12px solid #222222; padding: 0 9px;color: #e2e5e5; font-family: sans-serif; font-size: 14px; line-height: 1.0; text-align: center; text-decoration: none; display: block; border-radius: 3px; font-weight: bold;box-shadow: -1px 1px 1px #111111;" class="button-a"> 
-                            <!--[if mso]>&nbsp;&nbsp;&nbsp;&nbsp;<![endif]-->Read More<!--[if mso]>&nbsp;&nbsp;&nbsp;&nbsp;<![endif]--> 
-							</style></a></td>
-                          <td>&nbsp;</td>
-						  <td style="border-radius: 3px; background: #222222; text-align: right;" class="button-td"><a href="triballore.html" style="background: #222222; border: 12px solid #222222; padding: 0 9px;color: #e2e5e5; font-family: sans-serif; font-size: 14px; line-height: 1.0; text-align: center; text-decoration: none; display: block; border-radius: 3px; font-weight: bold; box-shadow: -1px 1px 1px #111111;" class="button-a"> 
-						<!--[if mso]>&nbsp;&nbsp;&nbsp;&nbsp;<![endif]-->Tribal Lore<!--[if mso]>&nbsp;&nbsp;&nbsp;&nbsp;<![endif]--> 
-						</style></a></td>
-                        </tr>
-                      </table>
-                      
-                    <!-- Button : END --></td>
-                  </tr>
-                </table></td>
-            </tr>
-            <!-- 1 Column Text : BEGIN --> 
-            
-            <!-- Background Image with Text : BEGIN -->
-            <tr>
-              <td background="images/Image_680x230_1.jpg" bgcolor="#222222" valign="middle" style="text-align: center; background-position: center center !important; background-size: cover !important;"><!--[if gte mso 9]>
-                        <v:rect xmlns:v="urn:schemas-microsoft-com:vml" fill="true" stroke="false" style="width:800px;height:175px; background-position: center center !important;">
-                        <v:fill type="tile" src="assets/Hybrid/Image_680x230.png" color="#222222" />
-                        <v:textbox inset="0,0,0,0">
-                        <![endif]-->
-                
-                <div> 
-                  <!--[if mso]>
-                            <table border="0" cellspacing="0" cellpadding="0" align="center" width="500">
-                            <tr>
-                            <td align="center" valign="top" width="500">
-                            <![endif]-->
-                  <table border="0" cellpadding="0" cellspacing="0" align="center" width="100%" style="max-width:500px; margin: auto;">
-                    <tr>
-                      <td valign="middle" style="text-align: center; padding: 20px 10px 20px 10px; font-family: sans-serif; font-size: 16px; mso-height-rule: exactly; line-height: 25px; color: #e2e5e5;text-shadow: -1px 1px 1px #111111;font-style: normal; font-weight: normal;">&quot;Those with the ultimate system and mad teamplay skills will eat this up; it's a triumph of teamwork, dynamic gameplay and some serious   strategy.&quot;</td>
-                    </tr>
-                  </table>
-                  <!--[if (gte mso 9)|(IE)]>
-                            </td>
-                            </tr>
-                            </table>
-                            <![endif]--> 
-                </div>
-                
-                <!--[if gte mso 9]>
-                        </v:textbox>
-                        </v:rect>
-                        <![endif]--></td>
-            </tr>
-            <!-- Background Image with Text : END --> 
-            <td bgcolor="#3E3E3E" style="padding: 12px 0px 9px 0px; text-align: center; font-family: sans-serif; font-size: 30px; mso-height-rule: exactly; line-height: 30px; color: #e2e5e5;"><img src="images/get.png" width="340" alt="" style="border: 0;width: 100%;max-width: 270px;height: auto;" class="center-on-narrow"></td>
-            <!-- Two Even Columns : BEGIN -->
-            <tr>
-              <td bgcolor="#2E2E2E" align="center" height="100%" valign="top" width="100%"><!--[if mso]>
-                        <table border="0" cellspacing="0" cellpadding="0" align="center" width="660">
-                        <tr>
-                        <td align="center" valign="top" width="660">
-                        <![endif]-->
-                
-                <table border="0" cellpadding="0" cellspacing="0" align="center" width="100%" style="max-width:770x;">
-                  <tr>
-                    <td align="center" valign="top" style="font-size:0; padding: 10px 0;"><!--[if mso]>
-                                    <table border="0" cellspacing="0" cellpadding="0" align="center" width="660">
-                                    <tr>
-                                    <td align="left" valign="top" width="330">
-                                    <![endif]-->
-                      
-                      <div style="display:inline-block; max-width:50%; margin: 0 -2px; min-width:200px; vertical-align:top; width:100%;" class="stack-column">
-                        <table width="100%" border="0" align="center" cellpadding="0" cellspacing="0">
-                          <tr>
-                            <td style="padding: 20px 20px;"><table cellspacing="0" cellpadding="0" border="0" width="100%" style="font-size: 14px;text-align: left;">
-                                <tr>  
-                            <td><a href="https://www.dropbox.com/s/qoo8m1dvhypt7zw/Tribes2Config_1.6.1.exe?dl=1">
-							<div class="col-lg-3 col-md-4 col-sm-6 col-xs-12">
-								<div class="hovereffect" style="box-shadow: -2px 2px 3px #212121;">
-                                 <div class="container">
-  									<img src="images/Image_310x310_1.jpg" alt="Avatar" class="image" style="width: 100%;height: auto; box-shadow: -2px 2px 3px #212121;" align="center" >
-									  <div class="middle">
-    									<div class="text" style="background: #222222; border: 12px solid #222222; padding: 0 9px;color: #e2e5e5; font-family: sans-serif; line-height: 1.0; text-align: center; text-decoration: none; display: block; border-radius: 3px; font-weight: bold;">Download</div>
-									  </div>
-									</div>
-                              </a>
-                               </td>
-                                </tr>
-                                <tr>
-                                  <td style="text-shadow: -1px 1px 1px #111111; font-family: sans-serif; font-size: 16px; mso-height-rule: exactly; line-height: 25px; color: #e2e5e5; padding-top: 10px;
-                                  padding: 10px;" class="stack-column-center"> Tribes 2 Config - Fresh install with mappacks, scripts, interpolation settings, and textures preincluded. Great for new players who want a quick and easy process. </td>
-                                </tr>
-                              </table></td>
-                          </tr>
-                        </table>
-                      </div>
-                      
-                      <!--[if mso]>
-                                    </td>
-                                    <td align="left" valign="top" width="330">
-                                    <![endif]-->
-                      
-                      <div style="display:inline-block; max-width:50%; margin: 0 -2px; min-width:200px; vertical-align:top; width:100%;" class="stack-column">
-                        <table width="100%" align="center">
-                          <tr>
-                            <td style="padding: 20px 20px;"><table cellspacing="0" cellpadding="0" border="0" width="100%" style="font-size: 14px;text-align: left;">
-                                <tr>
-                                  <td><a href="http://xfer1.the-construct.net/tribes2/tribes2gsi.exe">
-							<div class="col-lg-3 col-md-4 col-sm-6 col-xs-12">
-								<div class="hovereffect" style="box-shadow: -2px 2px 3px #212121;">
-                                 <div class="container">
-  									<img src="images/Image_310x310_2.jpg" alt="Avatar" class="image" style="width: 100%;height: auto;box-shadow: -2px 2px 3px #212121;" align="center" >
-									  <div class="middle">
-    									<div class="text" style="background: #222222; border: 12px solid #222222; padding: 0 9px;color: #e2e5e5; font-family: sans-serif; line-height: 1.0; text-align: center; text-decoration: none; display: block; border-radius: 3px; font-weight: bold;">Download</div>
-									  </div>
-									</div>
-                                  </a></td>
-                                </tr>
-                                <tr>
-                                  <td style="text-shadow: -1px 1px 1px #111111; font-family: sans-serif; font-size: 16px; mso-height-rule: exactly; line-height: 25px; color: #e2e5e5; padding-top: 10px; padding: 10px;" class="stack-column-center">Vanilla Tribes GSI from TribesNext - This is the stock Tribes2 Installer meaning you'll have to install the <a href="http://www.tribesnext.com/files/TribesNext_rc2a.exe" style="text-decoration: none">community patch</a> and find/configure <a href="http://www.chaingunned.org/sling/" style="text-decoration: none">scripts</a> and settings yourself.</td>
-                                </tr>
-                              </table></td>
-                          </tr>
-                        </table>
-                      </div>
-                      
-                      <!--[if mso]>
-                                    </td>
-                                    </tr>
-                                    </table>
-                                    <![endif]--></td>
-                  </tr>
-                </table>
-                
-                <!--[if mso]>
-                        </td>
-                        </tr>
-                        </table>
-                        <![endif]--></td>
-            </tr>
-            <!-- Two Even Columns : END --> 
-            
-            <!-- Background Image with Text : BEGIN -->
-            <tr>
-              <td background="images/Image_680x230_2.jpg" bgcolor="#222222" valign="middle" style="text-align: center; background-position: center center !important; background-size: cover !important;"><!--[if gte mso 9]>
-                        <v:rect xmlns:v="urn:schemas-microsoft-com:vml" fill="true" stroke="false" style="width:800px;height:175px; background-position: center center !important;">
-                        <v:fill type="tile" src="assets/Hybrid/Image_680x230.png" color="#222222" />
-                        <v:textbox inset="0,0,0,0">
-                        <![endif]-->
-                
-                <div> 
-                  <!--[if mso]>
-                            <table border="0" cellspacing="0" cellpadding="0" align="center" width="500">
-                            <tr>
-                            <td align="center" valign="top" width="500">
-                            <![endif]-->
-                  <table border="0" cellpadding="0" cellspacing="0" align="center" width="100%" style="max-width:500px; margin: auto;">
-                    <tr>
-                      <td valign="middle" style="text-align: center; padding: 20px 10px 20px 10px; font-family: sans-serif; font-size: 16px; mso-height-rule: exactly; line-height: 25px; color: #e2e5e5; text-shadow: -1px 1px 1px #111111;font-style: normal; font-weight: normal;">&quot;Destined for greatness. With its unmatched multiplayer gameplay, incredible depth, and huge online community, everyone should experience Tribes 2 for themselves.&quot;</td>
-                    </tr>
-                  </table>
-                  <!--[if (gte mso 9)|(IE)]>
-                            </td>
-                            </tr>
-                            </table>
-                            <![endif]--> 
-                </div>
-                
-                <!--[if gte mso 9]>
-                        </v:textbox>
-                        </v:rect>
-                        <![endif]--></td>
-            </tr>
-            <!-- Background Image with Text : END --> 
-            <td bgcolor="#3E3E3E" style="padding: 13px 0px 5px 0px; text-align: center; font-family: sans-serif; font-size: 30px; mso-height-rule: exactly; line-height: 30px; color: #e2e5e5;"><img src="images/join.png" width="400" alt="" style="border: 0;width: 100%;max-width: 300px;height: auto;" class="center-on-narrow"></td>
-            <!-- Three Even Columns : BEGIN -->
-            <tr>
-              <td bgcolor="#2E2E2E" align="center" height="100%" valign="top" width="100%" style="padding: 10px 0;"><!--[if mso]>
-                        <table border="0" cellspacing="0" cellpadding="0" align="center" width="660">
-                        <tr>
-                        <td align="center" valign="top" width="660">
-                        <![endif]-->
-                
-                <table border="0" cellpadding="0" cellspacing="0" align="center" width="100%" style="max-width:770px;">
-                  <tr>
-                    <td align="center" valign="top" style="font-size:0;"><!--[if mso]>
-                                    <table border="0" cellspacing="0" cellpadding="0" align="center" width="660">
-                                    <tr>
-                                    <td align="left" valign="top" width="220">
-                                    <![endif]-->
-                      
-                      <div style="display:inline-block; margin: 0 0px; max-width:33.33%; min-width:220px; vertical-align:top; width:100%;" class="stack-column">
-                        <table cellspacing="0" cellpadding="0" border="0" width="100%">
-                          <tr>
-                            <td style="padding: 10px 10px;"><table cellspacing="0" cellpadding="0" border="0" width="100%" style="font-size: 14px;text-align: left;">
-                                <tr>
-                                  <td><a href="discord.html"><img src="images/discord.png" width="350" alt="" style="border: 0;width: 100%;max-width: 220px;height: auto;" class="center-on-narrow"></a></td>
-                                </tr>
-                                <tr>
-                                  <td style="font-family: sans-serif; font-size: 16px; mso-height-rule: exactly; line-height: 25px; color: #e2e5e5; padding-top: 10px; text-shadow: -1px 1px 1px #111111;" class="stack-column-center"> Get Discord <a href="https://discordapp.com/" style="text-decoration: none">here</a>. Discord is a chat program that allows you to easily share images, videos, and media with your friends and the community. Resources can be shared and talked about making it easier to get started.</td>
-                                </tr>
-                              </table></td>
-                          </tr>
-                        </table>
-                      </div>
-                      
-                      <!--[if mso]>
-                                    </td>
-                                    <td align="left" valign="top" width="220">
-                                    <![endif]-->
-                      
-                      <div style="display:inline-block; margin: 0 0px; max-width:33.33%; min-width:220px; vertical-align:top; width:100%;" class="stack-column">
-                        <table cellspacing="0" cellpadding="0" border="0" width="100%">
-                          <tr>
-                            <td style="padding: 10px 10px;"><table cellspacing="0" cellpadding="0" border="0" width="100%" style="font-size: 14px;text-align: left;">
-                                <tr>
-                                  <td><a href="https://www.reddit.com/r/Tribes/"><img src="images/reddit.png" width="350" alt="" style="border: 0;width: 100%;max-width: 220px;height: auto;" class="center-on-narrow"></a></td>
-                                </tr>
-                                <tr>
-                                  <td style="text-shadow: -1px 1px 1px #111111; font-family: sans-serif; font-size: 16px; mso-height-rule: exactly; line-height: 25px; color: #e2e5e5; padding-top: 10px;" class="stack-column-center">The Tribes subreddit on Reddit is a combination of many differnet tribes games and a great place to start when looking for information on how to play. Our discord link is posted in the sidebar!</td>
-                                </tr>
-                              </table></td>
-                          </tr>
-                        </table>
-                      </div>
-                      
-                      <!--[if mso]>
-                                    </td>
-                                    <td align="left" valign="top" width="220">
-                                    <![endif]-->
-                      
-                      <div style="display:inline-block; margin: 0 0px; max-width:33.33%; min-width:220px; vertical-align:top; width:100%;" class="stack-column">
-                        <table cellspacing="0" cellpadding="0" border="0" width="100%">
-                          <tr>
-                            <td style="padding: 10px 10px;"><table cellspacing="0" cellpadding="0" border="0" width="100%" style="font-size: 14px;text-align: left;">
-                                <tr>
-                                  <td><a href="https://www.tribesnext.com/"><img src="images/tn.png" width="350" alt="" style="border: 0;width: 100%;max-width: 220px;height: auto;" class="center-on-narrow"></a></td>
-                                </tr>
-                                <tr>
-                                  <td style="text-shadow: -1px 1px 1px #111111; font-family: sans-serif; font-size: 16px; mso-height-rule: exactly; line-height: 25px; color: #e2e5e5; padding-top: 10px;" class="stack-column-center"> TribesNext is a community put together when the original Sierria master server went down. They run the current Tribes 2 master server and is a great source for any technical questions about the game and hosting servers.</td>
-                                </tr>
-                              </table></td>
-                          </tr>
-                        </table>
-                      </div>
-                      
-                      <!--[if mso]>
-                                    </td>
-
-                                   </tr>
-                                    </table>
-                                    <![endif]--></td>
-                  </tr>
-                </table>
-                
-                <!--[if mso]>
-                        </td>
-                        </tr>
-                        </table>
-                        <![endif]--></td>
-            </tr>
-            <!-- Three Even Columns : END -->
-            
-            <!-- Background Image with Text : BEGIN -->
-            <tr>
-              <td background="images/Image_680x230_3.jpg" bgcolor="#222222" valign="middle" style="text-align: center; background-position: center center !important; background-size: cover !important;"><!--[if gte mso 9]>
-                        <v:rect xmlns:v="urn:schemas-microsoft-com:vml" fill="true" stroke="false" style="width:800px;height:175px; background-position: center center !important;">
-                        <v:fill type="tile" src="assets/Hybrid/Image_680x230.png" color="#222222" />
-                        <v:textbox inset="0,0,0,0">
-                        <![endif]-->
-                
-                <div> 
-                  <!--[if mso]>
-                            <table border="0" cellspacing="0" cellpadding="0" align="center" width="500">
-                            <tr>
-                            <td align="center" valign="top" width="500">
-                            <![endif]-->
-                  <table border="0" cellpadding="0" cellspacing="0" align="center" width="100%" style="max-width:500px; margin: auto;">
-                    <tr>
-                      <td valign="middle" style="text-align: center; padding: 20px 10px 20px 10px; font-family: sans-serif; font-size: 16px; mso-height-rule: exactly; line-height: 25px; color: #e2e5e5; text-shadow: -1px 1px 1px #111111;font-style: normal; font-weight: normal;">&quot;The learning curve is straight up with no handholds or shortcuts; there is just no quick way to get going on the servers. However, once you get a hand on the gameplay, Tribes 2 will definitely be a title that will keep you coming back for more.&quot;</td>
-                    </tr>
-                  </table>
-                  <!--[if (gte mso 9)|(IE)]>
-                            </td>
-                            </tr>
-                            </table>
-                            <![endif]--> 
-                </div>
-                
-                <!--[if gte mso 9]>
-                        </v:textbox>
-                        </v:rect>
-                        <![endif]--></td>
-            </tr>
-            <!-- Background Image with Text : END -->  
-            <td bgcolor="#3E3E3E" style="padding: 12px 0px 9px 0px; text-align: center; font-family: sans-serif; font-size: 30px; mso-height-rule: exactly; line-height: 30px; color: #e2e5e5;"><img src="images/modes.png" width="300" alt="" style="border: 0;width: 100%;max-width: 360px;height: auto;" class="center-on-narrow"></td>
-            <!-- Thumbnail Left, Text Right : BEGIN -->
-            <tr>
-              <td dir="ltr" bgcolor="#2E2E2E" align="center" height="100%" valign="top" width="100%" style="padding: 10px 0;"><!--[if mso]>
-                        <table border="0" cellspacing="0" cellpadding="0" align="center" width="660">
-                        <tr>
-                        <td align="center" valign="top" width="660">
-                        <![endif]-->
-                
-                <table border="0" cellpadding="0" cellspacing="0" align="center" width="100%" style="max-width:770px;">
-                  <tr>
-                    <td align="center" valign="top" style="font-size:0; padding: 10px 0;"><!--[if mso]>
-                                    <table border="0" cellspacing="0" cellpadding="0" align="center" width="660">
-                                    <tr>
-                                    <td align="left" valign="top" width="220">
-                                    <![endif]-->
-                      
-                      <div style="display:inline-block; margin: 0 -2px; max-width:33.33%; min-width:160px; vertical-align:top; width:100%;" class="stack-column">
-                        <table cellspacing="0" cellpadding="0" border="0" width="100%">
-                          <tr>
-                            <td dir="ltr" style="padding: 45px 25px 10px 25px;"><img src="images/ctf.png" alt="" width="200" class="center-on-narrow" style="border: 0;width: 100%;max-width:160px;height: auto;" align="right"></td>
-                          </tr>
-                        </table>
-                      </div>
-                      
-                      <!--[if mso]>
-                                    </td>
-                                    <td align="left" valign="top" width="440">
-                                    <![endif]-->
-                      
-                      <div style="display:inline-block; margin: 0 -2px; max-width:66.66%; min-width:320px; vertical-align:top;" class="stack-column">
-                        <table cellspacing="0" cellpadding="0" border="0" width="100%">
-                          <tr>
-                            <td dir="ltr" style="font-family: sans-serif; font-size: 16px; mso-height-rule: exactly; line-height: 25px; color: #e2e5e5; padding: 0px 10px 0; text-align: left;" class="center-on-narrow"><strong style="color:#e2e5e5;text-shadow: -1px 1px 1px #111111;">Capture the Flag</strong> <br>
-                              <br>
-                              Capture the Flag is the original game mode. CTF makes use of all armors in the game; Scout, Assault, and Juggernaut. Teams have the work to fullfill objectives like going after the enemy flag, destroying enemy assets. All the while defending theirs. With a full range of vehicles and active turrets, the team that works best together wins the match.<br>
-                              <br>
-                              
-                              <!-- Button : Begin -->
-                              
-                              <table cellspacing="0" cellpadding="0" border="0" class="center-on-narrow" style="float:left; padding: 0px 9px 0px 9px;">
-                                <tr>
-                                  <td style="border-radius: 3px; background: #222222; text-align: center;" class="button-td"><a href="infoctf.html" style="background: #222222; border: 12px solid #222222; padding: 0 9px;color: #e2e5e5; font-family: sans-serif; font-size: 14px; line-height: 1.0; text-align: center; text-decoration: none; display: block; border-radius: 3px; font-weight: bold; box-shadow: -1px 1px 1px #111111;" class="button-a"> 
-                                    <!--[if mso]>&nbsp;&nbsp;&nbsp;&nbsp;<![endif]-->Info<!--[if mso]>&nbsp;&nbsp;&nbsp;&nbsp;<![endif]--> 
-                                    </a></td>
-                                  <td>&nbsp;</td>
-                                  <td style="border-radius: 3px; background: #222222; text-align: right;" class="button-td"><a href="wingscript.html" style="background: #222222; border: 12px solid #222222; padding: 0 9px;color: #e2e5e5; font-family: sans-serif; font-size: 14px; line-height: 1.0; text-align: center; text-decoration: none; display: block; border-radius: 3px; font-weight: bold; box-shadow: -1px 1px 1px #111111;" class="button-a"> 
-                                    <!--[if mso]>&nbsp;&nbsp;&nbsp;&nbsp;<![endif]-->Script Guide<!--[if mso]>&nbsp;&nbsp;&nbsp;&nbsp;<![endif]--> 
-                                    </a></td>
- 								  <td>&nbsp;</td>
-                                  <td style="border-radius: 3px; background: #222222; text-align: center;" class="button-td"><a href="demos.html" style="background: #222222; border: 12px solid #222222; padding: 0 9px;color: #e2e5e5; font-family: sans-serif; font-size: 14px; line-height: 1.0; text-align: center; text-decoration: none; display: block; border-radius: 3px; font-weight: bold; box-shadow: -1px 1px 1px #111111;" class="button-a"> 
-                                    <!--[if mso]>&nbsp;&nbsp;&nbsp;&nbsp;<![endif]-->Demos<!--[if mso]>&nbsp;&nbsp;&nbsp;&nbsp;<![endif]--> 
-                                    </a></td>
-                                </tr>
-                              </table>
-                              
-                              <!-- Button : END --></td>
-                          </tr>
-                        </table>
-                      </div>
-                      
-                      <!--[if mso]>
-                                    </td>
-                                    </tr>
-                                    </table>
-                                    <![endif]--></td>
-                  </tr>
-                </table>
-                
-                <!--[if mso]>
-                        </td>
-                        </tr>
-                        </table>
-                        <![endif]--></td>
-            </tr>
-            <!-- Thumbnail Left, Text Right : END --> 
-            
-            <!-- Thumbnail Right, Text Left : BEGIN -->
-            <tr>
-              <td dir="rtl" bgcolor="#2E2E2E" align="center" height="100%" valign="top" width="100%" style="padding: 10px 0;"><!--[if mso]>
-                        <table border="0" cellspacing="0" cellpadding="0" align="center" width="660">
-                        <tr>
-                        <td align="center" valign="top" width="660">
-                        <![endif]-->
-                
-                <table border="0" cellpadding="0" cellspacing="0" align="center" width="100%" style="max-width:660px;">
-                  <tr>
-                    <td align="center" valign="top" style="font-size:0; padding: 10px 0;"><!--[if mso]>
-                                    <table border="0" cellspacing="0" cellpadding="0" align="center" width="660">
-                                    <tr>
-                                    <td align="left" valign="top" width="220">
-                                    <![endif]-->
-                      
-                      <div style="display:inline-block; margin: 0 -2px; max-width:33.33%; min-width:200px; vertical-align:top; width:100%;" class="stack-column">
-                        <table cellspacing="0" cellpadding="0" border="0" width="100%">
-                          <tr>
-                            <td dir="ltr" style="padding: 35px 25px 15px 25px;"><img src="images/lak.png" alt="" width="200" class="center-on-narrow" style="border: 0;width: 100%;max-width: 160px;height: auto;" align="left"></td>
-                          </tr>
-                        </table>
-                      </div>
-                      
-                      <!--[if mso]>
-                                    </td>
-                                    <td align="left" valign="top" width="440">
-                                    <![endif]-->
-                      
-                      <div style="display:inline-block; margin: 0 -2px; max-width:66.66%; min-width:320px; vertical-align:top;" class="stack-column">
-                        <table cellspacing="0" cellpadding="0" border="0" width="100%">
-                          <tr>
-                            <td dir="ltr" style="font-family: sans-serif; font-size: 16px; mso-height-rule: exactly; line-height: 25px; color: #e2e5e5; padding: 0px 10px 0; text-align: left;" class="center-on-narrow"><strong style="color:#e2e5e5;text-shadow: -1px 1px 1px #111111;">LakRabbit</strong> <br>
-                              <br>
-                              Lakrabbit is a game mode popular among the purists. In Lak, points are given based on the skill of your shots. Not by the time you hold the flag like normal rabbit. With this mindset the rabbit is forced to engage back with the other players. You have to fight to keep it. As the rabbit, you can activate a range of powerups thru specific actions making it a fun alternative to other modes.<br>
-                              <br>
-                              
-                              <!-- Button : Begin -->
-                              
-                              <table cellspacing="0" cellpadding="0" border="0" class="center-on-narrow" style="float:left;">
-                                 <tr>
-								   <td style="border-radius: 3px; background: #222222; text-align: center;" class="button-td"><a href="infolak.html" style="background: #222222; border: 12px solid #222222; padding: 0 9px;color: #e2e5e5; font-family: sans-serif; font-size: 14px; line-height: 1.0; text-align:    center; text-decoration: none; display: block; border-radius: 3px; font-weight: bold; box-shadow: -1px 1px 1px #111111;" class="button-a"> 
-								   <!--[if mso]>&nbsp;&nbsp;&nbsp;&nbsp;<![endif]-->Info<!--[if mso]>&nbsp;&nbsp;&nbsp;&nbsp;<![endif]--> 
-								   </a></td>
-                                  <td>&nbsp;</td>
-                                  <td style="border-radius: 3px; background: #222222; text-align: center;" class="button-td"><a href="demoslak.html" style="background: #222222; border: 12px solid #222222; padding: 0 9px;color: #e2e5e5; font-family: sans-serif; font-size: 14px; line-height: 1.0; text-align: center; text-decoration: none; display: block; border-radius: 3px; font-weight: bold;box-shadow: -1px 1px 1px #111111;" class="button-a"> 
-                                    <!--[if mso]>&nbsp;&nbsp;&nbsp;&nbsp;<![endif]-->Demos<!--[if mso]>&nbsp;&nbsp;&nbsp;&nbsp;<![endif]--> 
-                                    </a></td>
-                                </tr>
-                              </table>
-                                <br><br>
-                              
-                              <!-- Button : END --></td>
-                          </tr>
-                        </table>
-                      </div>
-                      
-                      <!--[if mso]>
-                                    </td>
-                                    </tr>
-                                    </table>
-                                    <![endif]--></td>
-                  </tr>
-                </table>
-                
-                <!--[if mso]>
-                        </td>
-                        </tr>
-                        </table>
-                        <![endif]--></td>
-            </tr>
-            <!-- Thumbnail Right, Text Left : END -->
-            
-          </table></div>
-          <!-- Email Body : END --> 
-          
-          <!-- Email Footer : BEGIN -->
-          <div style="max-width: 800px;">
-          <table cellspacing="0" cellpadding="0" border="0" align="center" width="100%" style="max-width: 800px;">
-            <tr>
-              <td style="text-shadow: -1px 1px 1px #111111; padding: 20px 5px;width: 100%;font-size: 13px; font-family: sans-serif; mso-height-rule: exactly; line-height:18px; text-align: center; color: #888888;"><webversion style="color:#cccccc; text-decoration:underline;"><a href="https://github.com/ChocoTaco1/TacoServer">TacoServer</a></webversion> - <a href="https://bit.ly/2NNPXhA">Mappacks</a> - <a href="https://tinyurl.com/T2Netclient">TourneyNetClient</a> - <a href="https://www.tribesnext.com/#servers">Servers</a><br>
-                <br>
-                Tribes 2 Discord<br>
-                <span class="mobile-link--footer">Technical Support, P.O. Box 85006 Bellevue, WA 98015-8506</span> <br>
-                <br>
-                <a href="about.html">About</a></td>
-            </tr>
-          </table>
-          <!-- Email Footer : END --> 
-          
-          <!--[if (gte mso 9)|(IE)]>
-            </td>
-            </tr>
-            </table>
-            <![endif]--> 
-        </div>
-      </center></td>
-  </tr>
-</table>
-
-
-<script src="/js/main.js"></script>
-</body>
+	</body>
 </html>
+<!--<a href="#" class="image featured"><img src="images/pic08.jpg" alt="" /></a>-->
