@@ -13,19 +13,19 @@ $(document).ready(function () {
     }
 
     function updateView(data){
-        var template = "<div><strong>"+data.info_hostname+"</strong> ["+data.num_players+" / "+ data.info_flags.max_players +"]</div>";
-            template = template + "<div>"+ data.info_map+" - "+data.info_maptype+"</div>";
-        $serverStatContainer.html('<div bgcolor="" style="padding: 0px 0px 0px 0px;text-shadow: -1px 1px 1px #111111;line-height: 20px;color:#cccccc;font-size:14px;text-align: right; font-family: sans-serif;"><a href="server.html" style="text-decoration: none">'+ template + '</a></div>');
+        var template = "<div>"+data.info_hostname+" ["+data.num_players+" / "+ data.info_flags.max_players +"] - ";
+		template = template + "[" + data.info_map+"/"+data.info_maptype+"]</div>";
+        $serverStatContainer.html('<div bgcolor="" style="font-size:17px;line-height: 16px;"><a href="server.html" style="text-align: center; color:rgba(255, 255, 255, 0.5);">'+ template + '</a></div>');
     }
 	
 	function FULLupdateView(data){
         var data_players = data.num_players;
-        var template = "<div><strong>SHAZBOT,</strong></div>"; 
-            template = template + "<div>there's <strong>"+data.num_players+"</strong></div>";
+        var template = "<div>SHAZBOT,</div>"; 
+            template = template + "<div>there's <strong style=\"color:#0a9ba8;\">"+data.num_players+"</strong></div>";
             template = template + "<div>player" + (data_players != 1 ? "s":"") + " on</div>";
-            template = template + "<div><strong>"+data.info_hostname+"</strong></div>";
+            template = template + "<div>"+data.info_hostname+"</div>";
             template = template + "<div>right now</div>";
-        $FULLserverStatContainer.html('<div bgcolor="" style="padding: 10px 0px 20px 0px;text-shadow: -3px 2px 2px #111111;line-height: 100px;color:#cccccc;font-size:75px;text-align: center; font-family: sans-serif;">'+ template + '</div>');
+        $FULLserverStatContainer.html('<div bgcolor="" style="line-height: 100px;font-size:75px;text-align: center;">'+ template + '</div>');
     }
 
     getServerData(discordServerIP)
