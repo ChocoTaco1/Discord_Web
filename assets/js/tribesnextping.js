@@ -5,7 +5,7 @@ $(document).ready(function () {
     function getServerData(ip) {
         $.getJSON('https://www.tribesnext.com/json', function (tnMasterServerData) {
             var result = tnMasterServerData.find(function (server) {
-                return server.s_ipa === ip;
+                return server.s_ipa === discordServerIP;
             });
             updateView(result)
             FULLupdateView(result)
