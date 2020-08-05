@@ -1946,8 +1946,8 @@ input, select, textarea {
 		border-radius: 0.15em;
 		color: #e4e4e4 !important;
 		text-decoration: none;
-		padding: 0.05em 1.5em 0.05em 1.5em;
-		background-color: #0ba4b1;
+		padding: 0.0em 1.5em 0.0em 1.5em;
+		background-color: #038f9b;
 		border: 0;
 		cursor: pointer;
 		background-image: -moz-linear-gradient(top, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.15)), url("images/overlay.png");
