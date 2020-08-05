@@ -15,7 +15,7 @@ $(document).ready(function () {
     function updateView(data){
         var template = "<div>"+data.info_hostname+" ["+data.num_players+" / "+ data.info_flags.max_players +"] - ";
 		template = template + "[" + data.info_map+"/"+data.info_maptype+"]</div>";
-        $serverStatContainer.html('<div bgcolor="" style="font-size:17px;line-height: 16px;"><a href="server.html" style="text-align: center; color:rgba(255, 255, 255, 0.5);">'+ template + '</a></div>');
+        $serverStatContainer.html('<div bgcolor="" style="font-size:14px;line-height: 17px;"><a href="server.html" style="text-align: center; color:rgba(255, 255, 255, 0.5);">'+ template + '</a></div>');
     }
 	
 	function FULLupdateView(data){
