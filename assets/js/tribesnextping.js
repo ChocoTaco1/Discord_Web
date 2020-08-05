@@ -2,10 +2,10 @@ $(document).ready(function () {
     var $serverStatContainer = $('#serverStatContainer');
     var $FULLserverStatContainer = $('#FULLserverStatContainer');
     var discordServerIP = "67.222.138.16:28000";
-    function getServerData(discordServerIP) {
+    function getServerData(ip) {
         $.getJSON('https://www.tribesnext.com/json', function (tnMasterServerData) {
             var result = tnMasterServerData.find(function (server) {
-                return server.s_ipa === discordServerIP;
+                return server.s_ipa === ip;
             });
             updateView(result)
             FULLupdateView(result)
