@@ -10,6 +10,7 @@ $(document).ready(function () {
             });
             updateView(result)
             FULLupdateView(result)
+			$.ajaxSetup({ cache: false });
         });
     }
 
