@@ -2,7 +2,19 @@ $(document).ready(function () {
 	var $serverStatContainer = $('#serverStatContainer');
     var $FULLserverStatContainer = $('#FULLserverStatContainer');
     var discordServerIP = "67.222.138.16:28000";
-	$.ajaxSetup({ cache: false });
+	
+	// Set cache = false for all jquery ajax requests.
+	$.ajax({
+		url : "/rest/getStudents",
+		method : "GET",
+		cache : false
+	})
+	.done(function(data){
+		console.log("Successfully fetched data.");
+	})
+	.fail(function(data){
+		console.log("Error in fetching data");
+	})
 	
     function getServerData(ip) {
         $.getJSON('https://www.tribesnext.com/json', function (tnMasterServerData) {
