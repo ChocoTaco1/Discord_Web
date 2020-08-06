@@ -26,7 +26,7 @@ $(document).ready(function () {
             template = template + "<div>right now playing</div>";
 			template = template + "<div>" + data.info_map + "</div>";
 			template = template + "<div>" + data.info_maptype + "</div>";
-        $FULLserverStatContainer.html('<div bgcolor="" style="line-height: 100px;font-size:90px;text-align: center;">'+ template + '</div>');
+        $FULLserverStatContainer.html('<div bgcolor="" style="line-height: 100px;font-size:85px;text-align: center;">'+ template + '</div>');
     }
 
     getServerData(discordServerIP)
