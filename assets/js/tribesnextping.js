@@ -3,11 +3,6 @@ $(document).ready(function () {
     var $FULLserverStatContainer = $('#FULLserverStatContainer');
     var discordServerIP = "67.222.138.16:28000";
 	
-    $.ajaxSetup ({
-	// Disable caching of AJAX responses
-	cache: false
-	});
-	
     function getServerData(ip) {
         $.getJSON('https://www.tribesnext.com/json', function (tnMasterServerData) {
             var result = tnMasterServerData.find(function (server) {
