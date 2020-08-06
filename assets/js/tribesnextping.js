@@ -3,10 +3,9 @@ $(document).ready(function () {
     var $FULLserverStatContainer = $('#FULLserverStatContainer');
     var discordServerIP = "67.222.138.16:28000";
 	
-	$.ajax({url: "...", cache: false}).done(function( data ) {
-		// data contains result
-	}).fail(function(err){
-		// error
+    $.ajaxSetup ({
+	// Disable caching of AJAX responses
+	cache: false
 	});
 	
     function getServerData(ip) {
