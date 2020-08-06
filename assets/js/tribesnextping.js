@@ -21,11 +21,9 @@ $(document).ready(function () {
 	function FULLupdateView(data){
         var data_players = data.num_players;
         var template = "<div>SHAZBOT,</div>"; 
-            template = template + "<div>there's <strong style=\"color:#0a9ba8;\">"+data.num_players+"</strong></div>";
-            template = template + "<div>player" + (data_players != 1 ? "s":"") + " on</div>";
+            template = template + "<div>there's <strong style=\"color:#0a9ba8;\">"+data.num_players+"</strong> player" + (data_players != 1 ? "s":"") + " on</div>";
             template = template + "<div>"+data.info_hostname+"</div>";
-            template = template + "<div>right now</div>";
-			template = template + "<div>playing</div>";
+            template = template + "<div>right now playing</div>";
 			template = template + "<div>" + data.info_map + "</div>";
 			template = template + "<div>" + data.info_maptype + "</div>";
         $FULLserverStatContainer.html('<div bgcolor="" style="line-height: 100px;font-size:75px;text-align: center;">'+ template + '</div>');
