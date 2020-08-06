@@ -13,8 +13,8 @@ $(document).ready(function () {
     }
 
     function updateView(data){
-        var template = "<div>" + data.info_hostname + " [" +data.num_players + "/" + data.info_flags.max_players + "]</div>";
-		//template = template + "[" + data.info_map+"/"+data.info_maptype+"]</div>";
+        var template = "<div>" + data.info_hostname + "&nbsp;&nbsp;&nbsp;&nbsp; P#: " +data.num_players + "/" + data.info_flags.max_players + "</div>";
+		template = "<div>" + template + data.info_map + "&nbsp; / &nbsp;" + data.info_maptype + "</div>";
         $serverStatContainer.html('<div bgcolor="" style="font-size:16px;line-height: 17px;"><a href="server.html" style="text-align: center; color:#545c61;">'+ template + '</a></div>');
     }
 	
@@ -25,6 +25,9 @@ $(document).ready(function () {
             template = template + "<div>player" + (data_players != 1 ? "s":"") + " on</div>";
             template = template + "<div>"+data.info_hostname+"</div>";
             template = template + "<div>right now</div>";
+			template = template + "<div>playing</div>";
+			template = template + "<div>" + data.info_map + "</div>";
+			template = template + "<div>" + data.info_maptype + "</div>";
         $FULLserverStatContainer.html('<div bgcolor="" style="line-height: 100px;font-size:75px;text-align: center;">'+ template + '</div>');
     }
 
