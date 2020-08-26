@@ -4,7 +4,7 @@ $(document).ready(function() {
 	var discordServerIP = '67.222.138.16:28000';
 
 	function getServerData(ip) {
-		$.getJSON('https://www.tribesnext.com/json', function(tnMasterServerData) {
+		$.getJSON('https://www.tribesnext.com/list.json', function(tnMasterServerData) {
 			var result = tnMasterServerData.find(function(server) {
 				return server.s_ipa === ip;
 			});
