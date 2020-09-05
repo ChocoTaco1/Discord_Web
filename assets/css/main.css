@@ -2637,3 +2637,38 @@ input, select, textarea {
 				}
 
 	}
+	
+/* DropDown  Menu*/
+
+.dbtn {
+  text-decoration-line: underline;
+  text-decoration-style: dotted;
+}
+
+.ddown {
+  position: relative;
+  display: inline-block;
+}
+
+.ddown-content {
+  display: none;
+  position: absolute;
+  background-color: #323a3e;
+  min-width: 60px;
+  box-shadow: -2px 2px 3px #212121;
+  z-index: 1;
+}
+
+.ddown-content a {
+  font-size: 15px
+  color: #e2e5e5;
+  padding: 3px 5px;
+  text-decoration: none;
+  display: block;
+}
+
+.ddown-content a:hover {background-color: #272e31;}
+
+.ddown:hover .ddown-content {display: block;}
+
+.ddown:hover .dbtn {}
