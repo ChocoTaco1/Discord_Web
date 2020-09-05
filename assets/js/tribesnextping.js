@@ -40,7 +40,7 @@ $(document).ready
 			template += '<div>right now playing</div>';
 			template += '<div>' + data.info_map + '</div>';
 			template += '<div>' + data.info_maptype + '</div>';
-			$FULLserverStatContainer.html('<div bgcolor="" style="line-height: 100px;font-size:85px;text-align: center;">' + template + '</div>');
+			$FULLserverStatContainer.html('<div bgcolor="" style="text-align: center;">' + template + '</div>');
 		}
 
 		getServerData(discordServerIP);
