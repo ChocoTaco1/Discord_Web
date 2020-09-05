@@ -2,8 +2,8 @@ $(document).ready
 (
 	function()
 	{
-		var $serverStatContainer = $('#serverStatContainer');
-		var $FULLserverStatContainer = $('#FULLserverStatContainer');
+		var $serverPopContainer = $('#serverPopContainer');
+		var $serverPopContainerPage = $('#serverPopContainerPage');
 		var discordServerIP = '67.222.138.16:28000';
 
 		function getServerData(ip) 
@@ -19,7 +19,7 @@ $(document).ready
 					);
 
 					updateView(result);
-					FULLupdateView(result);
+					updateViewPage(result);
 				}
 			);
 		}
@@ -28,10 +28,10 @@ $(document).ready
 		{
 			var template = '<div>' + data.info_hostname + '&nbsp;&nbsp;&nbsp;&nbsp; P#: ' + data.num_players + '/' + data.info_flags.max_players + '</div>';
 			template = '<div>' + template + data.info_map + '&nbsp; / &nbsp;' + data.info_maptype + '</div>';
-			$serverStatContainer.html('<div bgcolor="" style="font-size:16px;line-height: 17px;"><a href="server.html" style="text-align: center; color:#545c61;">' + template + '</a></div>');
+			$serverPopContainer.html('<div bgcolor="" style="font-size:16px;line-height: 17px;"><a href="server.html" style="text-align: center; color:#545c61;">' + template + '</a></div>');
 		}
 
-		function FULLupdateView(data) 
+		function updateViewPage(data) 
 		{
 			var data_players = data.num_players;
 			var template = '<div>SHAZBOT,</div>';
@@ -40,16 +40,15 @@ $(document).ready
 			template += '<div>right now playing</div>';
 			template += '<div>' + data.info_map + '</div>';
 			template += '<div>' + data.info_maptype + '</div>';
-			$FULLserverStatContainer.html('<div bgcolor="" style="text-align: center;">' + template + '</div>');
+			$serverPopContainerPage.html('<div bgcolor="" style="text-align: center;">' + template + '</div>');
 		}
 
 		getServerData(discordServerIP);
-		setInterval
-		(
+		setInterval(
 			function() 
 			{
 				getServerData(discordServerIP);
-			}, 25000
-		); // check every 25 seconds
+			}, 25000 // check every 25 seconds
+		);
 	}
 );
