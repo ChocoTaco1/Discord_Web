@@ -35,7 +35,7 @@ $(document).ready
 		{
 			var data_players = data.num_players;
 			var template = '<div>SHAZBOT,</div>';
-			template += '<div width=100%>there\'s <strong style="color:#0a9ba8;">' + data.num_players + '</strong> player' + (data_players != 1 ? 's' : '') + ' on</div>';
+			template += '<div>there\'s <strong style="color:#0a9ba8;">' + data.num_players + '</strong> player' + (data_players != 1 ? 's' : '') + ' on</div>';
 			template += '<div>' + data.info_hostname + '</div>';
 			template += '<div>right now playing</div>';
 			template += '<div>' + data.info_map + '</div>';
