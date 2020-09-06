@@ -2655,7 +2655,7 @@ input, select, textarea {
 	position: absolute;
 	background-color: #323a3e;
 	min-width: 50px;
-	box-shadow: -3px 3px 3px #282828;
+	box-shadow: -2px 2px 5px #252525;
 	z-index: 1;
 }
 
