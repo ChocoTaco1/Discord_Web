@@ -4,6 +4,7 @@ $(document).ready
 	{
 		var $serverPopContainer = $('#serverPopContainer');
 		var $serverPopContainerPage = $('#serverPopContainerPage');
+		var $serverPopContainerList = $('#serverPopContainerList');
 		var discordServerIP = '67.222.138.16:28000';
 		//var discordServerIP = '185.66.108.39:28000';
 
@@ -19,6 +20,7 @@ $(document).ready
 
 					updateView(result);
 					updateViewPage(result);
+					updateViewList(result);
 				}
 			);
 		}
@@ -32,14 +34,21 @@ $(document).ready
 
 		function updateViewPage(data) 
 		{
-			var data_players = data.num_players;
+			var players = data.num_players;
 			var template = '<div>SHAZBOT,</div>';
-			template += '<div>there\'s <strong style="color:#0a9ba8;">' + data.num_players + '</strong> player' + (data_players != 1 ? 's' : '') + ' on</div>';
+			template += '<div>there\'s <strong style="color:#0a9ba8;">' + data.num_players + '</strong> player' + (players != 1 ? 's' : '') + ' on</div>';
 			template += '<div>' + data.info_hostname + '</div>';
 			template += '<div>right now playing</div>';
 			template += '<div>' + data.info_map + '</div>';
 			template += '<div>' + data.info_maptype + '</div>';
 
+			$serverPopContainerPage.html('<div bgcolor="" style="text-align: center;">' + template + '</div>');
+		}
+		
+		function updateViewList(data) 
+		{
+			var players = data.num_players;
+			var template = '<br>';
 			
 			function objectLength(obj){
 				var result = 0;
@@ -54,22 +63,24 @@ $(document).ready
 					if(result < 0) 
 						result = 0;
 				}
-				else result -= 1; //Minus team name, Observers
+				else if(data.info_maptype != "LakRabbit") //Some weird thing with observers deing different between lak and ctf
+						result -= 1;
 
 				return result;
 			}
 			
-			if(data_players > 0)
+			if(players > 0)
 			{
 				var teams = data.info_players;
 
 				var team0 = teams[0];
 				var team0cnt = objectLength(team0);
+				
+				console.log(team0cnt);
 
 				if(data.info_maptype == "LakRabbit"){
-					template += '<br>';
 					for (i = 0; i < team0cnt; i++){
-						template += team0[i].name + "&nbsp;&nbsp;&nbsp;&nbsp;" + team0[i].score + "<br>";
+						template += team0[i].name + '&nbsp;&nbsp;&nbsp;&nbsp;' + team0[i].score + '<br>';
 					}
 				}
 				else
@@ -80,31 +91,32 @@ $(document).ready
 					var team1cnt = objectLength(team1);
 					var team2cnt = objectLength(team2);
 					
-					if(team1cnt > 0){
-						template += '<br>' + team1.name + "&nbsp;&nbsp;&nbsp;&nbsp;" + team1.score + '<br>';
+					if(team1cnt > 0 || team2cnt > 0){
+						template += '<div class="row">';
+						template += '<div class="col-6-wide">';
+						template += team1.name + '&nbsp;&nbsp;&nbsp;&nbsp;' + team1.score + '<br>';
 						for (i = 0; i < team1cnt; i++){
-							template += team1[i].name + "&nbsp;&nbsp;&nbsp;&nbsp;" + team1[i].score + "<br>";
+							template += team1[i].name + '&nbsp;&nbsp;&nbsp;&nbsp;' + team1[i].score + '<br>';
 						}
-					}
-					
-					if(team2cnt > 0){
-						template += '<br>' + team2.name + "&nbsp;&nbsp;&nbsp;&nbsp;" + team2.score + '<br>';
+						template += '</div>';
+						template += '<div class="col-6-wide">' + team2.name + '&nbsp;&nbsp;&nbsp;&nbsp;' + team2.score + '<br>';
 						for (i = 0; i < team2cnt; i++){
-							template += team2[i].name + "&nbsp;&nbsp;&nbsp;&nbsp;" + team2[i].score + "<br>";
+							template += team2[i].name + '&nbsp;&nbsp;&nbsp;&nbsp;' + team2[i].score + '<br>';
 						}
+						template += '</div></div>';
 					}
 					
 					if(team0cnt > 0){
 						template += '<br>' + "Observers" + '<br>';
 						for (i = 0; i < team0cnt; i++){
-							template += team0[i].name + "&nbsp;&nbsp;&nbsp;&nbsp;" + team0[i].score + "<br>";
+							template += team0[i].name + '&nbsp;&nbsp;&nbsp;&nbsp;' + team0[i].score + '<br>';
 						}
 					}
 				}
 				
 			}
 			
-			$serverPopContainerPage.html('<div bgcolor="" style="text-align: center;">' + template + '</div>');
+			$serverPopContainerList.html('<td align="center"><div bgcolor="" style="font-size:35px;text-align: left;">' + template + '</div></td>');
 		}
 
 		getServerData(discordServerIP);
