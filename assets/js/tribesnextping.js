@@ -40,17 +40,18 @@ $(document).ready
 			template += '<div>' + data.info_maptype + '</div>';
 
 			
-			function objectLength(obj) {
+			function objectLength(obj){
 				var result = 0;
 				for(var prop in obj) {
-					if (obj.hasOwnProperty(prop)) {
+					if (obj.hasOwnProperty(prop)){
 					// or Object.prototype.hasOwnProperty.call(obj, prop)
 					result++;
 					}
 				}
 				if(obj != team0){
-					result -= 3; 
-					if(result < 0) result = 0; //Minus team name, score, and ???
+					result -= 3; //Minus team name, score, and ???
+					if(result < 0) 
+						result = 0;
 				}
 
 				return result;
