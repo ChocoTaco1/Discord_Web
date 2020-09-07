@@ -75,8 +75,6 @@ $(document).ready
 
 				var team0 = teams[0];
 				var team0cnt = objectLength(team0);
-				
-				console.log(team0cnt);
 
 				if(data.info_maptype == "LakRabbit"){
 					for (i = 0; i < team0cnt; i++){
