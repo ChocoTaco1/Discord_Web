@@ -5,6 +5,7 @@ $(document).ready
 		var $serverPopContainer = $('#serverPopContainer');
 		var $serverPopContainerPage = $('#serverPopContainerPage');
 		var discordServerIP = '67.222.138.16:28000';
+		//var discordServerIP = '185.66.108.39:28000';
 
 		function getServerData(ip) 
 		{
@@ -48,11 +49,12 @@ $(document).ready
 					result++;
 					}
 				}
-				if(obj != team0){
+				if(obj != team0){ //Non-Observers
 					result -= 3; //Minus team name, score, and ???
 					if(result < 0) 
 						result = 0;
 				}
+				else result -= 1; //Minus team name, Observers
 
 				return result;
 			}
