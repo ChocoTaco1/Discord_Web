@@ -65,7 +65,7 @@ $(document).ready
 				var team0cnt = objectLength(team0);
 
 				if(data.info_maptype == "LakRabbit"){
-					template += '<br>' + "LakRabbit" + '<br>';
+					template += '<br>';
 					for (i = 0; i < team0cnt; i++){
 						template += team0[i].name + "&nbsp;&nbsp;&nbsp;&nbsp;" + team0[i].score + "<br>";
 					}
