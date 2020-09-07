@@ -42,7 +42,7 @@ $(document).ready
 			
 			function objectLength(obj){
 				var result = 0;
-				for(var prop in obj) {
+				for(var prop in obj){
 					if (obj.hasOwnProperty(prop)){
 					// or Object.prototype.hasOwnProperty.call(obj, prop)
 					result++;
@@ -62,31 +62,41 @@ $(document).ready
 				var teams = data.info_players;
 
 				var team0 = teams[0];
-				var team1 = teams[1];
-				var team2 = teams[2];
-				
 				var team0cnt = objectLength(team0);
-				var team1cnt = objectLength(team1);
-				var team2cnt = objectLength(team2);
 
-				if(team1cnt > 0){
-					template += '<br>' + team1.name + "&nbsp;&nbsp;&nbsp;&nbsp;" + team1.score + '<br>';
-					for (i = 0; i < team1cnt; i++) {
-						template += team1[i].name + "&nbsp;&nbsp;&nbsp;&nbsp;" + team1[i].score + "<br>";
-					}
-				}
-				
-				if(team2cnt > 0){
-					template += '<br>' + team2.name + "&nbsp;&nbsp;&nbsp;&nbsp;" + team2.score + '<br>';
-					for (i = 0; i < team2cnt; i++) {
-						template += team2[i].name + "&nbsp;&nbsp;&nbsp;&nbsp;" + team2[i].score + "<br>";
-					}
-				}
-				
-				if(team0cnt > 0){
-					template += '<br>' + "Observers" + '<br>';
-					for (i = 0; i < team0cnt; i++) {
+				if(data.info_maptype == "LakRabbit"){
+					template += '<br>' + "LakRabbit" + '<br>';
+					for (i = 0; i < team0cnt; i++){
 						template += team0[i].name + "&nbsp;&nbsp;&nbsp;&nbsp;" + team0[i].score + "<br>";
+					}
+				}
+				else
+				{
+					var team1 = teams[1];
+					var team2 = teams[2];
+
+					var team1cnt = objectLength(team1);
+					var team2cnt = objectLength(team2);
+					
+					if(team1cnt > 0){
+						template += '<br>' + team1.name + "&nbsp;&nbsp;&nbsp;&nbsp;" + team1.score + '<br>';
+						for (i = 0; i < team1cnt; i++){
+							template += team1[i].name + "&nbsp;&nbsp;&nbsp;&nbsp;" + team1[i].score + "<br>";
+						}
+					}
+					
+					if(team2cnt > 0){
+						template += '<br>' + team2.name + "&nbsp;&nbsp;&nbsp;&nbsp;" + team2.score + '<br>';
+						for (i = 0; i < team2cnt; i++){
+							template += team2[i].name + "&nbsp;&nbsp;&nbsp;&nbsp;" + team2[i].score + "<br>";
+						}
+					}
+					
+					if(team0cnt > 0){
+						template += '<br>' + "Observers" + '<br>';
+						for (i = 0; i < team0cnt; i++){
+							template += team0[i].name + "&nbsp;&nbsp;&nbsp;&nbsp;" + team0[i].score + "<br>";
+						}
 					}
 				}
 				
