@@ -77,10 +77,9 @@ $(document).ready
 				if(data.info_maptype == "LakRabbit"){
 					template += '<div class="col-6">';
 					for (i = 0; i < team0cnt; i++){
-						if(team0[i].name === ""){
-							team0cnt++;	
+						if(team0[i].name === "")
 							continue;
-						}
+
 						template += '<div class="column">' + team0[i].name + '</div>';
 					}
 					template += '</div>';
@@ -100,10 +99,9 @@ $(document).ready
 					template += '<div class="column" style="text-decoration: underline;">' + team1.name +  '</div>';
 					if(team1cnt > 0){
 						for (i = 0; i < team1cnt; i++){
-							if(team1[i].name === ""){
-								team0cnt++;	
+							if(team1[i].name === "")
 								continue;
-							}
+								
 							template += '<div class="column">' + team1[i].name  + '</div>';
 						}
 						template += '</div><br>';
@@ -115,10 +113,9 @@ $(document).ready
 					template += '<div class="column" style="text-decoration: underline;">' + team2.name + '</div>';
 					if(team2cnt > 0){
 						for (i = 0; i < team2cnt; i++){
-							if(team2[i].name === ""){
-								team0cnt++;	
+							if(team2[i].name === "")
 								continue;
-							}
+
 							template += '<div class="column">' + team2[i].name+ '</div>';
 						}
 						template += '</div><br>';
@@ -131,10 +128,9 @@ $(document).ready
 					template += '<div class="column" style="text-decoration: underline;">' + "Observers" + '</div>';
 					if(team0cnt > 0){
 						for (i = 0; i < team0cnt; i++){
-							if(team0[i].name === ""){
-								team0cnt++;	
+							if(team0[i].name === "")
 								continue;
-							}
+
 							template += '<div class="column">' + team0[i].name + '</div>';
 						}
 						template += '</div><br>';
