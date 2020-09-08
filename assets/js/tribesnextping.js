@@ -25,22 +25,25 @@ $(document).ready
 			);
 		}
 
+		var div ='<div>';
+		var div1 = '</div>';
+		
 		function updateView(data) 
 		{
-			var template = '<div>' + data.info_hostname + '&nbsp;&nbsp;&nbsp;&nbsp; P#: ' + data.num_players + '/' + data.info_flags.max_players + '</div>';
-			template = '<div>' + template + data.info_map + '&nbsp; / &nbsp;' + data.info_maptype + '</div>';
-			$serverPopContainer.html('<div bgcolor="" style="font-size:16px;line-height: 17px;"><a href="server.html" style="text-align: center; color:#545c61;">' + template + '</a></div>');
+			var template = div + data.info_hostname + '&nbsp;&nbsp;&nbsp;&nbsp; P#: ' + data.num_players + '/' + data.info_flags.max_players + div1;
+			template = div + template + data.info_map + '&nbsp; / &nbsp;' + data.info_maptype + div1;
+			$serverPopContainer.html('<div bgcolor="" style="font-size:16px;line-height: 17px;"><a href="server.html" style="text-align: center; color:#545c61;">' + template + '</a>' + div1);
 		}
 
 		function updateViewPage(data) 
 		{
 			var players = data.num_players;
-			var template = '<div>SHAZBOT,</div>';
-			template += '<div>there\'s <strong style="color:#0a9ba8;">' + data.num_players + '</strong> player' + (players != 1 ? 's' : '') + ' on</div>';
-			template += '<div>' + data.info_hostname + '</div>';
-			template += '<div>right now playing</div>';
-			template += '<div>' + data.info_map + '</div>';
-			template += '<div>' + data.info_maptype + '</div>';
+			var template = div + 'SHAZBOT,' + div1;
+			template += div + 'there\'s <strong style="color:#0a9ba8;">' + data.num_players + '</strong> player' + (players != 1 ? 's' : '') + ' on' + div1;
+			template += div + data.info_hostname + div1;
+			template += div + 'right now playing' + div1;
+			template += div + data.info_map + div1;
+			template += div + data.info_maptype + div1;
 
 			$serverPopContainerPage.html('<div bgcolor="" style="text-align: center;">' + template + '</div>');
 		}
@@ -50,7 +53,7 @@ $(document).ready
 			var players = data.num_players;
 			var template = '<br>';
 			
-			function objectLength(obj){
+			function objectLength(teamnum, obj){
 				var result = 0;
 				for(var prop in obj){
 					if (obj.hasOwnProperty(prop)){
@@ -58,88 +61,55 @@ $(document).ready
 					result++;
 					}
 				}
-				if(obj != team0) //Non-Observers
+				if(teamnum != 0) //Non-Observers
 					result -= 2; //Minus team name, score
 				else if(data.info_maptype != "LakRabbit") //Minus name, Lak keeps people in observer, doesnt update team ranks
 						result -= 1;
-
 				return result;
 			}
 			
-			if(players > 0)
-			{
-				var teams = data.info_players;
-
-				var team0 = teams[0];
-				var team0cnt = objectLength(team0);
+			function playerLoop(teamnum, data){
+				var teamdata = data[teamnum];
+				var count = objectLength(teamnum, teamdata);
+				if(data.info_maptype != "LakRabbit")
+					template += div4 + teamdata.name + div1;
+				if(count > 0){
+					for (i = 0; i < count; i++){
+						if(teamdata[i].name === "")
+							continue;
+						template += divc + teamdata[i].name  + div1;
+					}
+					template += div1br;
+				}
+				else
+					template += 'N/A' + div1br;
+			}
+			
+			if(players > 0){
+				var data = data.info_players;
+				
+				//Formatting
+				var div4 = '<div class="col-4" style="min-width:250px;"><div class="column" style="text-decoration: underline;">';
+				var divc = '<div class="column">';
+				var div1br = '</div><br>';
 
 				//Lak Only
 				if(data.info_maptype == "LakRabbit"){
 					template += '<div class="col-6">';
-					for (i = 0; i < team0cnt; i++){
-						if(team0[i].name === "")
-							continue;
-
-						template += '<div class="column">' + team0[i].name + '</div>';
-					}
-					template += '</div>';
+					playerLoop(0, data);
 				}
 				//CTF
-				else
-				{
-					var team1 = teams[1];
-					var team2 = teams[2];
-
-					var team1cnt = objectLength(team1);
-					var team2cnt = objectLength(team2);
-					
+				else{
 					//Team 1
 					template += '<div class="row-special">';
-					template += '<div class="col-4" style="min-width:250px;">';
-					template += '<div class="column" style="text-decoration: underline;">' + team1.name +  '</div>';
-					if(team1cnt > 0){
-						for (i = 0; i < team1cnt; i++){
-							if(team1[i].name === "")
-								continue;
-								
-							template += '<div class="column">' + team1[i].name  + '</div>';
-						}
-						template += '</div><br>';
-					}
-					else
-						template += 'N/A</div><br>';
+					playerLoop(1, data);
 					//Team 2
-					template += '<div class="col-4" style="min-width:250px;">';
-					template += '<div class="column" style="text-decoration: underline;">' + team2.name + '</div>';
-					if(team2cnt > 0){
-						for (i = 0; i < team2cnt; i++){
-							if(team2[i].name === "")
-								continue;
-
-							template += '<div class="column">' + team2[i].name+ '</div>';
-						}
-						template += '</div><br>';
-					}
-					else
-						template += 'N/A</div><br>';
-					
+					playerLoop(2, data);
 					//Observers
-					template += '<div class="col-4" style="min-width:250px;">';
-					template += '<div class="column" style="text-decoration: underline;">' + "Observers" + '</div>';
-					if(team0cnt > 0){
-						for (i = 0; i < team0cnt; i++){
-							if(team0[i].name === "")
-								continue;
-
-							template += '<div class="column">' + team0[i].name + '</div>';
-						}
-						template += '</div><br>';
-					}
-					else
-						template += 'N/A</div><br>';
+					playerLoop(0, data);
 				}
 			}
-			$serverPopContainerList.html('<div style="font-size:45px;line-height: 55px;text-align: center;">' + template + '</div>');
+			$serverPopContainerList.html('<div style="font-size:45px;line-height: 55px;text-align: center;">' + template + div1);
 		}
 
 		getServerData(discordServerIP);
