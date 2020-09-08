@@ -52,60 +52,61 @@ $(document).ready
 			var template = ``;
 
 			if(players > 0){
-				function objectLength(teamnum, obj){
+				function objectLength(teamnum, data, mode){
 					var result = 0;
-					for(var prop in obj){
-						if (obj.hasOwnProperty(prop)){
-						// or Object.prototype.hasOwnProperty.call(obj, prop)
-						result++;
-						}
+					for(var prop in data){
+						if (data.hasOwnProperty(prop))
+							result++;
 					}
 					if(teamnum != 0) //Non-Observers
 						result -= 2; //Minus team name, score
-					else if(data.info_maptype != "LakRabbit") //Minus name, Lak keeps people in observer, doesnt update team ranks
+					else if(mode != "LakRabbit") //Minus name, Lak keeps people in observer, doesnt update team ranks
 							result -= 1;
 					return result;
 				}
 
-				function playerLoop(teamnum, data){
+				function playerLoop(teamnum, data, mode){
 					var teamdata = data[teamnum];
-					var count = objectLength(teamnum, teamdata);
-					if(data.info_maptype != "LakRabbit")
-						template = `${template} ${div4} ${teamdata.name} </div>`;
+					var count = objectLength(teamnum, teamdata, mode);
+					if(mode != "LakRabbit")
+						var title = teamdata.name;
+					else
+						var title = `Players`;
+					template = `${template} ${div4} ${title} </div>`;
 					if(count > 0){
 						for (i = 0; i < count; i++){
 							if(teamdata[i].name === "")
 								continue;
 							template = `${template} ${divc} ${teamdata[i].name} </div>`;
 						}
-						template = `${template} ${div1br}`;
+						template = `${template} </div><br>`;
 					}
 					else
-						template = `${template} N/A ${div1br}`;
+						template = `${template} N/A </div><br>`;
 				}
 				
 				template = `<br>`;
+				var mode = data.info_maptype;
 				var data = data.info_players;
 				
 				//Formatting
 				var div4 = `<div class="col-4" style="min-width:250px;"><div class="column" style="text-decoration: underline;">`;
 				var divc = `<div class="column">`;
-				var div1br = `</div><br>`;
 
 				//Lak Only: Lak puts everyone in observer and doesnt update team rank
-				if(data.info_maptype == "LakRabbit"){
+				if(mode == "LakRabbit"){
 					template = `${template} <div class="col-6">`;
-					playerLoop(0, data);
+					playerLoop(0, data, mode);
 				}
 				//CTF
 				else{
 					//Team 1
 					template = `${template} <div class="row-special">`;
-					playerLoop(1, data);
+					playerLoop(1, data, mode);
 					//Team 2
-					playerLoop(2, data);
+					playerLoop(2, data, mode);
 					//Observers
-					playerLoop(0, data);
+					playerLoop(0, data, mode);
 				}
 			}
 
