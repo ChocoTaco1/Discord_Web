@@ -8,9 +8,9 @@ $(document).ready
 		var discordServerIP = '67.222.138.16:28000';
 		//var discordServerIP = '185.66.108.39:28000';
 
-		function getServerData(ip) 
+		function getServerData(ip)
 		{
-			$.getJSON('https://www.tribesnext.com/list.json', 
+			$.getJSON('https://www.tribesnext.com/list.json',
 				function(tnMasterServerData){
 					var result = tnMasterServerData.find(
 						function(server) {
@@ -27,8 +27,8 @@ $(document).ready
 
 		var div = '<div>';
 		var div1 = '</div>';
-		
-		function updateView(data) 
+
+		function updateView(data)
 		{
 			var template = `${div} ${data.info_hostname} &#160; &#160; P#: ${data.num_players} / ${data.info_flags.max_players} ${div1}
                             ${div} ${template} ${data.info_map} &#160;/&#160; ${data.info_maptype} ${div1}`;
@@ -36,7 +36,7 @@ $(document).ready
 			$serverPopContainer.html(`<div bgcolor="" style="font-size:16px;line-height: 17px;"><a href="server.html" style="text-align: center; color:#545c61;"> ${template} </a> ${div1}`);
 		}
 
-		function updateViewPage(data) 
+		function updateViewPage(data)
 		{
 			var players = data.num_players;
 			var template = `${div} SHAZBOT, ${div1}
@@ -48,8 +48,8 @@ $(document).ready
 
 			$serverPopContainerPage.html(`<div bgcolor="" style="text-align: center;"> ${template} ${div1}`);
 		}
-		
-		function updateViewList(data) 
+
+		function updateViewList(data)
 		{
 			var players = data.num_players;
 			var template = ``;
@@ -68,7 +68,7 @@ $(document).ready
 						result -= 1;
 				return result;
 			}
-			
+
 			function playerLoop(teamnum, data){
 				var teamdata = data[teamnum];
 				var count = objectLength(teamnum, teamdata);
@@ -85,7 +85,7 @@ $(document).ready
 				else
 					template = `${template} N/A ${div1br}`;
 			}
-			
+
 			if(players > 0){
 				template = `<br>`;
 				var data = data.info_players;
@@ -111,7 +111,7 @@ $(document).ready
 					playerLoop(0, data);
 				}
 			}
-			
+
 			$serverPopContainerList.html(`<div style="font-size:45px;line-height: 55px;text-align: center;"> ${template} ${div1}`);
 		}
 
