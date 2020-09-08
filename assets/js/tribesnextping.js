@@ -94,7 +94,7 @@ $(document).ready
 				var divc = '<div class="column">';
 				var div1br = '</div><br>';
 
-				//Lak Only
+				//Lak Only: Lak puts everyone in observer and doesnt update team rank
 				if(data.info_maptype == "LakRabbit"){
 					template += '<div class="col-6">';
 					playerLoop(0, data);
