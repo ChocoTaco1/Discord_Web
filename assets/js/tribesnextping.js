@@ -58,11 +58,8 @@ $(document).ready
 					result++;
 					}
 				}
-				if(obj != team0){ //Non-Observers
-					result -= 3; //Minus team name, score, and ???
-					if(result < 0) 
-						result = 0;
-				}
+				if(obj != team0) //Non-Observers
+					result -= 2; //Minus team name, score, and ???
 				else if(data.info_maptype != "LakRabbit") //Some weird thing with observers deing different between lak and ctf
 						result -= 1;
 
@@ -78,7 +75,11 @@ $(document).ready
 
 				if(data.info_maptype == "LakRabbit"){
 					for (i = 0; i < team0cnt; i++){
-						template += team0[i].name + '&nbsp;&nbsp;&nbsp;&nbsp;' + team0[i].score + '<br>';
+						if(team0[i].name === ""){
+							team0cnt++;	
+							continue;
+						}
+						template += team0[i].name + '&emsp;&emsp;' + team0[i].score + '<br>';
 					}
 				}
 				else
@@ -91,15 +92,23 @@ $(document).ready
 					
 					if(team1cnt > 0 || team2cnt > 0){
 						template += '<div class="row">';
-						template += '<div class="col-6-wide">';
-						template += team1.name + '&nbsp;&nbsp;&nbsp;&nbsp;' + team1.score + '<br>';
+						template += '<div class="col-6">';
+						template += team1.name + '<br>' + team1.score + '<br>';
 						for (i = 0; i < team1cnt; i++){
-							template += team1[i].name + '&nbsp;&nbsp;&nbsp;&nbsp;' + team1[i].score + '<br>';
+							if(team1[i].name === ""){
+								team0cnt++;	
+								continue;
+							}
+							template += team1[i].name + '<br>' + team1[i].score + '<br>';
 						}
 						template += '</div>';
-						template += '<div class="col-6-wide">' + team2.name + '&nbsp;&nbsp;&nbsp;&nbsp;' + team2.score + '<br>';
+						template += '<div class="col-6">' + team2.name + '<br>' + team2.score + '<br>';
 						for (i = 0; i < team2cnt; i++){
-							template += team2[i].name + '&nbsp;&nbsp;&nbsp;&nbsp;' + team2[i].score + '<br>';
+							if(team2[i].name === ""){
+								team0cnt++;	
+								continue;
+							}
+							template += team2[i].name + '<br>' + team2[i].score + '<br>';
 						}
 						template += '</div></div>';
 					}
@@ -107,14 +116,18 @@ $(document).ready
 					if(team0cnt > 0){
 						template += '<br>' + "Observers" + '<br>';
 						for (i = 0; i < team0cnt; i++){
-							template += team0[i].name + '&nbsp;&nbsp;&nbsp;&nbsp;' + team0[i].score + '<br>';
+							if(team0[i].name === ""){
+								team0cnt++;	
+								continue;
+							}
+							template += team0[i].name + '<br>' + team0[i].score + '<br>';
 						}
 					}
 				}
 				
 			}
 			
-			$serverPopContainerList.html('<td align="center"><div bgcolor="" style="font-size:35px;text-align: left;">' + template + '</div></td>');
+			$serverPopContainerList.html('<div style="font-size:35px;text-align: center;">' + template + '</div>');
 		}
 
 		getServerData(discordServerIP);
