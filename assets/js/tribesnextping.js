@@ -73,15 +73,20 @@ $(document).ready
 				var team0 = teams[0];
 				var team0cnt = objectLength(team0);
 
+				//Lak Only
 				if(data.info_maptype == "LakRabbit"){
+					template += '<div class="col-6">';
+					template += '<div class="column">' + "Observers" + '<br>';
 					for (i = 0; i < team0cnt; i++){
 						if(team0[i].name === ""){
 							team0cnt++;	
 							continue;
 						}
-						template += team0[i].name + '&emsp;&emsp;' + team0[i].score + '<br>';
+						template += '<div class="column">' + team0[i].name + '</div><div class="column">' + team0[i].score + '</div>';
 					}
+					template += '</div></div>';
 				}
+				//CTF
 				else
 				{
 					var team1 = teams[1];
@@ -90,38 +95,44 @@ $(document).ready
 					var team1cnt = objectLength(team1);
 					var team2cnt = objectLength(team2);
 					
+					//Team 1 and Team 2
 					if(team1cnt > 0 || team2cnt > 0){
 						template += '<div class="row">';
 						template += '<div class="col-6">';
-						template += team1.name + '<br>' + team1.score + '<br>';
+						template += '<div class="column">' + team1.name + '</div><div class="column">' + team1.score + '</div>';
 						for (i = 0; i < team1cnt; i++){
 							if(team1[i].name === ""){
-								team0cnt++;	
-								continue;
+							team0cnt++;	
+							continue;
 							}
-							template += team1[i].name + '<br>' + team1[i].score + '<br>';
+							template += '<div class="column">' + team1[i].name + '</div><div class="column">' + team1[i].score + '</div>';
 						}
 						template += '</div>';
-						template += '<div class="col-6">' + team2.name + '<br>' + team2.score + '<br>';
+						template += '<div class="col-6">';
+						template += '<div class="column">' + team2.name + '</div><div class="column">' + team2.score + '</div>';
 						for (i = 0; i < team2cnt; i++){
 							if(team2[i].name === ""){
-								team0cnt++;	
-								continue;
+							team0cnt++;	
+							continue;
 							}
+							
 							template += team2[i].name + '<br>' + team2[i].score + '<br>';
 						}
 						template += '</div></div>';
 					}
 					
+					//Observers
 					if(team0cnt > 0){
-						template += '<br>' + "Observers" + '<br>';
+						template += '<div class="col-6">';
+						template += '<div class="column">' + "Observers" + '<br>';
 						for (i = 0; i < team0cnt; i++){
 							if(team0[i].name === ""){
 								team0cnt++;	
 								continue;
 							}
-							template += team0[i].name + '<br>' + team0[i].score + '<br>';
+							template += '<div class="column">' + team0[i].name + '</div><div class="column">' + team0[i].score + '</div>';
 						}
+						template += '</div></div>';
 					}
 				}
 				
