@@ -97,8 +97,8 @@ $(document).ready
 					//Team 1 and Team 2
 					if(team1cnt > 0 || team2cnt > 0){
 						template += '<div class="row">';
-						template += '<div class="col-6">';
-						template += '<div class="column" style="text-decoration: underline">' + team1.name + '</div>';
+						template += '<div class="col-4">';
+						template += '<div class="column" style="text-decoration: underline">' + team1.name +  '</div>';
 						for (i = 0; i < team1cnt; i++){
 							if(team1[i].name === ""){
 							team0cnt++;	
@@ -107,7 +107,7 @@ $(document).ready
 							template += '<div class="column">' + team1[i].name  + '</div>';
 						}
 						template += '</div>';
-						template += '<div class="col-6">';
+						template += '<div class="col-4">';
 						template += '<div class="column" style="text-decoration: underline">' + team2.name + '</div>';
 						for (i = 0; i < team2cnt; i++){
 							if(team2[i].name === ""){
@@ -116,12 +116,9 @@ $(document).ready
 							}
 							template += '<div class="column">' + team2[i].name+ '</div>';
 						}
-						template += '</div></div>';
-					}
-					template += '<br>';
-					//Observers
-					if(team0cnt > 0){
-						template += '<div class="col-6">';
+						//Observers
+						template += '</div>';
+						template += '<div class="col-4">';
 						template += '<div class="column" style="text-decoration: underline">' + "Observers" + '</div>';
 						for (i = 0; i < team0cnt; i++){
 							if(team0[i].name === ""){
@@ -130,10 +127,9 @@ $(document).ready
 							}
 							template += '<div class="column">' + team0[i].name + '</div>';
 						}
-						template += '</div></div>';
+						template += '</div>';
 					}
 				}
-				
 			}
 			$serverPopContainerList.html('<div style="font-size:45px;line-height: 55px;text-align: center;">' + template + '</div>');
 		}
