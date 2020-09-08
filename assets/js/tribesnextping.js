@@ -106,11 +106,11 @@ $(document).ready
 							}
 							template += '<div class="column">' + team1[i].name  + '</div>';
 						}
+						template += '</div><br>';
 					}
 					else
 						template += 'N/A</div><br>';
 					//Team 2
-					template += '</div><br>';
 					template += '<div class="col-4" style="min-width:250px;">';
 					template += '<div class="column" style="text-decoration: underline;">' + team2.name + '</div>';
 					if(team2cnt > 0){
