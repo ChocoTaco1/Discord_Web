@@ -39,8 +39,8 @@ $(document).ready
 		function updateViewPage(data)
 		{
 			var players = data.num_players;
-			var template = `${div} SHAZBOT, ${div1}
-							${div} there\'s <strong style="color:#0a9ba8;"> ${data.num_players} </strong> player${(players != 1 ? 's' : '')} on ${div1}
+			var template = `${div} SHAZBOT! ${div1}
+							${div} There\'s <strong style="color:#0a9ba8;"> ${data.num_players} </strong> player${(players != 1 ? 's' : '')} on ${div1}
 							${div} ${data.info_hostname} ${div1}
 							${div} right now playing ${div1}
 							${div} ${data.info_map} ${div1}
