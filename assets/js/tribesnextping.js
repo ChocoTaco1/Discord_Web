@@ -30,8 +30,9 @@ $(document).ready
 		
 		function updateView(data) 
 		{
-			var template = div + data.info_hostname + '&nbsp;&nbsp;&nbsp;&nbsp; P#: ' + data.num_players + '/' + data.info_flags.max_players + div1;
-			template = div + template + data.info_map + '&nbsp; / &nbsp;' + data.info_maptype + div1;
+			var template = div + data.info_hostname + '&#160;&#160; P#: ' + data.num_players + '/' + data.info_flags.max_players + div1;
+			template = div + template + data.info_map + '&#160; / &#160;' + data.info_maptype + div1;
+			
 			$serverPopContainer.html('<div bgcolor="" style="font-size:16px;line-height: 17px;"><a href="server.html" style="text-align: center; color:#545c61;">' + template + '</a>' + div1);
 		}
 
@@ -52,7 +53,7 @@ $(document).ready
 		{
 			var players = data.num_players;
 			var template = '<br>';
-			
+
 			function objectLength(teamnum, obj){
 				var result = 0;
 				for(var prop in obj){
@@ -109,6 +110,7 @@ $(document).ready
 					playerLoop(0, data);
 				}
 			}
+			
 			$serverPopContainerList.html('<div style="font-size:45px;line-height: 55px;text-align: center;">' + template + div1);
 		}
 
