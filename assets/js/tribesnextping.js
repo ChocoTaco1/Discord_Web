@@ -76,15 +76,14 @@ $(document).ready
 				//Lak Only
 				if(data.info_maptype == "LakRabbit"){
 					template += '<div class="col-6">';
-					template += '<div class="column">' + "Observers" + '<br>';
 					for (i = 0; i < team0cnt; i++){
 						if(team0[i].name === ""){
 							team0cnt++;	
 							continue;
 						}
-						template += '<div class="column">' + team0[i].name + '</div><div class="column">' + team0[i].score + '</div>';
+						template += '<div class="column">' + team0[i].name + '</div>';
 					}
-					template += '</div></div>';
+					template += '</div>';
 				}
 				//CTF
 				else
@@ -99,46 +98,44 @@ $(document).ready
 					if(team1cnt > 0 || team2cnt > 0){
 						template += '<div class="row">';
 						template += '<div class="col-6">';
-						template += '<div class="column">' + team1.name + '</div><div class="column">' + team1.score + '</div>';
+						template += '<div class="column" style="text-decoration: underline">' + team1.name + '</div>';
 						for (i = 0; i < team1cnt; i++){
 							if(team1[i].name === ""){
 							team0cnt++;	
 							continue;
 							}
-							template += '<div class="column">' + team1[i].name + '</div><div class="column">' + team1[i].score + '</div>';
+							template += '<div class="column">' + team1[i].name  + '</div>';
 						}
 						template += '</div>';
 						template += '<div class="col-6">';
-						template += '<div class="column">' + team2.name + '</div><div class="column">' + team2.score + '</div>';
+						template += '<div class="column" style="text-decoration: underline">' + team2.name + '</div>';
 						for (i = 0; i < team2cnt; i++){
 							if(team2[i].name === ""){
 							team0cnt++;	
 							continue;
 							}
-							
-							template += team2[i].name + '<br>' + team2[i].score + '<br>';
+							template += '<div class="column">' + team2[i].name+ '</div>';
 						}
 						template += '</div></div>';
 					}
-					
+					template += '<br>';
 					//Observers
 					if(team0cnt > 0){
 						template += '<div class="col-6">';
-						template += '<div class="column">' + "Observers" + '<br>';
+						template += '<div class="column" style="text-decoration: underline">' + "Observers" + '</div>';
 						for (i = 0; i < team0cnt; i++){
 							if(team0[i].name === ""){
 								team0cnt++;	
 								continue;
 							}
-							template += '<div class="column">' + team0[i].name + '</div><div class="column">' + team0[i].score + '</div>';
+							template += '<div class="column">' + team0[i].name + '</div>';
 						}
 						template += '</div></div>';
 					}
 				}
 				
 			}
-			
-			$serverPopContainerList.html('<div style="font-size:35px;text-align: center;">' + template + '</div>');
+			$serverPopContainerList.html('<div style="font-size:45px;line-height: 55px;text-align: center;">' + template + '</div>');
 		}
 
 		getServerData(discordServerIP);

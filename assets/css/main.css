@@ -2676,3 +2676,25 @@ input, select, textarea {
 }
 
 .ddown:hover .dbtn {}
+
+/* Resize text */
+
+div.resize {}
+
+@media screen and (min-width: 401px) 
+{
+	div.resize 
+	{
+		font-size: 85px;
+		line-height: 100px;
+	}
+}
+
+@media screen and (max-width: 400px) 
+{
+	div.resize 
+	{
+		font-size: 68px;
+		line-height: 80px;
+	}
+}
