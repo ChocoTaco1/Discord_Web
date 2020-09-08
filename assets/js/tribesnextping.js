@@ -101,8 +101,8 @@ $(document).ready
 					if(team1cnt > 0){
 						for (i = 0; i < team1cnt; i++){
 							if(team1[i].name === ""){
-							team0cnt++;	
-							continue;
+								team0cnt++;	
+								continue;
 							}
 							template += '<div class="column">' + team1[i].name  + '</div>';
 						}
@@ -116,8 +116,8 @@ $(document).ready
 					if(team2cnt > 0){
 						for (i = 0; i < team2cnt; i++){
 							if(team2[i].name === ""){
-							team0cnt++;	
-							continue;
+								team0cnt++;	
+								continue;
 							}
 							template += '<div class="column">' + team2[i].name+ '</div>';
 						}
