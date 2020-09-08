@@ -54,39 +54,39 @@ $(document).ready
 			var players = data.num_players;
 			var template = ``;
 
-			function objectLength(teamnum, obj){
-				var result = 0;
-				for(var prop in obj){
-					if (obj.hasOwnProperty(prop)){
-					// or Object.prototype.hasOwnProperty.call(obj, prop)
-					result++;
-					}
-				}
-				if(teamnum != 0) //Non-Observers
-					result -= 2; //Minus team name, score
-				else if(data.info_maptype != "LakRabbit") //Minus name, Lak keeps people in observer, doesnt update team ranks
-						result -= 1;
-				return result;
-			}
-
-			function playerLoop(teamnum, data){
-				var teamdata = data[teamnum];
-				var count = objectLength(teamnum, teamdata);
-				if(data.info_maptype != "LakRabbit")
-					template = `${template} ${div4} ${teamdata.name} ${div1}`;
-				if(count > 0){
-					for (i = 0; i < count; i++){
-						if(teamdata[i].name === "")
-							continue;
-						template = `${template} ${divc} ${teamdata[i].name} ${div1}`;
-					}
-					template = `${template} ${div1br}`;
-				}
-				else
-					template = `${template} N/A ${div1br}`;
-			}
-
 			if(players > 0){
+				function objectLength(teamnum, obj){
+					var result = 0;
+					for(var prop in obj){
+						if (obj.hasOwnProperty(prop)){
+						// or Object.prototype.hasOwnProperty.call(obj, prop)
+						result++;
+						}
+					}
+					if(teamnum != 0) //Non-Observers
+						result -= 2; //Minus team name, score
+					else if(data.info_maptype != "LakRabbit") //Minus name, Lak keeps people in observer, doesnt update team ranks
+							result -= 1;
+					return result;
+				}
+
+				function playerLoop(teamnum, data){
+					var teamdata = data[teamnum];
+					var count = objectLength(teamnum, teamdata);
+					if(data.info_maptype != "LakRabbit")
+						template = `${template} ${div4} ${teamdata.name} ${div1}`;
+					if(count > 0){
+						for (i = 0; i < count; i++){
+							if(teamdata[i].name === "")
+								continue;
+							template = `${template} ${divc} ${teamdata[i].name} ${div1}`;
+						}
+						template = `${template} ${div1br}`;
+					}
+					else
+						template = `${template} N/A ${div1br}`;
+				}
+				
 				template = `<br>`;
 				var data = data.info_players;
 				
