@@ -2698,3 +2698,32 @@ input, select, textarea {
 		line-height: 80px;
 	}
 }
+
+.row-special{}
+
+@media screen and (min-width: 801px) 
+{
+	.row-special {
+		display: flex;
+		flex-wrap: wrap;
+		box-sizing: border-box;
+		align-items: stretch;
+	}
+		.row-special > .col-4 {
+			width: 33.33333%;
+		}
+		.row-special > .col-4-normal {
+			width: 33.33333%;
+		}
+		.row-special > .col-4-wide {
+			width: 33.33333%;
+		}
+		.row-special > .col-4-narrow {
+			width: 33.33333%;
+		}
+}
+
+@media screen and (max-width: 800px) 
+{
+	.row-special{}
+}
