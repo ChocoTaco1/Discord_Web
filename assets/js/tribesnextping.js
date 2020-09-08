@@ -59,8 +59,8 @@ $(document).ready
 					}
 				}
 				if(obj != team0) //Non-Observers
-					result -= 2; //Minus team name, score, and ???
-				else if(data.info_maptype != "LakRabbit") //Some weird thing with observers deing different between lak and ctf
+					result -= 2; //Minus team name, score
+				else if(data.info_maptype != "LakRabbit") //Minus name, Lak keeps people in observer, doesnt update team ranks
 						result -= 1;
 
 				return result;
@@ -94,28 +94,38 @@ $(document).ready
 					var team1cnt = objectLength(team1);
 					var team2cnt = objectLength(team2);
 					
-					//Team 1 and Team 2
+					//Team 1
 					template += '<div class="row-special">';
 					template += '<div class="col-4" style="min-width:250px;">';
 					template += '<div class="column" style="text-decoration: underline;">' + team1.name +  '</div>';
-					for (i = 0; i < team1cnt; i++){
-						if(team1[i].name === ""){
-						team0cnt++;	
-						continue;
+					if(team1cnt > 0){
+						for (i = 0; i < team1cnt; i++){
+							if(team1[i].name === ""){
+							team0cnt++;	
+							continue;
+							}
+							template += '<div class="column">' + team1[i].name  + '</div>';
 						}
-						template += '<div class="column">' + team1[i].name  + '</div>';
 					}
+					else
+						template += 'N/A</div><br>';
+					//Team 2
 					template += '</div><br>';
 					template += '<div class="col-4" style="min-width:250px;">';
 					template += '<div class="column" style="text-decoration: underline;">' + team2.name + '</div>';
-					for (i = 0; i < team2cnt; i++){
-						if(team2[i].name === ""){
-						team0cnt++;	
-						continue;
+					if(team2cnt > 0){
+						for (i = 0; i < team2cnt; i++){
+							if(team2[i].name === ""){
+							team0cnt++;	
+							continue;
+							}
+							template += '<div class="column">' + team2[i].name+ '</div>';
 						}
-						template += '<div class="column">' + team2[i].name+ '</div>';
+						template += '</div><br>';
 					}
-					template += '</div><br>';
+					else
+						template += 'N/A</div><br>';
+					
 					//Observers
 					template += '<div class="col-4" style="min-width:250px;">';
 					template += '<div class="column" style="text-decoration: underline;">' + "Observers" + '</div>';
