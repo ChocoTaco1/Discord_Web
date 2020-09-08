@@ -25,28 +25,25 @@ $(document).ready
 			);
 		}
 
-		var div = '<div>';
-		var div1 = '</div>';
-
 		function updateView(data)
 		{
-			var template = `${div} ${data.info_hostname} &#160; &#160; P#: ${data.num_players} / ${data.info_flags.max_players} ${div1}
-                            ${div} ${data.info_map} &#160;/&#160; ${data.info_maptype} ${div1}`;
+			var template = `<div> ${data.info_hostname} &#160; &#160; P#: ${data.num_players} / ${data.info_flags.max_players} </div>
+                            <div> ${data.info_map} &#160;/&#160; ${data.info_maptype} </div>`;
 			
-			$serverPopContainer.html(`<div bgcolor="" style="font-size:16px;line-height: 17px;"><a href="server.html" style="text-align: center; color:#545c61;"> ${template} </a> ${div1}`);
+			$serverPopContainer.html(`<div bgcolor="" style="font-size:16px;line-height: 17px;"><a href="server.html" style="text-align: center; color:#545c61;"> ${template} </a> </div>`);
 		}
 
 		function updateViewPage(data)
 		{
 			var players = data.num_players;
-			var template = `${div} SHAZBOT! ${div1}
-							${div} There\'s <strong style="color:#0a9ba8;"> ${data.num_players} </strong> player${(players != 1 ? 's' : '')} on ${div1}
-							${div} ${data.info_hostname} ${div1}
-							${div} right now playing ${div1}
-							${div} ${data.info_map} ${div1}
-							${div} ${data.info_maptype} ${div1}`;
+			var template = `<div> SHAZBOT! </div>
+							<div> There\'s <strong style="color:#0a9ba8;"> ${data.num_players} </strong> player${(players != 1 ? 's' : '')} on </div>
+							<div> ${data.info_hostname} </div>
+							<div> right now playing </div>
+							<div> ${data.info_map} </div>
+							<div> ${data.info_maptype} </div>`;
 
-			$serverPopContainerPage.html(`<div bgcolor="" style="text-align: center;"> ${template} ${div1}`);
+			$serverPopContainerPage.html(`<div bgcolor="" style="text-align: center;"> ${template} </div>`);
 		}
 
 		function updateViewList(data)
@@ -74,12 +71,12 @@ $(document).ready
 					var teamdata = data[teamnum];
 					var count = objectLength(teamnum, teamdata);
 					if(data.info_maptype != "LakRabbit")
-						template = `${template} ${div4} ${teamdata.name} ${div1}`;
+						template = `${template} ${div4} ${teamdata.name} </div>`;
 					if(count > 0){
 						for (i = 0; i < count; i++){
 							if(teamdata[i].name === "")
 								continue;
-							template = `${template} ${divc} ${teamdata[i].name} ${div1}`;
+							template = `${template} ${divc} ${teamdata[i].name} </div>`;
 						}
 						template = `${template} ${div1br}`;
 					}
@@ -112,7 +109,7 @@ $(document).ready
 				}
 			}
 
-			$serverPopContainerList.html(`<div style="font-size:45px;line-height: 55px;text-align: center;"> ${template} ${div1}`);
+			$serverPopContainerList.html(`<div style="font-size:45px;line-height: 55px;text-align: center;"> ${template} </div>`);
 		}
 
 		getServerData(discordServerIP);
