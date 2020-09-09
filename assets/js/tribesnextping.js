@@ -64,15 +64,15 @@ $(document).ready
 				function playerLoop(teamNum, data, mode){
 					var teamData = data[teamNum];
 					var count = countPlayers(teamData);
+					
 					if(mode != "LakRabbit")
 						var title = teamData.name;
 					else
 						var title = `Players`;
+					
 					template = `${template} ${div4} ${title} </div>`;
 					if(count > 0){
 						for (i = 0; i < count; i++){
-							if(teamData[i].name === "")
-								continue;
 							template = `${template} ${divc} ${teamData[i].name} </div>`;
 						}
 						template = `${template} </div><br>`;
