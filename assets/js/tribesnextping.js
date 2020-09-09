@@ -47,37 +47,33 @@ $(document).ready
 		}
 
 		function updateViewList(data)
-		{
+		{	
 			var players = data.num_players;
 			var template = ``;
 
 			if(players > 0){
-				function objectLength(teamnum, data, mode){
+				function countPlayers(teamData){
 					var result = 0;
-					for(var prop in data){
-						if (data.hasOwnProperty(prop))
+					for(var playerSlot in teamData){
+						if(!isNaN(playerSlot))
 							result++;
 					}
-					if(teamnum != 0) //Non-Observers
-						result -= 2; //Minus team name, score
-					else if(mode != "LakRabbit") //Minus name, Lak keeps people in observer, doesnt update team ranks
-							result -= 1;
 					return result;
 				}
 
-				function playerLoop(teamnum, data, mode){
-					var teamdata = data[teamnum];
-					var count = objectLength(teamnum, teamdata, mode);
+				function playerLoop(teamNum, data, mode){
+					var teamData = data[teamNum];
+					var count = countPlayers(teamData);
 					if(mode != "LakRabbit")
-						var title = teamdata.name;
+						var title = teamData.name;
 					else
 						var title = `Players`;
 					template = `${template} ${div4} ${title} </div>`;
 					if(count > 0){
 						for (i = 0; i < count; i++){
-							if(teamdata[i].name === "")
+							if(teamData[i].name === "")
 								continue;
-							template = `${template} ${divc} ${teamdata[i].name} </div>`;
+							template = `${template} ${divc} ${teamData[i].name} </div>`;
 						}
 						template = `${template} </div><br>`;
 					}
