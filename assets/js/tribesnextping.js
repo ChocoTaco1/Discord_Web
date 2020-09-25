@@ -65,10 +65,10 @@ $(document).ready
 					var teamData = data[teamNum];
 					var count = countPlayers(teamData);
 					
-					if(mode != "LakRabbit")
-						var title = teamData.name;
-					else
+					if(mode == "LakRabbit" || mode == "Deathmatch")
 						var title = `Players`;
+					else
+						var title = teamData.name;
 					
 					template = `${template} ${div4} ${title} </div>`;
 					if(count > 0){
@@ -89,8 +89,8 @@ $(document).ready
 				var div4 = `<div class="col-4" style="min-width:250px;"><div class="column" style="text-decoration: underline;">`;
 				var divc = `<div class="column">`;
 
-				//Lak Only: Lak puts everyone in observer and doesnt update team rank
-				if(mode == "LakRabbit"){
+				//Lak/DM Only: Lak/DM puts everyone in observer and doesnt update team rank
+				if(mode == "LakRabbit" || mode == "Deathmatch"){
 					template = `${template} <div class="col-6">`;
 					playerLoop(0, data, mode);
 				}
