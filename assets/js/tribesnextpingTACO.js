@@ -25,7 +25,7 @@ $(document).ready
 			);
 		}
 
-		function updateViewTACO(data)
+		function updateView(data)
 		{
 			var template = `<div> ${data.info_hostname} &#160; &#160; P#: ${data.num_players} / ${data.info_flags.max_players} </div>
                             <div> ${data.info_map} &#160;/&#160; ${data.info_maptype} </div>`;
@@ -33,7 +33,7 @@ $(document).ready
 			$serverPopContainer.html(`<div bgcolor="" style="font-size:16px;line-height: 17px;"><a href="taco.html" style="text-align: center; color:#545c61;"> ${template} </a> </div>`);
 		}
 
-		function updateViewPageTACO(data)
+		function updateViewPage(data)
 		{
 			var players = data.num_players;
 			var template = `<div> SHAZBOT! </div>
@@ -46,7 +46,7 @@ $(document).ready
 			$serverPopContainerPage.html(`<div bgcolor="" style="text-align: center;"> ${template} </div>`);
 		}
 
-		function updateViewListTACO(data)
+		function updateViewList(data)
 		{	
 			var players = data.num_players;
 			var template = ``;
