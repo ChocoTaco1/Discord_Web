@@ -2,9 +2,9 @@ $(document).ready
 (
 	function()
 	{
-		var $serverPopContainerTACO = $('#serverPopContainer');
-		var $serverPopContainerPageTACO = $('#serverPopContainerPage');
-		var $serverPopContainerListTACO = $('#serverPopContainerList');
+		var $serverPopContainerTACO = $('#serverPopContainerTACO');
+		var $serverPopContainerPageTACO = $('#serverPopContainerPageTACO');
+		var $serverPopContainerListTACO = $('#serverPopContainerListTACO');
 		var discordServerIP = '35.239.88.241:28000';
 		//var discordServerIP = '185.66.108.39:28000';
 
