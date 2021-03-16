@@ -5,7 +5,7 @@ $(document).ready
 		var $serverPopContainer = $('#serverPopContainer');
 		var $serverPopContainerPage = $('#serverPopContainerPage');
 		var $serverPopContainerList = $('#serverPopContainerList');
-		var discordServerIP = '67.222.138.16:28000';
+		var discordServerIP = '35.239.88.241:28000';
 		//var discordServerIP = '185.66.108.39:28000';
 
 		function getServerData(ip)
