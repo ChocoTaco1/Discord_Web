@@ -27,8 +27,9 @@ $(document).ready
 
 		function updateView(data)
 		{
-			var template = `<div> ${data.info_hostname} &#160; &#160; P#: ${data.num_players} / ${data.info_flags.max_players} </div>
-                            <div> ${data.info_map} &#160;/&#160; ${data.info_maptype} </div>`;
+			var template = `<div><p>${data.info_hostname}<br>
+							P#: ${data.num_players} / ${data.info_flags.max_players}<br>
+                            ${data.info_map} &#160;/&#160; ${data.info_maptype}</p></div>`;
 			
 			$serverPopContainer.html(`<div bgcolor="" style="font-size:16px;line-height: 17px;"><a href="server.html" style="text-align: center; color:#545c61;"> ${template} </a> </div>`);
 		}

@@ -111,12 +111,14 @@ input, select, textarea {
 	}
 
 	h1, h2, h3, h4, h5, h6 {
+		font-family: 'Source Sans Pro', sans-serif;
 		font-weight: 300;
 		color: #e2e5e5;
 		line-height: 1.5em;
 	}
 
 	h1 a, h2 a, h3 a, h4 a, h5 a, h6 a {
+		font-family: 'Source Sans Pro', sans-serif;
 		color: inherit;
 		text-decoration: none;
 	}
@@ -164,6 +166,7 @@ input, select, textarea {
 	}
 
 	a {
+		font-family: 'Source Sans Pro', sans-serif;
 		text-decoration: none;
 		color: inherit;
 		border-bottom: dotted 1px rgba(128, 128, 128, 0.5);
@@ -175,6 +178,7 @@ input, select, textarea {
 	}
 
 		a:hover {
+			font-family: 'Source Sans Pro', sans-serif;
 			color: #2ccedc;
 			border-bottom-color: rgba(255, 255, 255, 0);
 		}
@@ -204,6 +208,7 @@ input, select, textarea {
 
 	p, ul, ol, dl, table {
 		margin-bottom: 2em;
+		font-family: 'Source Sans Pro', sans-serif;
 	}
 
 	br.clear {
