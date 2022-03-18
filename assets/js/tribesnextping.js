@@ -10,7 +10,7 @@ $(document).ready
 
 		function getServerData(ip)
 		{
-			$.getJSON('http://master.tribesnext.com/list.json',
+			$.getJSON('https://www.tribesnext.com/list.json',
 				function(tnMasterServerData){
 					var result = tnMasterServerData.find(
 						function(server) {
