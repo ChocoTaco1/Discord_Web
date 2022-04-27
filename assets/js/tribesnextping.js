@@ -30,7 +30,7 @@ $(document).ready
 			var template = `<div><p>${data.info_hostname}<br>
 							P#: ${data.num_players} / ${data.info_flags.max_players}<br>
                             ${data.info_map} &#160;/&#160; ${data.info_maptype}</p></div>`;
-			
+
 			$serverPopContainer.html(`<div bgcolor="" style="font-size:16px;line-height: 17px;"><a href="server.html" style="text-align: center; color:#545c61;"> ${template} </a> </div>`);
 		}
 
@@ -48,7 +48,7 @@ $(document).ready
 		}
 
 		function updateViewList(data)
-		{	
+		{
 			var players = data.num_players;
 			var template = ``;
 
@@ -65,12 +65,12 @@ $(document).ready
 				function playerLoop(teamNum, data, mode){
 					var teamData = data[teamNum];
 					var count = countPlayers(teamData);
-					
+
 					if(mode == "LakRabbit" || mode == "Deathmatch")
 						var title = `Players`;
 					else
 						var title = teamData.name;
-					
+
 					template = `${template} ${div4} ${title} </div>`;
 					if(count > 0){
 						for (i = 0; i < count; i++){
@@ -81,11 +81,11 @@ $(document).ready
 					else
 						template = `${template} N/A </div><br>`;
 				}
-				
+
 				template = `<br>`;
 				var mode = data.info_maptype;
 				var data = data.info_players;
-				
+
 				//Formatting
 				var div4 = `<div class="col-4" style="min-width:250px;"><div class="column" style="text-decoration: underline;">`;
 				var divc = `<div class="column">`;
