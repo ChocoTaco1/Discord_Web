@@ -169,7 +169,6 @@ input, select, textarea {
 		font-family: 'Source Sans Pro', sans-serif;
 		text-decoration: none;
 		color: inherit;
-		border-bottom: dotted 1px rgba(128, 128, 128, 0.5);
 		-moz-transition: color 0.35s ease-in-out, border-bottom-color 0.35s ease-in-out;
 		-webkit-transition: color 0.35s ease-in-out, border-bottom-color 0.35s ease-in-out;
 		-ms-transition: color 0.35s ease-in-out, border-bottom-color 0.35s ease-in-out;
@@ -179,8 +178,6 @@ input, select, textarea {
 
 		a:hover {
 			font-family: 'Source Sans Pro', sans-serif;
-			color: #2ccedc;
-			border-bottom-color: rgba(255, 255, 255, 0);
 		}
 
 	sub {
