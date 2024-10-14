@@ -21,12 +21,14 @@
             gap: 10px; /* Space between buttons */
         }
         #greyscaleCanvas {
-			display: block; /* Changed to block */
+			display: block;
 			position: absolute;
-			bottom: 10px; /* Position from the bottom */
-			left: 10px; /* Position from the left */
+			bottom: 10px;
+			left: 10px;
 			z-index: 10;
-			border: 1px solid black; /* Optional: Add a border for visibility */
+			border: 1px solid black;
+			width: 256px;
+			height: 256px;
 		}
     </style>
 </head>
@@ -34,15 +36,21 @@
     <div id="buttonContainer">
         <input type="file" id="fileInput" accept=".ter" />
         <button id="toggleViewButton">Switch to Shaded View</button>
-        <button id="exportButton">Export Greyscale</button>
-        <label for="scaleSlider">Export Scale (1-16): <span id="scaleValue">1</span></label>
+		<label for="scaleSlider">Image Export Scale (1-16): <span id="scaleValue">1</span></label>
         <input type="range" id="scaleSlider" min="1" max="16" value="1" />
+        <button id="exportButton">Export 8 Bit PNG Greyscale</button>
+		<button id="exportPGMButton">Export 16 Bit PGM</button>
+		<button id="exportTextButton">Export Raw Height Data Text File</button>
+		<span style="font-weight: normal; margin-bottom: 5px; display: block;">3D Export</span>
+		<button id="exportObjButton">Export Terrain as OBJ</button>
+		<button id="exportStlButton">Export Terrain as STL</button>
     </div>
     <canvas id="renderCanvas"></canvas>
     <canvas id="greyscaleCanvas" width="256" height="256"></canvas> <!-- Canvas for grayscale image -->
 
     <script src="https://cdn.babylonjs.com/babylon.js"></script>
     <script>
+
         const canvas = document.getElementById('renderCanvas');
         const engine = new BABYLON.Engine(canvas, true);
         const scene = new BABYLON.Scene(engine);
@@ -51,7 +59,8 @@
         const camera = new BABYLON.ArcRotateCamera("camera1", Math.PI / 2, Math.PI / 3, 2048, BABYLON.Vector3.Zero(), scene);
         camera.attachControl(canvas, true);
 		camera.wheelDeltaPercentage = 0.005; // Adjust this value for faster zoom (default is 0.01)
-        const light = new BABYLON.HemisphericLight("light1", new BABYLON.Vector3(0.0, 1.0, 0.0), scene);
+
+		const light = new BABYLON.HemisphericLight("light1", new BABYLON.Vector3(0.0, 1.0, 0.0), scene);
         light.intensity = 0.75;
 
         const size = 256; // Size of the terrain
@@ -59,51 +68,69 @@
         let mHeight = [];
         let map; // Reference to the terrain mesh
 
-        // Function to create terrain mesh using height data
-        function createTerrain() {
-            // Dispose of the previous terrain mesh if it exists
-            if (map) {
-                map.dispose();
-            }
+		// Function to create terrain mesh using height data
+		function createTerrain() {
+			// Dispose of the previous terrain mesh if it exists
+			if (map) {
+				map.dispose();
+			}
 
-            const mapSubX = size; // Points along the X axis
-            const mapSubZ = size; // Points along the Z axis
-            const mapData = new Float32Array(mapSubX * mapSubZ * 3); // 3 float values per point: x, y, z
+			const mapSubX = size; // Points along the X axis (256)
+			const mapSubZ = size; // Points along the Z axis (256)
 
-            const paths = [];
-            for (let l = 0; l < mapSubZ; l++) {
-                const path = [];
-                for (let w = 0; w < mapSubX; w++) {
-                    const x = (w - mapSubX * 0.5) * scaleFactor; // Adjusted by scale factor
-                    const z = (l - mapSubZ * 0.5) * scaleFactor; // Adjusted by scale factor
-                    const y = mHeight[l * mapSubX + w]; // Use loaded height data
+			const vertices = [];
+			const indices = [];
 
-                    mapData[3 * (l * mapSubX + w)] = x;
-                    mapData[3 * (l * mapSubX + w) + 1] = y;
-                    mapData[3 * (l * mapSubX + w) + 2] = z;
+			// Create vertices and indices for the mesh
+			for (let l = 0; l < mapSubZ; l++) {
+				for (let w = 0; w < mapSubX; w++) {
+					const x = (w - mapSubX * 0.5) * 8; // Each vertex is 8m apart
+					const z = (l - mapSubZ * 0.5) * 8; // Each vertex is 8m apart
+					const y = mHeight[l * mapSubX + w]; // Use loaded height data
 
-                    path.push(new BABYLON.Vector3(x, y, z));
-                }
-                paths.push(path);
-            }
+					// Store the vertex position
+					vertices.push(x, y, z);
+				}
+			}
 
-            // Create the new terrain mesh
-            map = BABYLON.MeshBuilder.CreateRibbon("terrain", { pathArray: paths, sideOrientation: BABYLON.Mesh.DOUBLESIDE }, scene);
-            map.position.y = 0;
+			// Create triangles by defining indices
+			for (let l = 0; l < mapSubZ - 1; l++) {
+				for (let w = 0; w < mapSubX - 1; w++) {
+					const topLeft = l * mapSubX + w;
+					const topRight = topLeft + 1;
+					const bottomLeft = (l + 1) * mapSubX + w;
+					const bottomRight = bottomLeft + 1;
 
-            // Create a flat shading material
-            const flatMaterial = new BABYLON.StandardMaterial("flatMaterial", scene);
-            flatMaterial.wireframe = false; // Set to false for shaded view
-            flatMaterial.diffuseColor = new BABYLON.Color3(0.8, 0.8, 0.8); // Set color to something natural
-            flatMaterial.specularColor = new BABYLON.Color3(0, 0, 0); // No specular highlights for flat shading
-            flatMaterial.emissiveColor = new BABYLON.Color3(0, 0, 0); // No emissive color
+					// Inverted first triangle
+					indices.push(bottomLeft, topLeft, topRight);
+					// Inverted second triangle
+					indices.push(bottomLeft, topRight, bottomRight);
+				}
+			}
 
-            // Set the material to the mesh
-            map.material = flatMaterial;
+			// Create the mesh using the vertices and indices
+			const terrainMesh = new BABYLON.Mesh("terrain", scene);
+			const vertexData = new BABYLON.VertexData();
+			vertexData.positions = vertices;
+			vertexData.indices = indices;
+			vertexData.applyToMesh(terrainMesh);
 
-            console.log("Terrain created successfully.");
-            generateGreyscaleImage(); // Generate the grayscale image
-        }
+			// Create a flat shading material for the shaded view
+			flatMaterial = new BABYLON.StandardMaterial("flatMaterial", scene);
+			flatMaterial.wireframe = false; // Set to false for shaded view
+			flatMaterial.diffuseColor = new BABYLON.Color3(0.8, 0.8, 0.8); // Set color to something natural
+			flatMaterial.specularColor = new BABYLON.Color3(0, 0, 0); // No specular highlights for flat shading
+			flatMaterial.emissiveColor = new BABYLON.Color3(0, 0, 0); // No emissive color
+
+			// Set the material to the mesh initially
+			terrainMesh.material = flatMaterial;
+
+			// Update the map variable to reference the newly created terrain mesh
+			map = terrainMesh;
+
+			console.log("Terrain created successfully.");
+			generateGreyscaleImage(); // Generate the grayscale image
+		}
 
         // Function to load and parse the .ter file
         function loadTerFile(file) {
@@ -226,6 +253,208 @@
             link.click();
         }
 
+		// Function to export height data as a P2 (ASCII) PGM file with scaling
+		function exportPGM() {
+			const scale = parseInt(document.getElementById('scaleSlider').value, 10);
+			const resizeTo = size * scale; // New dimensions based on scale
+			const maxHeight = Math.max(...mHeight);
+			const minHeight = Math.min(...mHeight);
+			const pgmHeader = `P2\n${resizeTo} ${resizeTo}\n65535\n`;
+
+			let pgmData = '';
+
+			for (let y = 0; y < resizeTo; y++) {
+				for (let x = 0; x < resizeTo; x++) {
+					const nx = Math.floor(x / scale);
+					const ny = Math.floor(y / scale);
+
+					// Ensure nx and ny are within bounds
+					const nxEdge = (nx < size - 1) ? 1 : 0;
+					const nyEdge = (ny < size - 1) ? 1 : 0;
+
+					const v1 = mHeight[nx + (ny * size)];
+					const v2 = mHeight[(nx + nxEdge) + (ny * size)];
+					const v3 = mHeight[nx + ((ny + nyEdge) * size)];
+					const v4 = mHeight[(nx + nxEdge) + ((ny + nyEdge) * size)];
+
+					// Bilinear interpolation
+					const interpolatedValue = bilinearInter(
+						Math.floor(x / scale) * scale,
+						Math.floor(y / scale) * scale,
+						(Math.floor(x / scale) + 1) * scale,
+						(Math.floor(y / scale) + 1) * scale,
+						x,
+						y,
+						v1,
+						v2,
+						v3,
+						v4
+					);
+
+					// Normalize height to the range 0-65535
+					const normalizedHeight = Math.floor(((interpolatedValue - minHeight) / (maxHeight - minHeight)) * 65535);
+					pgmData += `${normalizedHeight}\n`;
+				}
+			}
+
+			// Create a Blob from the PGM data
+			const blob = new Blob([pgmHeader + pgmData], { type: 'image/x-portable-graymap' });
+			const url = URL.createObjectURL(blob);
+
+			// Create a link to download the PGM file
+			const link = document.createElement('a');
+			link.download = 'heightmap.pgm';
+			link.href = url;
+			link.click();
+		}
+
+		// Function to export height data as a tab-separated text file with scaling
+		function exportText() {
+			const scale = parseInt(document.getElementById('scaleSlider').value, 10);
+			const resizeTo = size * scale; // New dimensions based on scale
+			let textData = '';
+
+			for (let y = 0; y < resizeTo; y++) {
+				const row = [];
+
+				for (let x = 0; x < resizeTo; x++) {
+					const nx = Math.floor(x / scale);
+					const ny = Math.floor(y / scale);
+
+					// Ensure nx and ny are within bounds
+					const nxEdge = (nx < size - 1) ? 1 : 0;
+					const nyEdge = (ny < size - 1) ? 1 : 0;
+
+					const v1 = mHeight[nx + (ny * size)];
+					const v2 = mHeight[(nx + nxEdge) + (ny * size)];
+					const v3 = mHeight[nx + ((ny + nyEdge) * size)];
+					const v4 = mHeight[(nx + nxEdge) + ((ny + nyEdge) * size)];
+
+					// Bilinear interpolation to get the height value
+					const interpolatedValue = bilinearInter(
+						Math.floor(x / scale) * scale,
+						Math.floor(y / scale) * scale,
+						(Math.floor(x / scale) + 1) * scale,
+						(Math.floor(y / scale) + 1) * scale,
+						x,
+						y,
+						v1,
+						v2,
+						v3,
+						v4
+					);
+
+					// Add interpolated value to the row array
+					row.push(interpolatedValue);
+				}
+
+				textData += row.join('\t') + '\n'; // Join row with tabs and add a newline
+			}
+
+			// Create a Blob from the text data
+			const blob = new Blob([textData], { type: 'text/plain' });
+			const url = URL.createObjectURL(blob);
+
+			// Create a link to download the text file
+			const link = document.createElement('a');
+			link.download = 'heightdata.txt';
+			link.href = url;
+			link.click();
+		}
+
+		// Function to export the terrain mesh as an OBJ file
+		function exportObj() {
+			if (!map) {
+				console.error("No terrain mesh found.");
+				return;
+			}
+
+			const vertices = map.getVerticesData(BABYLON.VertexBuffer.PositionKind);
+			const indices = map.getIndices();
+
+			let objData = '';
+
+			// Add OBJ file header
+			objData += '# Exported terrain mesh\n';
+
+			// Write vertices
+			for (let i = 0; i < vertices.length; i += 3) {
+				objData += `v ${vertices[i]} ${vertices[i + 1]} ${vertices[i + 2]}\n`;
+			}
+
+			// Write faces (reverse winding order)
+			for (let i = 0; i < indices.length; i += 3) {
+				// Reverse the order of vertices for each face
+				objData += `f ${indices[i + 2] + 1} ${indices[i + 1] + 1} ${indices[i] + 1}\n`;
+			}
+
+			// Create a Blob from the OBJ data
+			const blob = new Blob([objData], { type: 'text/plain' });
+			const url = URL.createObjectURL(blob);
+
+			// Create a link to download the OBJ file
+			const link = document.createElement('a');
+			link.download = 'terrain.obj';
+			link.href = url;
+			link.click();
+		}
+
+
+		// Function to export the terrain mesh as an STL file
+		function exportStl() {
+			if (!map) {
+				console.error("No terrain mesh found.");
+				return;
+			}
+
+			const vertices = map.getVerticesData(BABYLON.VertexBuffer.PositionKind);
+			const indices = map.getIndices();
+			let stlData = 'solid terrain\n';
+
+			// Create facets from the triangles
+			for (let i = 0; i < indices.length; i += 3) {
+				const v1 = new BABYLON.Vector3(vertices[indices[i] * 3], vertices[indices[i] * 3 + 1], vertices[indices[i] * 3 + 2]);
+				const v2 = new BABYLON.Vector3(vertices[indices[i + 1] * 3], vertices[indices[i + 1] * 3 + 1], vertices[indices[i + 1] * 3 + 2]);
+				const v3 = new BABYLON.Vector3(vertices[indices[i + 2] * 3], vertices[indices[i + 2] * 3 + 1], vertices[indices[i + 2] * 3 + 2]);
+
+				// Normal vector for the facet
+				const normal = BABYLON.Vector3.Cross(v2.subtract(v1), v3.subtract(v1)).normalize();
+
+				stlData += `facet normal ${normal.x} ${normal.y} ${normal.z}\n`;
+				stlData += 'outer loop\n';
+
+				// Reverse the vertex order for STL
+				stlData += `vertex ${v1.x} ${v1.y} ${v1.z}\n`;
+				stlData += `vertex ${v3.x} ${v3.y} ${v3.z}\n`; // Change the order here
+				stlData += `vertex ${v2.x} ${v2.y} ${v2.z}\n`; // Change the order here
+
+				stlData += 'endloop\n';
+				stlData += 'endfacet\n';
+			}
+
+			stlData += 'endsolid terrain\n';
+
+			// Create a Blob from the STL data
+			const blob = new Blob([stlData], { type: 'text/plain' });
+			const url = URL.createObjectURL(blob);
+
+			// Create a link to download the STL file
+			const link = document.createElement('a');
+			link.download = 'terrain.stl';
+			link.href = url;
+			link.click();
+		}
+
+		// Button to export terrain mesh as STL
+		document.getElementById('exportStlButton').addEventListener('click', exportStl);
+		// Button to export terrain mesh as OBJ
+		document.getElementById('exportObjButton').addEventListener('click', exportObj);
+
+		// Button to export height data as text
+		document.getElementById('exportTextButton').addEventListener('click', exportText);
+
+		// Button to export the PGM image
+		document.getElementById('exportPGMButton').addEventListener('click', exportPGM);
         // Button to export the grayscale image as PNG
         document.getElementById('exportButton').addEventListener('click', function() {
             const scale = parseInt(document.getElementById('scaleSlider').value, 10);
@@ -256,15 +485,36 @@
         });
 
         // Button to toggle between wireframe and shaded view
-        document.getElementById('toggleViewButton').addEventListener('click', function() {
-            const material = map.material;
-            material.wireframe = !material.wireframe; // Toggle wireframe property
+        // Create a flat shading material
 
-            // Update button text based on the current view
-            this.textContent = material.wireframe ? 'Switch to Shaded View' : 'Switch to Wireframe View';
-        });
 
-        // Render loop
+		// Button to toggle between wireframe and shaded view
+		document.getElementById('toggleViewButton').addEventListener('click', function() {
+			if (map) { // Ensure the map (terrain mesh) exists
+				const material = map.material;
+				const isWireframe = material.wireframe;
+
+				// Toggle the wireframe property
+				material.wireframe = !isWireframe;
+
+				// Update lights and emissive color based on the current view
+				if (material.wireframe) {
+					// In wireframe mode, disable lights and change emissive color
+					scene.lights.forEach(light => light.setEnabled(false));
+					material.emissiveColor = new BABYLON.Color3(0.6, 0.6, 0.6); // Set emissive color to white in wireframe mode
+					this.textContent = 'Switch to Shaded View'; // Update button text
+				} else {
+					// In shaded mode, enable lights and reset emissive color
+					scene.lights.forEach(light => light.setEnabled(true));
+					material.emissiveColor = new BABYLON.Color3(0, 0, 0); // Reset emissive color to off in shaded mode
+					this.textContent = 'Switch to Wireframe View'; // Update button text
+				}
+			} else {
+				console.error("Terrain mesh not found.");
+			}
+		});
+
+    // Render loop
         engine.runRenderLoop(function() {
             scene.render();
         });
@@ -273,6 +523,16 @@
         window.addEventListener('resize', function() {
             engine.resize();
         });
+
+		//scene.debugLayer.show({
+		//	embedMode: true, // Display as an embedded UI
+		//	overlay: true, // Display on top of the canvas
+		//	globalRoot: document.body, // Attach to the body or another element
+		//	position: {
+		//		top: 0, // Position at the top
+		//		right: 0 // Align to the right side
+		//	}
+		//});
     </script>
 </body>
 </html>
