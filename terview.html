@@ -60,8 +60,8 @@
         camera.attachControl(canvas, true);
 		camera.wheelDeltaPercentage = 0.005; // Adjust this value for faster zoom (default is 0.01)
 
-		const light = new BABYLON.HemisphericLight("light1", new BABYLON.Vector3(0.0, 1000.0, 1000.0), scene);
-        light.intensity = 0.60;
+		const light = new BABYLON.HemisphericLight("light1", new BABYLON.Vector3(0.0, 1.0, 1.0), scene);
+        light.intensity = 0.75;
 
         const size = 256; // Size of the terrain
         const scaleFactor = 8; // Scale factor for X and Z axes
@@ -75,13 +75,13 @@
 				map.dispose();
 			}
 
-			const mapSubX = size; // Points along the X axis (256)
-			const mapSubZ = size; // Points along the Z axis (256)
+			const mapSubX = size; // Points along the X axis (e.g., 256)
+			const mapSubZ = size; // Points along the Z axis (e.g., 256)
 
 			const vertices = [];
 			const indices = [];
 
-			// Create vertices and indices for the mesh
+			// Create vertices for the mesh
 			for (let l = 0; l < mapSubZ; l++) {
 				for (let w = 0; w < mapSubX; w++) {
 					const x = (w - mapSubX * 0.5) * 8; // Each vertex is 8m apart
@@ -93,7 +93,7 @@
 				}
 			}
 
-			// Create triangles by defining indices
+			// Create triangles by defining indices (Clockwise winding order)
 			for (let l = 0; l < mapSubZ - 1; l++) {
 				for (let w = 0; w < mapSubX - 1; w++) {
 					const topLeft = l * mapSubX + w;
@@ -101,9 +101,9 @@
 					const bottomLeft = (l + 1) * mapSubX + w;
 					const bottomRight = bottomLeft + 1;
 
-					// Inverted first triangle
+					// First triangle (clockwise winding order)
 					indices.push(bottomLeft, topLeft, topRight);
-					// Inverted second triangle
+					// Second triangle (clockwise winding order)
 					indices.push(bottomLeft, topRight, bottomRight);
 				}
 			}
@@ -113,24 +113,34 @@
 			const vertexData = new BABYLON.VertexData();
 			vertexData.positions = vertices;
 			vertexData.indices = indices;
+
+			// Compute normals for smooth shading
+			vertexData.normals = [];
+			BABYLON.VertexData.ComputeNormals(vertexData.positions, vertexData.indices, vertexData.normals);
+
+			// Apply the vertex data to the mesh
 			vertexData.applyToMesh(terrainMesh);
 
-			// Create a flat shading material for the shaded view
+			// Create a material with smooth shading and double-sided rendering
 			flatMaterial = new BABYLON.StandardMaterial("flatMaterial", scene);
-			flatMaterial.wireframe = false; // Set to false for shaded view
+			flatMaterial.wireframe = false; // Set to false for smooth shaded view
 			flatMaterial.diffuseColor = new BABYLON.Color3(0.8, 0.8, 0.8); // Set color to something natural
-			flatMaterial.specularColor = new BABYLON.Color3(0, 0, 0); // No specular highlights for flat shading
+			flatMaterial.specularColor = new BABYLON.Color3(0.0, 0.0, 0.0); // Some specular highlights for smooth shading
 			flatMaterial.emissiveColor = new BABYLON.Color3(0, 0, 0); // No emissive color
 
-			// Set the material to the mesh initially
+			// Set the material to be double-sided
+			flatMaterial.sideOrientation = BABYLON.Mesh.DOUBLESIDE;
+
+			// Apply the material to the terrain mesh
 			terrainMesh.material = flatMaterial;
 
 			// Update the map variable to reference the newly created terrain mesh
 			map = terrainMesh;
 
-			console.log("Terrain created successfully.");
+			console.log("Terrain with smooth shading and double-sided rendering created successfully.");
 			generateGreyscaleImage(); // Generate the grayscale image
 		}
+
 
         // Function to load and parse the .ter file
         function loadTerFile(file) {
