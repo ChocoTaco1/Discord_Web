@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Terrain Viewer</title>
+    <title>Babylon.js Terrain Loader</title>
     <style>
         body { margin: 0; overflow: hidden; }
         #renderCanvas {
@@ -81,10 +81,10 @@
 			const vertices = [];
 			const indices = [];
 
-			// Create vertices for the mesh
+			// Create vertices for the mesh (flipping on X-axis)
 			for (let l = 0; l < mapSubZ; l++) {
 				for (let w = 0; w < mapSubX; w++) {
-					const x = (w - mapSubX * 0.5) * 8; // Each vertex is 8m apart
+					const x = -(w - mapSubX * 0.5) * 8; // Flip the X coordinate
 					const z = (l - mapSubZ * 0.5) * 8; // Each vertex is 8m apart
 					const y = mHeight[l * mapSubX + w]; // Use loaded height data
 
@@ -101,10 +101,9 @@
 					const bottomLeft = (l + 1) * mapSubX + w;
 					const bottomRight = bottomLeft + 1;
 
-					// First triangle (clockwise winding order)
-					indices.push(bottomLeft, topLeft, topRight);
-					// Second triangle (clockwise winding order)
-					indices.push(bottomLeft, topRight, bottomRight);
+					// Adjusted triangle definitions (clockwise winding order)
+					indices.push(bottomLeft, topRight, topLeft); // First triangle
+					indices.push(bottomLeft, bottomRight, topRight); // Second triangle
 				}
 			}
 
@@ -125,11 +124,8 @@
 			flatMaterial = new BABYLON.StandardMaterial("flatMaterial", scene);
 			flatMaterial.wireframe = false; // Set to false for smooth shaded view
 			flatMaterial.diffuseColor = new BABYLON.Color3(0.8, 0.8, 0.8); // Set color to something natural
-			flatMaterial.specularColor = new BABYLON.Color3(0.0, 0.0, 0.0); // Some specular highlights for smooth shading
+			flatMaterial.specularColor = new BABYLON.Color3(0.0, 0.0, 0.0); // No specular highlights for smooth shading
 			flatMaterial.emissiveColor = new BABYLON.Color3(0, 0, 0); // No emissive color
-
-			// Set the material to be double-sided
-			flatMaterial.sideOrientation = BABYLON.Mesh.DOUBLESIDE;
 
 			// Apply the material to the terrain mesh
 			terrainMesh.material = flatMaterial;
@@ -140,7 +136,6 @@
 			console.log("Terrain with smooth shading and double-sided rendering created successfully.");
 			generateGreyscaleImage(); // Generate the grayscale image
 		}
-
 
         // Function to load and parse the .ter file
         function loadTerFile(file) {
@@ -381,6 +376,7 @@
 
 			const vertices = map.getVerticesData(BABYLON.VertexBuffer.PositionKind);
 			const indices = map.getIndices();
+			const normals = map.getVerticesData(BABYLON.VertexBuffer.NormalKind); // Get the normals data
 
 			let objData = '';
 
@@ -392,10 +388,15 @@
 				objData += `v ${vertices[i]} ${vertices[i + 1]} ${vertices[i + 2]}\n`;
 			}
 
-			// Write faces (reverse winding order)
+			// Write normals
+			for (let i = 0; i < normals.length; i += 3) {
+				objData += `vn ${normals[i]} ${normals[i + 1]} ${normals[i + 2]}\n`;
+			}
+
+			// Write faces (reverse winding order and include normals)
 			for (let i = 0; i < indices.length; i += 3) {
-				// Reverse the order of vertices for each face
-				objData += `f ${indices[i + 2] + 1} ${indices[i + 1] + 1} ${indices[i] + 1}\n`;
+				// Reverse the order of vertices for each face and include normals
+				objData += `f ${indices[i + 2] + 1}//${indices[i + 2] + 1} ${indices[i + 1] + 1}//${indices[i + 1] + 1} ${indices[i] + 1}//${indices[i] + 1}\n`;
 			}
 
 			// Create a Blob from the OBJ data
