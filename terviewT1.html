@@ -1,0 +1,1063 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Babylon.js Terrain Loader</title>
+	<style>
+		body {
+			margin: 0;
+			overflow: hidden;
+		}
+
+		#renderCanvas {
+			width: 100vw;
+			/* Use full viewport width */
+			height: 100vh;
+			/* Use full viewport height */
+			touch-action: none;
+		}
+
+		#buttonContainer {
+			position: absolute;
+			top: 10px;
+			left: 10px;
+			z-index: 10;
+			display: flex;
+			flex-direction: column;
+			/* Stack buttons vertically */
+			gap: 10px;
+			/* Space between buttons */
+		}
+
+		#greyscaleCanvas {
+			display: block;
+			position: absolute;
+			bottom: 10px;
+			left: 10px;
+			z-index: 10;
+			border: 1px solid black;
+			width: 256px;
+			height: 256px;
+			object-fit: fill;
+			/* Stretch the image to fill the canvas */
+
+		}
+	</style>
+</head>
+
+<body>
+	
+	<div id="buttonContainer">
+		<label for="fileInput" style="color: white; cursor: pointer;">Oriented to match CC map, North being top</label>
+		<label for="fileInput" style="color: white; cursor: pointer;">Upload .dtb file found in the .ted of the map</label>
+		<input type="file" id="fileInput" accept=".dtb" style="color:white" />
+		<button id="toggleViewButton">Switch to Shaded View</button>
+		<label for="scaleSlider" style="color:white" ;>Image Export Scale (1-16): <span id="scaleValue" style="color:white">1</span></label>
+		<input type="range" id="scaleSlider" min="1" max="16" value="1" />
+		<button id="exportButton">Export 8 Bit PNG Greyscale</button>
+		<button id="exportPGMButton">Export 16 Bit PGM</button>
+		<span style="font-weight: normal; margin-bottom: 5px; display: block; color: white;">Note text export order matches terrain file</span>
+		<button id="exportTextButton">Export Raw Height Data Text File</button>
+		<span style="font-weight: normal; margin-bottom: 5px; display: block; color: white;">3D Export</span>
+		<button id="exportObjButton">Export Terrain as OBJ</button>
+		<button id="exportStlButton">Export Terrain as STL</button>
+		<div id="minMaxHeightDisplay" style="margin-bottom: 10px; color: white;"></div>
+	</div>
+	<canvas id="renderCanvas"></canvas>
+	<canvas id="greyscaleCanvas" width="256" height="256"></canvas> <!-- Canvas for grayscale image -->
+
+	<script src="https://cdn.babylonjs.com/babylon.js"></script>
+	<script>
+		//https://github.com/jamesu/TribesViewer 
+		const canvas = document.getElementById('renderCanvas');
+		const engine = new BABYLON.Engine(canvas, true);
+		const scene = new BABYLON.Scene(engine);
+
+		// Camera and lighting setup
+		const camera = new BABYLON.ArcRotateCamera("camera1", Math.PI / 2, Math.PI / 3, 2048, BABYLON.Vector3.Zero(), scene);
+		camera.attachControl(canvas, true);
+		camera.wheelDeltaPercentage = 0.005; // Adjust this value for faster zoom (default is 0.01)
+
+		const light = new BABYLON.HemisphericLight("light1", new BABYLON.Vector3(0.0, 1.0, 1.0), scene);
+		light.intensity = 0.75;
+
+		var size = 257; // Size of the terrain
+		const scaleFactor = 8; // Scale factor for X and Z axes
+		var mHeight = [];
+		var mHeightDefault = [];
+		var offsetPos = 0;
+		var map; // Reference to the terrain mesh
+
+		// Function to create terrain mesh using height data
+		function createTerrain() {
+			// Dispose of the previous terrain mesh if it exists
+			if (map) {
+				map.dispose();
+			}
+
+			const mapSubX = size - 1; // Points along the X axis, trimmed to 256
+			const mapSubZ = size - 1; // Points along the Z axis, trimmed to 256
+
+			const vertices = [];
+			const indices = [];
+
+			// Create vertices for the mesh (flipping on X-axis)
+			for (let l = 0; l < mapSubZ; l++) {
+				for (let w = 0; w < mapSubX; w++) {
+					const x = -(w - mapSubX * 0.5) * 8; // Flip the X coordinate
+					const z = (l - mapSubZ * 0.5) * 8; // Each vertex is 8m apart
+					const y = mHeight[l * (mapSubX + 1) + w]; // Use loaded height data, skipping last row and column
+
+					// Store the vertex position
+					vertices.push(x, y, z);
+				}
+			}
+
+			// Create triangles by defining indices (Clockwise winding order)
+			for (let l = 0; l < mapSubZ - 1; l++) {
+				for (let w = 0; w < mapSubX - 1; w++) {
+					const topLeft = l * mapSubX + w;
+					const topRight = topLeft + 1;
+					const bottomLeft = (l + 1) * mapSubX + w;
+					const bottomRight = bottomLeft + 1;
+
+					// Adjusted triangle definitions (clockwise winding order)
+					indices.push(bottomLeft, topRight, topLeft); // First triangle
+					indices.push(bottomLeft, bottomRight, topRight); // Second triangle
+				}
+			}
+
+			// Create the mesh using the vertices and indices
+			const terrainMesh = new BABYLON.Mesh("terrain", scene);
+			const vertexData = new BABYLON.VertexData();
+			vertexData.positions = vertices;
+			vertexData.indices = indices;
+
+			// Compute normals for smooth shading
+			vertexData.normals = [];
+			BABYLON.VertexData.ComputeNormals(vertexData.positions, vertexData.indices, vertexData.normals);
+
+			// Apply the vertex data to the mesh
+			vertexData.applyToMesh(terrainMesh);
+
+			// Create a material with smooth shading and double-sided rendering
+			flatMaterial = new BABYLON.StandardMaterial("flatMaterial", scene);
+			flatMaterial.wireframe = false;
+			flatMaterial.diffuseColor = new BABYLON.Color3(0.8, 0.8, 0.8);
+			flatMaterial.specularColor = new BABYLON.Color3(0.0, 0.0, 0.0);
+			flatMaterial.emissiveColor = new BABYLON.Color3(0, 0, 0);
+
+			// Apply the material to the terrain mesh
+			terrainMesh.material = flatMaterial;
+
+			// Update the map variable to reference the newly created terrain mesh
+			map = terrainMesh;
+
+			console.log("Terrain with smooth shading and double-sided rendering created successfully.");
+			generateGreyscaleImage(); // Generate the grayscale image
+		}
+
+		// Function to load and parse the .ter file
+		function loadTerFile(file) {
+			const reader = new FileReader();
+			reader.onload = function (e) {
+				const buffer = e.target.result;
+				const dataView = new DataView(buffer);
+
+				offsetPos = 0;
+				const tident = dataView.getUint32(offsetPos, true); offsetPos += 4;
+				const tsize = dataView.getUint32(offsetPos, true); offsetPos += 4;
+				const version = dataView.getUint32(offsetPos, true); offsetPos += 4;
+				console.log(`Terrain Version: ${version}`);
+				if (version > 5) {
+					return 0;
+				}
+				offsetPos += 16; // Skip over the 16-byte identifier
+
+				const mDetailCount = dataView.getInt32(offsetPos, true); offsetPos += 4;
+				const mLightScale = dataView.getInt32(offsetPos, true); offsetPos += 4;
+
+				const min = dataView.getFloat32(offsetPos, true); offsetPos += 4;
+				const max = dataView.getFloat32(offsetPos, true); offsetPos += 4;
+
+				const minMaxHeightDisplay = document.getElementById('minMaxHeightDisplay');
+				minMaxHeightDisplay.textContent = `Min Height: ${min.toFixed(2)}, Max Height: ${max.toFixed(2)}`;
+
+				const xSize = dataView.getInt32(offsetPos, true); offsetPos += 4;
+				const ySize = dataView.getInt32(offsetPos, true); offsetPos += 4;
+				size = xSize + 1;
+				const hmSize = (xSize + 1) * (ySize + 1);
+				const heightMap = new Array(hmSize);
+				if (version === 0) {
+					for (let i = 0; i < hmSize; i++) {
+						heightMap[i] = dataView.getFloat32(offsetPos, true); offsetPos += 4;
+					}
+				} else if (version < 4) {
+					const rowSize = xSize + 1;
+					for (let row = 0; row < ySize; row++) {
+						const scale = dataView.getFloat32(offsetPos, true); offsetPos += 4;
+						const baseHeight = dataView.getFloat32(offsetPos, true); offsetPos += 4;
+						heightMap[row * rowSize] = baseHeight;
+						for (let col = 1; col < xSize; col++) {
+							const colOffset = dataView.getUint8(offsetPos); offsetPos += 1; // Use a unique name
+							heightMap[row * rowSize + col] = heightMap[row * rowSize + col - 1] + colOffset * scale;
+						}
+					}
+				} else {
+					// Read compressed height map
+					mHeightDefault = readCompressedBlock(dataView, offsetPos, hmSize * 4);
+
+					// Flip the heightmap vertically
+					mHeight = [];
+					for (let row = size - 1; row >= 0; row--) {
+						for (let col = 0; col < size; col++) {
+							mHeight.push(mHeightDefault[row * size + col]);
+						}
+					}
+				}
+				createTerrain();
+			};
+
+			reader.readAsArrayBuffer(file);
+		}
+
+		function readBytes(dataView, offset, length) {
+			const bytes = [];
+
+			// Check if the requested range goes out of bounds
+			if (offset < 0 || offset >= dataView.byteLength) {
+				throw new RangeError("Offset is out of bounds");
+			}
+
+			// Adjust length if necessary to stay within bounds
+			const maxLength = dataView.byteLength - offset;
+			const safeLength = Math.min(length, maxLength);
+
+			for (let i = 0; i < safeLength; i++) {
+				bytes.push(dataView.getUint8(offset + i));
+			}
+
+			return bytes;
+		}
+
+		function readCompressedBlock(dataView, offsetPos) {
+
+			const dataSize = dataView.getInt32(offsetPos, true); offsetPos += 4;
+
+			const lzStream = new LZH(dataView, offsetPos);
+			let s = lzStream.read(dataSize);
+			let buffer = new Uint8Array(lzStream.pdata);
+			var FB = new Float32Array(buffer.buffer);
+			offsetPos = lzStream.dHuff.curPos;
+			if (s) {
+				console.log("decompression done " + lzStream.pdata.length);
+			}
+			else {
+				console.log("decompression error " + lzStream.pdata.length);
+			}
+			lzStream.detach();
+			return FB;
+		}
+
+		// Starsiege Tribes LZH 
+
+		const LZH_BUFF_SIZE = 4096;
+		const LZH_LOOKAHEAD = 60;
+		const LZH_THRESHOLD = 2;
+		const LZH_NIL = LZH_BUFF_SIZE;
+		const LZH_NCHAR = (256 - LZH_THRESHOLD + LZH_LOOKAHEAD);
+		const LZH_TABLE_SIZE = (LZH_NCHAR * 2 - 1);
+		const LZH_ROOT = (LZH_TABLE_SIZE - 1);
+		const LZH_MAX_FREQ = 0x8000;
+
+		const p_len = [
+			0x03, 0x04, 0x04, 0x04, 0x05, 0x05, 0x05, 0x05,
+			0x05, 0x05, 0x05, 0x05, 0x06, 0x06, 0x06, 0x06,
+			0x06, 0x06, 0x06, 0x06, 0x06, 0x06, 0x06, 0x06,
+			0x07, 0x07, 0x07, 0x07, 0x07, 0x07, 0x07, 0x07,
+			0x07, 0x07, 0x07, 0x07, 0x07, 0x07, 0x07, 0x07,
+			0x07, 0x07, 0x07, 0x07, 0x07, 0x07, 0x07, 0x07,
+			0x08, 0x08, 0x08, 0x08, 0x08, 0x08, 0x08, 0x08,
+			0x08, 0x08, 0x08, 0x08, 0x08, 0x08, 0x08, 0x08
+		];
+
+		const p_code = [
+			0x00, 0x20, 0x30, 0x40, 0x50, 0x58, 0x60, 0x68,
+			0x70, 0x78, 0x80, 0x88, 0x90, 0x94, 0x98, 0x9C,
+			0xA0, 0xA4, 0xA8, 0xAC, 0xB0, 0xB4, 0xB8, 0xBC,
+			0xC0, 0xC2, 0xC4, 0xC6, 0xC8, 0xCA, 0xCC, 0xCE,
+			0xD0, 0xD2, 0xD4, 0xD6, 0xD8, 0xDA, 0xDC, 0xDE,
+			0xE0, 0xE2, 0xE4, 0xE6, 0xE8, 0xEA, 0xEC, 0xEE,
+			0xF0, 0xF1, 0xF2, 0xF3, 0xF4, 0xF5, 0xF6, 0xF7,
+			0xF8, 0xF9, 0xFA, 0xFB, 0xFC, 0xFD, 0xFE, 0xFF
+		];
+
+		const d_code = [
+			0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
+			0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
+			0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
+			0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
+			0x01, 0x01, 0x01, 0x01, 0x01, 0x01, 0x01, 0x01,
+			0x01, 0x01, 0x01, 0x01, 0x01, 0x01, 0x01, 0x01,
+			0x02, 0x02, 0x02, 0x02, 0x02, 0x02, 0x02, 0x02,
+			0x02, 0x02, 0x02, 0x02, 0x02, 0x02, 0x02, 0x02,
+			0x03, 0x03, 0x03, 0x03, 0x03, 0x03, 0x03, 0x03,
+			0x03, 0x03, 0x03, 0x03, 0x03, 0x03, 0x03, 0x03,
+			0x04, 0x04, 0x04, 0x04, 0x04, 0x04, 0x04, 0x04,
+			0x05, 0x05, 0x05, 0x05, 0x05, 0x05, 0x05, 0x05,
+			0x06, 0x06, 0x06, 0x06, 0x06, 0x06, 0x06, 0x06,
+			0x07, 0x07, 0x07, 0x07, 0x07, 0x07, 0x07, 0x07,
+			0x08, 0x08, 0x08, 0x08, 0x08, 0x08, 0x08, 0x08,
+			0x09, 0x09, 0x09, 0x09, 0x09, 0x09, 0x09, 0x09,
+			0x0A, 0x0A, 0x0A, 0x0A, 0x0A, 0x0A, 0x0A, 0x0A,
+			0x0B, 0x0B, 0x0B, 0x0B, 0x0B, 0x0B, 0x0B, 0x0B,
+			0x0C, 0x0C, 0x0C, 0x0C, 0x0D, 0x0D, 0x0D, 0x0D,
+			0x0E, 0x0E, 0x0E, 0x0E, 0x0F, 0x0F, 0x0F, 0x0F,
+			0x10, 0x10, 0x10, 0x10, 0x11, 0x11, 0x11, 0x11,
+			0x12, 0x12, 0x12, 0x12, 0x13, 0x13, 0x13, 0x13,
+			0x14, 0x14, 0x14, 0x14, 0x15, 0x15, 0x15, 0x15,
+			0x16, 0x16, 0x16, 0x16, 0x17, 0x17, 0x17, 0x17,
+			0x18, 0x18, 0x19, 0x19, 0x1A, 0x1A, 0x1B, 0x1B,
+			0x1C, 0x1C, 0x1D, 0x1D, 0x1E, 0x1E, 0x1F, 0x1F,
+			0x20, 0x20, 0x21, 0x21, 0x22, 0x22, 0x23, 0x23,
+			0x24, 0x24, 0x25, 0x25, 0x26, 0x26, 0x27, 0x27,
+			0x28, 0x28, 0x29, 0x29, 0x2A, 0x2A, 0x2B, 0x2B,
+			0x2C, 0x2C, 0x2D, 0x2D, 0x2E, 0x2E, 0x2F, 0x2F,
+			0x30, 0x31, 0x32, 0x33, 0x34, 0x35, 0x36, 0x37,
+			0x38, 0x39, 0x3A, 0x3B, 0x3C, 0x3D, 0x3E, 0x3F
+		];
+
+		const d_len = [
+			0x03, 0x03, 0x03, 0x03, 0x03, 0x03, 0x03, 0x03,
+			0x03, 0x03, 0x03, 0x03, 0x03, 0x03, 0x03, 0x03,
+			0x03, 0x03, 0x03, 0x03, 0x03, 0x03, 0x03, 0x03,
+			0x03, 0x03, 0x03, 0x03, 0x03, 0x03, 0x03, 0x03,
+			0x04, 0x04, 0x04, 0x04, 0x04, 0x04, 0x04, 0x04,
+			0x04, 0x04, 0x04, 0x04, 0x04, 0x04, 0x04, 0x04,
+			0x04, 0x04, 0x04, 0x04, 0x04, 0x04, 0x04, 0x04,
+			0x04, 0x04, 0x04, 0x04, 0x04, 0x04, 0x04, 0x04,
+			0x04, 0x04, 0x04, 0x04, 0x04, 0x04, 0x04, 0x04,
+			0x04, 0x04, 0x04, 0x04, 0x04, 0x04, 0x04, 0x04,
+			0x05, 0x05, 0x05, 0x05, 0x05, 0x05, 0x05, 0x05,
+			0x05, 0x05, 0x05, 0x05, 0x05, 0x05, 0x05, 0x05,
+			0x05, 0x05, 0x05, 0x05, 0x05, 0x05, 0x05, 0x05,
+			0x05, 0x05, 0x05, 0x05, 0x05, 0x05, 0x05, 0x05,
+			0x05, 0x05, 0x05, 0x05, 0x05, 0x05, 0x05, 0x05,
+			0x05, 0x05, 0x05, 0x05, 0x05, 0x05, 0x05, 0x05,
+			0x05, 0x05, 0x05, 0x05, 0x05, 0x05, 0x05, 0x05,
+			0x05, 0x05, 0x05, 0x05, 0x05, 0x05, 0x05, 0x05,
+			0x06, 0x06, 0x06, 0x06, 0x06, 0x06, 0x06, 0x06,
+			0x06, 0x06, 0x06, 0x06, 0x06, 0x06, 0x06, 0x06,
+			0x06, 0x06, 0x06, 0x06, 0x06, 0x06, 0x06, 0x06,
+			0x06, 0x06, 0x06, 0x06, 0x06, 0x06, 0x06, 0x06,
+			0x06, 0x06, 0x06, 0x06, 0x06, 0x06, 0x06, 0x06,
+			0x06, 0x06, 0x06, 0x06, 0x06, 0x06, 0x06, 0x06,
+			0x07, 0x07, 0x07, 0x07, 0x07, 0x07, 0x07, 0x07,
+			0x07, 0x07, 0x07, 0x07, 0x07, 0x07, 0x07, 0x07,
+			0x07, 0x07, 0x07, 0x07, 0x07, 0x07, 0x07, 0x07,
+			0x07, 0x07, 0x07, 0x07, 0x07, 0x07, 0x07, 0x07,
+			0x07, 0x07, 0x07, 0x07, 0x07, 0x07, 0x07, 0x07,
+			0x07, 0x07, 0x07, 0x07, 0x07, 0x07, 0x07, 0x07,
+			0x08, 0x08, 0x08, 0x08, 0x08, 0x08, 0x08, 0x08,
+			0x08, 0x08, 0x08, 0x08, 0x08, 0x08, 0x08, 0x08,
+		];
+		class LZH {
+			constructor(dataView, offsetPos) {
+				this.dStream = null;
+				this.dHuff = new LZHuffman();
+				this.textBuf = new Uint8Array(LZH_BUFF_SIZE + LZH_LOOKAHEAD - 1);
+				this.attach(dataView, offsetPos);
+				this.pdata = [];
+			}
+
+			attach(stream, offsetPos) {
+				this.detach();
+				this.dStream = stream;
+				this.dHuff.attach(stream, offsetPos);
+
+				// Initialize buffer
+				for (let i = 0; i < LZH_BUFF_SIZE - LZH_LOOKAHEAD; i++) {
+					this.textBuf[i] = 32;
+				}
+
+				this.DR = LZH_BUFF_SIZE - LZH_LOOKAHEAD;
+				this.DK = 0;
+				this.DJ = 0;
+			}
+
+			detach() {
+				this.dStream = null;
+			}
+
+			close() {
+				this.detach();
+			}
+			getStatus() {
+				if (offsetPos < this.dStream.byteLength && this.dStream.byteLength > 0) {
+					return 1;
+				}
+				return 0;
+			}
+
+			read(length) {
+				if (!this.getStatus()) return false;  // Check if stream is valid
+				if (length === 0) return true;        // Handle zero length case
+
+				while (true) {
+					// Copy string from the buffer
+					while (this.DK < this.DJ) {
+						let c = this.textBuf[(this.DI + this.DK) & (LZH_BUFF_SIZE - 1)];
+						this.pdata.push(c);  // Store the byte in the pdata array
+
+						this.textBuf[this.DR++] = c;
+						this.DR &= (LZH_BUFF_SIZE - 1);  // Circular buffer wrapping
+
+						this.DK++;  // Increment the index
+
+						this.curPos++;  // Update current position
+						if (this.pdata.length === length) return true;
+					}
+
+					// Copy individual chars
+					let c;
+					while ((c = this.dHuff.decodeChar()) < 256) {
+						this.pdata.push(c)  // Store the decoded character in pdata
+
+						this.textBuf[this.DR++] = c;
+						this.DR &= (LZH_BUFF_SIZE - 1);  // Circular buffer wrapping
+
+						this.curPos++;  // Update current position
+						if (this.pdata.length === length) return true;  // Check if we have reached the desired length
+					}
+
+					// Initialize the string copy
+					this.DI = (this.DR - this.dHuff.decodePosition() - 1) & (LZH_BUFF_SIZE - 1);
+					this.DJ = c - 255 + LZH_THRESHOLD;
+					this.DK = 0;  // Reset DK for the next loop
+				}
+			}
+		}
+
+		class LZHuffman {
+			constructor() {
+				this.freq = new Uint16Array(LZH_TABLE_SIZE + 1);
+				this.prnt = new Int16Array(LZH_TABLE_SIZE + LZH_NCHAR);
+				this.son = new Int16Array(LZH_TABLE_SIZE);
+				this.curPos = 0;
+				if (!this.freq || !this.prnt || !this.son) {
+					throw new Error("LZHuffman: Could not allocate buffers");
+				}
+			}
+
+			attach(stream, offsetPos) {
+				this.curPos = offsetPos;
+				this.d_stream = stream;
+				this.d_getbuf = this.d_getlen = 0;
+				this.d_putbuf = this.d_putlen = 0;
+
+				// Initialize the tree
+				for (let i = 0; i < LZH_NCHAR; i++) {
+					this.freq[i] = 1;
+					this.son[i] = i + LZH_TABLE_SIZE;
+					this.prnt[i + LZH_TABLE_SIZE] = i;
+				}
+
+				let i = 0, j = LZH_NCHAR;
+				while (j <= LZH_ROOT) {
+					this.freq[j] = this.freq[i] + this.freq[i + 1];
+					this.son[j] = i;
+					this.prnt[i] = this.prnt[i + 1] = j;
+					i += 2; j++;
+				}
+
+				this.freq[LZH_TABLE_SIZE] = 0xffff;
+				this.prnt[LZH_ROOT] = 0;
+			}
+
+			encodeChar(c) {
+				let i = 0;
+				let j = 0;
+				let k = this.prnt[c + LZH_TABLE_SIZE];
+
+				// Traverse from leaf to root
+				do {
+					i >>= 1;
+					if (k & 1) i += 0x8000;
+					j++;
+				} while ((k = this.prnt[k]) !== LZH_ROOT);
+
+				this.putCode(j, i);
+				this.update(c);
+			}
+
+			encodePosition(c) {
+				// Output upper 6 bits via lookup, then lower 6 bits verbatim
+				let i = c >> 6;
+				this.putCode(p_len[i], p_code[i] << 8);
+				this.putCode(6, (c & 0x3f) << 10);
+			}
+
+			decodeChar() {
+				let c = this.son[LZH_ROOT];
+
+				// Traverse from root to leaf
+				while (c < LZH_TABLE_SIZE) {
+					c += this.getBit();
+					c = this.son[c];
+				}
+
+				c -= LZH_TABLE_SIZE;
+				this.update(c);
+				return c;
+			}
+
+			decodePosition() {
+				let i = this.getByte();
+				let c = d_code[i] << 6;
+				let j = d_len[i] - 2;
+
+				// Read lower 6 bits
+				while (j--) {
+					i = (i << 1) + this.getBit();
+				}
+
+				return c | (i & 0x3f);
+			}
+
+			getBit() {
+				while (this.d_getlen <= 8) {
+					let cc = this.d_stream.getUint8(this.curPos) || 0;
+					this.curPos++;
+					this.d_getbuf |= cc << (8 - this.d_getlen);
+					this.d_getlen += 8;
+				}
+
+				const bit = this.d_getbuf;
+				this.d_getbuf <<= 1;
+				this.d_getbuf &= 0xFFFF;
+				this.d_getlen--;
+
+				return (bit >> 15) & 0x1;
+			}
+
+			getByte() {
+				while (this.d_getlen <= 8) {
+					let cc = this.d_stream.getUint8(this.curPos) || 0;
+					this.curPos++;
+					this.d_getbuf |= cc << (8 - this.d_getlen);
+					this.d_getlen += 8;
+				}
+
+				const i = this.d_getbuf;
+				this.d_getbuf <<= 8;
+				this.d_getlen -= 8;
+
+				return i >> 8;
+			}
+
+			putCode(length, code) {
+				this.d_putbuf |= code >> this.d_putlen;
+
+				if ((this.d_putlen += length) >= 8) {
+					this.d_stream.push(this.d_putbuf >> 8);
+
+					if ((this.d_putlen -= 8) >= 8) {
+						this.d_stream.push(this.d_putbuf);
+						this.d_putlen -= 8;
+						this.d_putbuf = code << (length - this.d_putlen);
+					} else {
+						this.d_putbuf <<= 8;
+					}
+				}
+			}
+
+			reconst() {
+				let j = 0;
+
+				// Collect leaf nodes
+				for (let i = 0; i < LZH_TABLE_SIZE; i++) {
+					if (this.son[i] >= LZH_TABLE_SIZE) {
+						this.freq[j] = (this.freq[i] + 1) >> 1;
+						this.son[j] = this.son[i];
+						j++;
+					}
+				}
+
+				// Begin constructing tree
+				for (let i = 0, j = LZH_NCHAR; j < LZH_TABLE_SIZE; i += 2, j++) {
+					let k = i + 1;
+					const f = this.freq[j] = this.freq[i] + this.freq[k];
+					for (k = j - 1; f < this.freq[k]; k--);
+					k++;
+
+					// Move nodes and connect tree
+					const l = (j - k) << 1;
+					this.freq.copyWithin(k + 1, k, k + l);
+					this.freq[k] = f;
+					this.son.copyWithin(k + 1, k, k + l);
+					this.son[k] = i;
+				}
+
+				// Connect prnt
+				for (let i = 0; i < LZH_TABLE_SIZE; i++) {
+					const k = this.son[i];
+					if (k >= LZH_TABLE_SIZE) {
+						this.prnt[k] = i;
+					} else {
+						this.prnt[k] = this.prnt[k + 1] = i;
+					}
+				}
+			}
+
+			update(c) {
+				if (this.freq[LZH_ROOT] === LZH_MAX_FREQ) {
+					this.reconst();
+				}
+
+				c = this.prnt[c + LZH_TABLE_SIZE];
+
+				do {
+					const k = ++this.freq[c];
+
+					if (k > this.freq[c + 1]) {
+						let l = c + 1;
+						while (k > this.freq[++l]);
+						l--;
+
+						this.freq[c] = this.freq[l];
+						this.freq[l] = k;
+
+						const i = this.son[c];
+						this.prnt[i] = l;
+						if (i < LZH_TABLE_SIZE) this.prnt[i + 1] = l;
+
+						const j = this.son[l];
+						this.son[l] = i;
+						this.prnt[j] = c;
+						if (j < LZH_TABLE_SIZE) this.prnt[j + 1] = c;
+						this.son[c] = j;
+						c = l;
+					}
+				} while ((c = this.prnt[c]) !== 0);
+			}
+		}
+		// Function to generate a grayscale image from height data
+		function generateGreyscaleImage() {
+			const greyscaleCanvas = document.getElementById('greyscaleCanvas');
+			const context = greyscaleCanvas.getContext('2d');
+
+			// Set the target size for the image
+			const targetSize = 256;
+			const imageData = context.createImageData(targetSize, targetSize);
+
+			// Calculate min and max heights for normalization
+			const minHeight = Math.min(...mHeight);
+			const maxHeight = Math.max(...mHeight);
+
+			// Resample using bilinear interpolation
+			for (let y = 0; y < targetSize; y++) {
+				for (let x = 0; x < targetSize; x++) {
+					// Map target coordinates (x, y) to source coordinates
+					let sourceX = (x / targetSize) * size;  // Map x to original size
+					let sourceY = (y / targetSize) * size;  // Map y to original size
+
+					// Get the four nearest neighbors (top-left, top-right, bottom-left, bottom-right)
+					let x1 = Math.floor(sourceX);
+					let y1 = Math.floor(sourceY);
+					let x2 = Math.min(x1 + 1, size - 1);  // Ensure within bounds
+					let y2 = Math.min(y1 + 1, size - 1);  // Ensure within bounds
+
+					// Get the height values at the four corners
+					let v1 = mHeight[y1 * size + x1]; // top-left
+					let v2 = mHeight[y1 * size + x2]; // top-right
+					let v3 = mHeight[y2 * size + x1]; // bottom-left
+					let v4 = mHeight[y2 * size + x2]; // bottom-right
+
+					// Perform bilinear interpolation to get the new height value
+					let interpolatedHeight = bilinearInter(x1, y1, x2, y2, sourceX, sourceY, v1, v2, v3, v4);
+
+					// Normalize the interpolated height value
+					const normalizedHeight = (interpolatedHeight - minHeight) / (maxHeight - minHeight);
+					const grayValue = Math.floor(normalizedHeight * 255);
+
+					// Set pixel data in the imageData object (no vertical flip)
+					const index = y * targetSize + x;
+					imageData.data[index * 4] = grayValue;   // Red
+					imageData.data[index * 4 + 1] = grayValue; // Green
+					imageData.data[index * 4 + 2] = grayValue; // Blue
+					imageData.data[index * 4 + 3] = 255;     // Alpha
+				}
+			}
+
+			// Draw the image data to the canvas
+			context.putImageData(imageData, 0, 0);
+			greyscaleCanvas.style.display = 'block'; // Show the grayscale canvas
+		}
+
+
+
+		// Bilinear interpolation function
+		function bilinearInter(x1, y1, x2, y2, x, y, v1, v2, v3, v4) {
+			let w11 = (((x2 - x) * (y2 - y)) / ((x2 - x1) * (y2 - y1))) * v1; // x1 y1 
+			let w21 = (((x - x1) * (y2 - y)) / ((x2 - x1) * (y2 - y1))) * v2; // x2 y1
+			let w12 = (((x2 - x) * (y - y1)) / ((x2 - x1) * (y2 - y1))) * v3; // x1 y2
+			let w22 = (((x - x1) * (y - y1)) / ((x2 - x1) * (y2 - y1))) * v4; // x2 y2
+			return w11 + w21 + w12 + w22;
+		}
+
+		// Function to resize and export the grayscale image
+		function exportScaledImage(scale) {
+			const greyscaleCanvas = document.getElementById('greyscaleCanvas');
+			const resizeTo = size * scale;
+			const img1 = new ImageData(resizeTo, resizeTo);
+			const max = Math.max(...mHeight);
+			const min = Math.min(...mHeight);
+
+			for (let y = 0; y < resizeTo; y++) {
+				for (let x = 0; x < resizeTo; x++) {
+					const nx = Math.floor(x / scale);
+					const ny = Math.floor(y / scale);
+					const nxedge = (nx !== 255) ? 1 : -255;
+					const nyedge = (ny !== 255) ? 1 : -255;
+
+					const v1 = mHeight[nx + (ny * size)];
+					const v2 = mHeight[(nx + nxedge) + (ny * size)];
+					const v3 = mHeight[nx + ((ny + nyedge) * size)];
+					const v4 = mHeight[(nx + nxedge) + ((ny + nyedge) * size)];
+
+					const linval = bilinearInter(
+						Math.floor(x / scale) * scale,
+						Math.floor(y / scale) * scale,
+						(Math.floor(x / scale) + 1) * scale,
+						(Math.floor(y / scale) + 1) * scale,
+						x,
+						y,
+						v1,
+						v2,
+						v3,
+						v4
+					);
+
+					const dif = max - min;
+					const colRange = 255 / dif;
+					const color = Math.floor((linval - min) * colRange);
+
+					// No flipping, use the original y-coordinate
+					const originalY = y;
+
+					// Set pixel data at the original y-coordinate
+					img1.data[(x + originalY * resizeTo) * 4] = color;       // Red
+					img1.data[(x + originalY * resizeTo) * 4 + 1] = color;   // Green
+					img1.data[(x + originalY * resizeTo) * 4 + 2] = color;   // Blue
+					img1.data[(x + originalY * resizeTo) * 4 + 3] = 255;     // Alpha
+				}
+			}
+
+			// Create a new canvas for the scaled image
+			const scaledCanvas = document.createElement('canvas');
+			scaledCanvas.width = resizeTo;
+			scaledCanvas.height = resizeTo;
+			const scaledContext = scaledCanvas.getContext('2d');
+			scaledContext.putImageData(img1, 0, 0);
+
+			// Create a link to download the image
+			const link = document.createElement('a');
+			link.download = 'heightmap.png';
+			link.href = scaledCanvas.toDataURL('image/png');
+			link.click();
+		}
+
+
+		// Function to export height data as a P2 (ASCII) PGM file with scaling
+		function exportPGM() {
+			const scale = parseInt(document.getElementById('scaleSlider').value, 10);
+			const resizeTo = size * scale; // New dimensions based on scale
+			const maxHeight = Math.max(...mHeight);
+			const minHeight = Math.min(...mHeight);
+			const pgmHeader = `P2\n${resizeTo} ${resizeTo}\n65535\n`;
+
+			let pgmData = '';
+
+			for (let y = 0; y < resizeTo; y++) { // Start from the first row (no flip)
+				for (let x = 0; x < resizeTo; x++) {
+					const nx = Math.floor(x / scale);
+					const ny = Math.floor(y / scale);
+
+					// Ensure nx and ny are within bounds
+					const nxEdge = (nx < size - 1) ? 1 : 0;
+					const nyEdge = (ny < size - 1) ? 1 : 0;
+
+					const v1 = mHeight[nx + (ny * size)];
+					const v2 = mHeight[(nx + nxEdge) + (ny * size)];
+					const v3 = mHeight[nx + ((ny + nyEdge) * size)];
+					const v4 = mHeight[(nx + nxEdge) + ((ny + nyEdge) * size)];
+
+					// Bilinear interpolation
+					const interpolatedValue = bilinearInter(
+						Math.floor(x / scale) * scale,
+						Math.floor(y / scale) * scale,
+						(Math.floor(x / scale) + 1) * scale,
+						(Math.floor(y / scale) + 1) * scale,
+						x,
+						y,
+						v1,
+						v2,
+						v3,
+						v4
+					);
+
+					// Normalize height to the range 0-65535
+					const normalizedHeight = Math.floor(((interpolatedValue - minHeight) / (maxHeight - minHeight)) * 65535);
+					pgmData += `${normalizedHeight}\n`;
+				}
+			}
+
+			// Create a Blob from the PGM data
+			const blob = new Blob([pgmHeader + pgmData], { type: 'image/x-portable-graymap' });
+			const url = URL.createObjectURL(blob);
+
+			// Create a link to download the PGM file
+			const link = document.createElement('a');
+			link.download = 'heightmap.pgm';
+			link.href = url;
+			link.click();
+		}
+
+
+
+		// Function to export height data as a tab-separated text file with scaling
+		function exportText() {
+			const scale = parseInt(document.getElementById('scaleSlider').value, 10);
+			const resizeTo = size * scale; // New dimensions based on scale
+			let textData = '';
+
+			for (let y = 0; y < resizeTo; y++) { // Start from the first row (no flip)
+				var row = [];
+				for (let x = 0; x < resizeTo; x++) {
+					const nx = Math.floor(x / scale);
+					const ny = Math.floor(y / scale);
+
+					// Ensure nx and ny are within bounds
+					const nxEdge = (nx < size - 1) ? 1 : 0;
+					const nyEdge = (ny < size - 1) ? 1 : 0;
+
+					const v1 = mHeight[nx + (ny * size)];
+					const v2 = mHeight[(nx + nxEdge) + (ny * size)];
+					const v3 = mHeight[nx + ((ny + nyEdge) * size)];
+					const v4 = mHeight[(nx + nxEdge) + ((ny + nyEdge) * size)];
+
+					// Bilinear interpolation
+					const interpolatedValue = bilinearInter(
+						Math.floor(x / scale) * scale,
+						Math.floor(y / scale) * scale,
+						(Math.floor(x / scale) + 1) * scale,
+						(Math.floor(y / scale) + 1) * scale,
+						x,
+						y,
+						v1,
+						v2,
+						v3,
+						v4
+					);
+
+					// Add interpolated value to the row array
+					row.push(interpolatedValue);
+				}
+
+				textData += row.join('\t') + '\n'; // Join row with tabs and add a newline
+			}
+
+			// Create a Blob from the text data
+			const blob = new Blob([textData], { type: 'text/plain' });
+			const url = URL.createObjectURL(blob);
+
+			// Create a link to download the text file
+			const link = document.createElement('a');
+			link.download = 'heightdata.txt';
+			link.href = url;
+			link.click();
+		}
+
+		// Function to export the terrain mesh as an OBJ file
+		function exportObj() {
+			if (!map) {
+				console.error("No terrain mesh found.");
+				return;
+			}
+
+			const vertices = map.getVerticesData(BABYLON.VertexBuffer.PositionKind);
+			const indices = map.getIndices();
+			const normals = map.getVerticesData(BABYLON.VertexBuffer.NormalKind); // Get the normals data
+
+			let objData = '';
+
+			// Add OBJ file header
+			objData += '# Exported terrain mesh\n';
+
+			// Write vertices
+			for (let i = 0; i < vertices.length; i += 3) {
+				objData += `v ${vertices[i]} ${vertices[i + 1]} ${vertices[i + 2]}\n`;
+			}
+
+			// Write normals
+			for (let i = 0; i < normals.length; i += 3) {
+				objData += `vn ${normals[i]} ${normals[i + 1]} ${normals[i + 2]}\n`;
+			}
+
+			// Write faces (reverse winding order and include normals)
+			for (let i = 0; i < indices.length; i += 3) {
+				// Reverse the order of vertices for each face and include normals
+				objData += `f ${indices[i + 2] + 1}//${indices[i + 2] + 1} ${indices[i + 1] + 1}//${indices[i + 1] + 1} ${indices[i] + 1}//${indices[i] + 1}\n`;
+			}
+
+			// Create a Blob from the OBJ data
+			const blob = new Blob([objData], { type: 'text/plain' });
+			const url = URL.createObjectURL(blob);
+
+			// Create a link to download the OBJ file
+			const link = document.createElement('a');
+			link.download = 'terrain.obj';
+			link.href = url;
+			link.click();
+		}
+
+
+		// Function to export the terrain mesh as an STL file
+		function exportStl() {
+			if (!map) {
+				console.error("No terrain mesh found.");
+				return;
+			}
+
+			const vertices = map.getVerticesData(BABYLON.VertexBuffer.PositionKind);
+			const indices = map.getIndices();
+			let stlData = 'solid terrain\n';
+
+			// Create facets from the triangles
+			for (let i = 0; i < indices.length; i += 3) {
+				const v1 = new BABYLON.Vector3(vertices[indices[i] * 3], vertices[indices[i] * 3 + 1], vertices[indices[i] * 3 + 2]);
+				const v2 = new BABYLON.Vector3(vertices[indices[i + 1] * 3], vertices[indices[i + 1] * 3 + 1], vertices[indices[i + 1] * 3 + 2]);
+				const v3 = new BABYLON.Vector3(vertices[indices[i + 2] * 3], vertices[indices[i + 2] * 3 + 1], vertices[indices[i + 2] * 3 + 2]);
+
+				// Normal vector for the facet
+				const normal = BABYLON.Vector3.Cross(v2.subtract(v1), v3.subtract(v1)).normalize();
+
+				stlData += `facet normal ${normal.x} ${normal.y} ${normal.z}\n`;
+				stlData += 'outer loop\n';
+
+				// Reverse the vertex order for STL
+				stlData += `vertex ${v1.x} ${v1.y} ${v1.z}\n`;
+				stlData += `vertex ${v3.x} ${v3.y} ${v3.z}\n`; // Change the order here
+				stlData += `vertex ${v2.x} ${v2.y} ${v2.z}\n`; // Change the order here
+
+				stlData += 'endloop\n';
+				stlData += 'endfacet\n';
+			}
+
+			stlData += 'endsolid terrain\n';
+
+			// Create a Blob from the STL data
+			const blob = new Blob([stlData], { type: 'text/plain' });
+			const url = URL.createObjectURL(blob);
+
+			// Create a link to download the STL file
+			const link = document.createElement('a');
+			link.download = 'terrain.stl';
+			link.href = url;
+			link.click();
+		}
+
+		// Button to export terrain mesh as STL
+		document.getElementById('exportStlButton').addEventListener('click', exportStl);
+		// Button to export terrain mesh as OBJ
+		document.getElementById('exportObjButton').addEventListener('click', exportObj);
+
+		// Button to export height data as text
+		document.getElementById('exportTextButton').addEventListener('click', exportText);
+
+		// Button to export the PGM image
+		document.getElementById('exportPGMButton').addEventListener('click', exportPGM);
+		// Button to export the grayscale image as PNG
+		document.getElementById('exportButton').addEventListener('click', function () {
+			const scale = parseInt(document.getElementById('scaleSlider').value, 10);
+			exportScaledImage(scale);
+		});
+
+		// Update the scale value display when slider changes
+		document.getElementById('scaleSlider').addEventListener('input', function () {
+			const scaleValue = document.getElementById('scaleValue');
+			scaleValue.textContent = this.value;
+		});
+
+		// Listen for file input change to load the .ter file
+		document.getElementById('fileInput').addEventListener('change', function (event) {
+			const file = event.target.files[0];
+			if (file) {
+				console.log(`Loading file: ${file.name}`);
+				// Reset the terrain first
+				mHeight = [];
+				if (map) {
+					map.dispose(); // Dispose of the previous terrain mesh
+					map = null; // Reset the reference
+				}
+				loadTerFile(file);
+			} else {
+				console.error("No file selected.");
+			}
+		});
+
+		// Button to toggle between wireframe and shaded view
+		// Create a flat shading material
+
+
+		// Button to toggle between wireframe and shaded view
+		document.getElementById('toggleViewButton').addEventListener('click', function () {
+			if (map) { // Ensure the map (terrain mesh) exists
+				const material = map.material;
+				const isWireframe = material.wireframe;
+
+				// Toggle the wireframe property
+				material.wireframe = !isWireframe;
+
+				// Update lights and emissive color based on the current view
+				if (material.wireframe) {
+					// In wireframe mode, disable lights and change emissive color
+					scene.lights.forEach(light => light.setEnabled(false));
+					material.emissiveColor = new BABYLON.Color3(0.6, 0.6, 0.6); // Set emissive color to white in wireframe mode
+					this.textContent = 'Switch to Shaded View'; // Update button text
+				} else {
+					// In shaded mode, enable lights and reset emissive color
+					scene.lights.forEach(light => light.setEnabled(true));
+					material.emissiveColor = new BABYLON.Color3(0, 0, 0); // Reset emissive color to off in shaded mode
+					this.textContent = 'Switch to Wireframe View'; // Update button text
+				}
+			} else {
+				console.error("Terrain mesh not found.");
+			}
+		});
+
+		// Render loop
+		engine.runRenderLoop(function () {
+			scene.render();
+		});
+
+		// Handle window resizing
+		window.addEventListener('resize', function () {
+			engine.resize();
+		});
+
+		//scene.debugLayer.show({
+		//	embedMode: true, // Display as an embedded UI
+		//	overlay: true, // Display on top of the canvas
+		//	globalRoot: document.body, // Attach to the body or another element
+		//	position: {
+		//		top: 0, // Position at the top
+		//		right: 0 // Align to the right side
+		//	}
+		//});
+	</script>
+</body>
+
+</html>
