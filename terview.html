@@ -41,6 +41,128 @@
 			width: 256px;
 			height: 256px;
 		}
+		#container1 {
+			position: absolute;
+			bottom: 10px;
+			left: 276px;
+			z-index: 10;
+			display: flex;
+			flex-direction: column;
+			gap: 10px;
+		}
+
+      #container2 {
+			position: absolute;
+			bottom: 10px;
+			left: 416px;
+			z-index: 10;
+			display: flex;
+			flex-direction: column;
+			gap: 10px;
+		}
+
+		#container3 {
+			position: absolute;
+			bottom: 10px;
+			left: 556px;
+			z-index: 10;
+			display: flex;
+			flex-direction: column;
+			gap: 10px;
+		}
+
+
+		#container4 {
+			position: absolute;
+			bottom: 10px;
+			left: 696px;
+			z-index: 10;
+			display: flex;
+			flex-direction: column;
+			gap: 10px;
+		}
+
+
+		#container5 {
+			position: absolute;
+			bottom: 10px;
+			left: 836px;
+			z-index: 10;
+			display: flex;
+			flex-direction: column;
+			gap: 10px;
+		}
+
+		#container6 {
+			position: absolute;
+			bottom: 10px;
+			left: 976px;
+			z-index: 10;
+			display: flex;
+			flex-direction: column;
+			gap: 10px;
+		}
+
+		#layer1 {
+			display: block;
+			position: absolute;
+			bottom: 10px;
+			left: 0px;
+			z-index: 10;
+			border: 1px solid black;
+			width: 128px;
+			height: 128px;
+		}
+		#layer2 {
+			display: block;
+			position: absolute;
+			bottom: 10px;
+			left: 0px;
+			z-index: 10;
+			border: 1px solid black;
+			width: 128px;
+			height: 128px;
+		}
+		#layer3 {
+			display: block;
+			position: absolute;
+			bottom: 10px;
+			left: 0px;
+			z-index: 10;
+			border: 1px solid black;
+			width: 128px;
+			height: 128px;
+		}
+		#layer4 {
+			display: block;
+			position: absolute;
+			bottom: 10px;
+			left: 0px;
+			z-index: 10;
+			border: 1px solid black;
+			width: 128px;
+			height: 128px;
+		}
+		#layer5 {
+			display: block;
+			position: absolute;
+			bottom: 10px;
+			left: 0px;
+			z-index: 10;
+			border: 1px solid black;
+			width: 128px;
+			height: 128px;
+		}
+		#layer6 {
+			display: block;
+			position: absolute;
+			bottom: 10px;
+			left: 0px;
+			z-index: 10;
+			border: 1px solid black;
+			width: 128px;
+			height: 128px;
+		}
 	</style>
 </head>
 
@@ -50,20 +172,61 @@
 		<label for="fileInput" style="color: white; cursor: pointer;">Upload .ter file, note displays scale is 8</label>
 		<input type="file" id="fileInput" accept=".ter" style="color:white" />
 		<button id="toggleViewButton">Switch to Shaded View</button>
-		<label for="scaleSlider" style="color:white" ;>Image Export Scale (1-16): <span id="scaleValue"
-				style="color:white">1</span></label>
+		<label for="scaleSlider" style="color:white" ;>Image Export Scale (1-16): <span id="scaleValue" style="color:white">1</span></label>
 		<input type="range" id="scaleSlider" min="1" max="16" value="1" />
 		<button id="exportButton">Export 8 Bit PNG Greyscale</button>
 		<button id="exportPGMButton">Export 16 Bit PGM</button>
 		<span style="font-weight: normal; margin-bottom: 5px; display: block; color: white;">Note text export order matches terrain file</span>
-		<button id="exportTextButton">Export Raw Height Data Text File</button>
+		<button id="exportTextButton">Export Raw Terrain Data Text File</button>
 		<span style="font-weight: normal; margin-bottom: 5px; display: block; color: white;">3D Export</span>
 		<button id="exportObjButton">Export Terrain as OBJ</button>
 		<button id="exportStlButton">Export Terrain as STL</button>
 		<div id="minMaxHeightDisplay" style="margin-bottom: 10px; color: white;"></div>
+		<span style="font-weight: normal; margin-bottom: 5px; display: block; color: white;">Click And Drag GreyScale Preview To Offset</span>
+
+		<button id="exportTerButton">Export New .ter With Offset</button>
+
 	</div>
 	<canvas id="renderCanvas"></canvas>
 	<canvas id="greyscaleCanvas" width="256" height="256"></canvas> <!-- Canvas for grayscale image -->
+	
+	<div id="container1">
+			<canvas id="layer1"></canvas>
+			<div id="layerDisplay1" style="margin-bottom: 1px; color: white; font-size: 12px;">Texture 1</div>
+			<button id="LayerBtn1" style="margin-bottom: 150px;"">Export Layer 1</button>
+
+	</div>
+
+	<div id="container2">
+		<canvas id="layer2"></canvas>
+		<div id="layerDisplay2" style="margin-bottom: 1px; color: white; font-size: 12px;">Texture 2</div>
+		<button id="LayerBtn2" style="margin-bottom: 150px;"">Export Layer 2</button>
+	</div>
+
+	<div id="container3">
+		<canvas id="layer3"></canvas>
+		<div id="layerDisplay3" style="margin-bottom: 1px; color: white; font-size: 12px;">Texture 3</div>
+		<button id="LayerBtn3" style="margin-bottom: 150px;"">Export Layer 3</button>
+	</div>
+
+
+	<div id="container4">
+		<canvas id="layer4"></canvas>
+		<div id="layerDisplay4" style="margin-bottom: 1px; color: white; font-size: 12px;">Texture 4</div>
+		<button id="LayerBtn4" style="margin-bottom: 150px;"">Export Layer 4</button>
+	</div>
+
+	<div id="container5">
+		<canvas id="layer5"></canvas>
+		<div id="layerDisplay5" style="margin-bottom: 1px; color: white; font-size: 12px;">Texture 5</div>
+		<button id="LayerBtn5" style="margin-bottom: 150px;"">Export Layer 5</button>
+	</div>
+
+	<div id="container6">
+		<canvas id="layer6"></canvas>
+		<div id="layerDisplay6" style="margin-bottom: 1px; color: white; font-size: 12px;">Texture 6</div>
+		<button id="LayerBtn6" style="margin-bottom: 150px;"">Export Layer 6</button>
+	</div>	
 
 	<script src="https://cdn.babylonjs.com/babylon.js"></script>
 	<script>
@@ -84,8 +247,36 @@
 		const scaleFactor = 8; // Scale factor for X and Z axes
 		var mHeight = [];
 		var mHeightDefault = [];
+		var mHeightOffset = [];
 		var map; // Reference to the terrain mesh
+      var textureNames = [];
 
+		var alphaMap1 = [];
+		var alphaMap2 = [];
+		var alphaMap3 = [];
+		var alphaMap4 = [];
+		var alphaMap5 = [];
+		var alphaMap6 = [];
+
+		var alphaMap1d = [];
+		var alphaMap2d = [];
+		var alphaMap3d = [];
+		var alphaMap4d = [];
+		var alphaMap5d = [];
+		var alphaMap6d = [];
+
+		var alphaMapOffset1 = [];
+		var alphaMapOffset2 = [];
+		var alphaMapOffset3 = [];
+		var alphaMapOffset4 = [];
+		var alphaMapOffset5 = [];
+		var alphaMapOffset6 = [];
+
+      var test  = 0;
+		var isOffset = 0;
+		var dataViewEX = null;
+		var alphaOffsetStart = 0;
+		var upFileName = null;
 		// Function to create terrain mesh using height data
 		function createTerrain() {
 			// Dispose of the previous terrain mesh if it exists
@@ -95,7 +286,6 @@
 
 			const mapSubX = size; // Points along the X axis (e.g., 256)
 			const mapSubZ = size; // Points along the Z axis (e.g., 256)
-
 			const vertices = [];
 			const indices = [];
 
@@ -138,7 +328,7 @@
 			// Apply the vertex data to the mesh
 			vertexData.applyToMesh(terrainMesh);
 
-			// Create a material with smooth shading and double-sided rendering
+			// Create a material with smooth shading 
 			flatMaterial = new BABYLON.StandardMaterial("flatMaterial", scene);
 			flatMaterial.wireframe = false; // Set to false for smooth shaded view
 			flatMaterial.diffuseColor = new BABYLON.Color3(0.8, 0.8, 0.8); // Set color to something natural
@@ -150,23 +340,99 @@
 
 			// Update the map variable to reference the newly created terrain mesh
 			map = terrainMesh;
-
-			console.log("Terrain with smooth shading and double-sided rendering created successfully.");
 			generateGreyscaleImage(); // Generate the grayscale image
 		}
+      
+		function createTerrain2() {
+			   isOffset = 1;
+				// Dispose of the previous terrain mesh if it exists
+				if (map) {
+					map.dispose();
+				}
 
+				const mapSubX = size; // Points along the X axis (e.g., 256)
+				const mapSubZ = size; // Points along the Z axis (e.g., 256)
+
+				const vertices = [];
+				const indices = [];
+
+				// Create vertices for the mesh (flipping on X-axis)
+				for (let l = 0; l < mapSubZ; l++) {
+					for (let w = 0; w < mapSubX; w++) {
+						const x = -(w - mapSubX * 0.5) * 8; // Flip the X coordinate
+						const z = (l - mapSubZ * 0.5) * 8; // Each vertex is 8m apart
+						const y = mHeightOffset[l * mapSubX + w]; // Use loaded height data
+
+						// Store the vertex position
+						vertices.push(x, y, z);
+					}
+				}
+
+				// Create triangles by defining indices (Clockwise winding order)
+				for (let l = 0; l < mapSubZ - 1; l++) {
+					for (let w = 0; w < mapSubX - 1; w++) {
+						const topLeft = l * mapSubX + w;
+						const topRight = topLeft + 1;
+						const bottomLeft = (l + 1) * mapSubX + w;
+						const bottomRight = bottomLeft + 1;
+
+						// Adjusted triangle definitions (clockwise winding order)
+						indices.push(bottomLeft, topRight, topLeft); // First triangle
+						indices.push(bottomLeft, bottomRight, topRight); // Second triangle
+					}
+				}
+
+				// Create the mesh using the vertices and indices
+				const terrainMesh = new BABYLON.Mesh("terrain", scene);
+				const vertexData = new BABYLON.VertexData();
+				vertexData.positions = vertices;
+				vertexData.indices = indices;
+
+				// Compute normals for smooth shading
+				vertexData.normals = [];
+				BABYLON.VertexData.ComputeNormals(vertexData.positions, vertexData.indices, vertexData.normals);
+
+				// Apply the vertex data to the mesh
+				vertexData.applyToMesh(terrainMesh);
+
+				// Create a material with smooth shading and double-sided rendering
+				flatMaterial = new BABYLON.StandardMaterial("flatMaterial", scene);
+				flatMaterial.wireframe = false; // Set to false for smooth shaded view
+				flatMaterial.diffuseColor = new BABYLON.Color3(0.8, 0.8, 0.8); // Set color to something natural
+				flatMaterial.specularColor = new BABYLON.Color3(0.0, 0.0, 0.0); // No specular highlights for smooth shading
+				flatMaterial.emissiveColor = new BABYLON.Color3(0, 0, 0); // No emissive color
+
+				// Apply the material to the terrain mesh
+				terrainMesh.material = flatMaterial;
+
+				// Update the map variable to reference the newly created terrain mesh
+				map = terrainMesh;
+			}
 		// Function to load and parse the .ter file
 		function loadTerFile(file) {
+			isOffset = 0;
+			upFileName = file.name;
+			for (let x = 0; x < 6; x++) {
+				var imgLayer = document.getElementById('layer'+ (x+1));
+				var context = imgLayer.getContext('2d');
+				 context.clearRect(0, 0, imgLayer.width, imgLayer.height);
+
+				let id = document.getElementById('layerDisplay' + (x + 1));
+				id.textContent = 'Texture ' + (x+1);
+			}
 			const reader = new FileReader();
 			reader.onload = function (e) {
-				const buffer = e.target.result;
-				const dataView = new DataView(buffer);
-
+				var buffer = e.target.result;
+				var dataView = new DataView(buffer);
+            dataViewEX = dataView;
 				let offset = 0;
-				const version = dataView.getUint8(offset++);
+				var version = dataView.getUint8(offset++);
 				console.log(`Terrain Version: ${version}`);
 
 				mHeightDefault = [];
+				textureNames = [];
+				alphaMap1 = []; alphaMapD1 = []; 
+
 				for (let i = 0; i < size * size; i++) {
 					let height = dataView.getUint16(offset, true); // true for little-endian
 					height = height * 0.03125; // Convert height to meters
@@ -174,13 +440,118 @@
 					mHeightDefault.push(height);
 				}
 
-				// Flip the heightmap vertically
+						// Flip the heightmap vertically
 				mHeight = [];
 				for (let row = size - 1; row >= 0; row--) {
 					for (let col = 0; col < size; col++) {
 						mHeight.push(mHeightDefault[row * size + col]);
 					}
 				}
+
+				offset +=  (256 * 256); 
+
+             for (let i = 0; i < 8; i++) {
+					let strSize = dataView.getUint8(offset++);
+					let txtname = readString(dataView, offset, strSize);
+					offset += strSize;
+					txtname = txtname.replace('terrain.', "").trim();
+					if(i < 6 && strSize > 0){
+						let id = document.getElementById('layerDisplay'+ (i+1));
+						id.textContent = txtname;
+						textureNames.push(txtname);
+					}
+				}
+
+				alphaOffsetStart = offset;
+
+				alphaMap1 = []; alphaMap1d = [];
+				if(textureNames.length > 0){
+					for (let x = 0; x < (256 * 256); x++) {
+						var alphaMats = dataView.getUint8(offset++);
+						alphaMap1d.push(alphaMats);
+					}
+
+					for (let row = size - 1; row >= 0; row--) {
+						for (let col = 0; col < size; col++) {
+							alphaMap1.push(alphaMap1d[row * size + col]);
+						}
+					}
+					generateAlphaMapImage(alphaMap1d, 1);
+				}
+            
+				alphaMap2 = []; alphaMap2d = [];
+				if (textureNames.length > 1) {
+					for (let x = 0; x < (256 * 256); x++) {
+						var alphaMats = dataView.getUint8(offset++);
+						alphaMap2d.push(alphaMats);
+					}
+
+					for (let row = size - 1; row >= 0; row--) {
+						for (let col = 0; col < size; col++) {
+							alphaMap2.push(alphaMap2d[row * size + col]);
+						}
+					}
+					generateAlphaMapImage(alphaMap2, 2);
+				}
+
+				alphaMap3 = []; alphaMap3d = [];
+				if (textureNames.length > 2) {
+					for (let x = 0; x < (256 * 256); x++) {
+						var alphaMats = dataView.getUint8(offset++);
+						alphaMap3d.push(alphaMats);
+					}
+
+					for (let row = size - 1; row >= 0; row--) {
+						for (let col = 0; col < size; col++) {
+							alphaMap3.push(alphaMap3d[row * size + col]);
+						}
+					}
+					generateAlphaMapImage(alphaMap3, 3);
+				}
+
+				alphaMap4 = []; alphaMap4d = [];
+				if (textureNames.length > 3) {
+					for (let x = 0; x < (256 * 256); x++) {
+						var alphaMats = dataView.getUint8(offset++);
+						alphaMap4d.push(alphaMats);
+					}
+					for (let row = size - 1; row >= 0; row--) {
+						for (let col = 0; col < size; col++) {
+							alphaMap4.push(alphaMap4d[row * size + col]);
+						}
+					}
+					generateAlphaMapImage(alphaMap4, 4);
+				}
+
+				alphaMap5 = []; alphaMap5d = [];
+				if (textureNames.length > 4) {
+					for (let x = 0; x < (256 * 256); x++) {
+						var alphaMats = dataView.getUint8(offset++);
+						alphaMap5d.push(alphaMats);
+					}
+					for (let row = size - 1; row >= 0; row--) {
+						for (let col = 0; col < size; col++) {
+							alphaMap5.push(alphaMap5d[row * size + col]);
+						}
+					}
+					generateAlphaMapImage(alphaMap5, 5);
+				}
+
+				alphaMap6 = []; alphaMap6d = [];
+				if (textureNames.length > 5) {
+					for (let x = 0; x < (256 * 256); x++) {
+						var alphaMats = dataView.getUint8(offset++);
+						alphaMap6d.push(alphaMats);
+					}
+					for (let row = size - 1; row >= 0; row--) {
+						for (let col = 0; col < size; col++) {
+							alphaMap6.push(alphaMap6d[row * size + col]);
+						}
+					}
+					generateAlphaMapImage(alphaMap6, 6);
+				}
+
+
 				// Once data is loaded, create the terrain
 				createTerrain();
 			};
@@ -188,7 +559,173 @@
 			reader.readAsArrayBuffer(file);
 		}
 
+		function exportTer() {
+			if(!isOffset)
+				return;
+			let hm = [];
+			//let v = dataViewEX.getUint8(0);
+			for (let row = size - 1; row >= 0; row--) { //flip back to og
+				for (let col = 0; col < size; col++) {
+					hm.push(mHeightOffset[row * size + col]);
+				}
+			}
+
+         let off = 1;// skip the version 
+			for (let i = 0; i < size * size; i++) {
+				var height = Math.floor(hm[i] / 0.03125);
+				dataViewEX.setUint16(off, height, true); // true for little-endian
+				off += 2;
+			}
+
+			if (textureNames.length > 0) {
+				let tA = [];
+				for (let row = size - 1; row >= 0; row--) {//flip back to og
+					for (let col = 0; col < size; col++) {
+						tA.push(alphaMapOffset1[row * size + col]);
+					}
+				}
+				for (let i = 0; i < size * size; i++) {
+					dataViewEX.setUint8(alphaOffsetStart++, tA[i]);
+					off += 2;
+				}
+			}
+
+			if (textureNames.length > 1) {
+				let tA = [];
+				for (let row = size - 1; row >= 0; row--) {//flip back to og
+					for (let col = 0; col < size; col++) {
+						tA.push(alphaMapOffset2[row * size + col]);
+					}
+				}
+				for (let i = 0; i < size * size; i++) {
+					dataViewEX.setUint8(alphaOffsetStart++, tA[i]);
+					off += 2;
+				}
+			}
+
+			if (textureNames.length > 2) {
+				let tA = [];
+				for (let row = size - 1; row >= 0; row--) {//flip back to og
+					for (let col = 0; col < size; col++) {
+						tA.push(alphaMapOffset3[row * size + col]);
+					}
+				}
+				for (let i = 0; i < size * size; i++) {
+					dataViewEX.setUint8(alphaOffsetStart++, tA[i]);
+					off += 2;
+				}
+			}
+
+			if (textureNames.length > 3) {
+				let tA = [];
+				for (let row = size - 1; row >= 0; row--) {//flip back to og
+					for (let col = 0; col < size; col++) {
+						tA.push(alphaMapOffset4[row * size + col]);
+					}
+				}
+				for (let i = 0; i < size * size; i++) {
+					dataViewEX.setUint8(alphaOffsetStart++, tA[i]);
+					off += 2;
+				}
+			}
+
+			if (textureNames.length > 4) {
+				let tA = [];
+				for (let row = size - 1; row >= 0; row--) {//flip back to og
+					for (let col = 0; col < size; col++) {
+						tA.push(alphaMapOffset5[row * size + col]);
+					}
+				}
+				for (let i = 0; i < size * size; i++) {
+					dataViewEX.setUint8(alphaOffsetStart++, tA[i]);
+					off += 2;
+				}
+			}
+
+			if (textureNames.length > 5) {
+				let tA = [];
+				for (let row = size - 1; row >= 0; row--) {//flip back to og
+					for (let col = 0; col < size; col++) {
+						tA.push(alphaMapOffset6[row * size + col]);
+					}
+				}
+				for (let i = 0; i < size * size; i++) {
+					dataViewEX.setUint8(alphaOffsetStart++, tA[i]);
+					off += 2;
+				}
+			}
+
+			const blob = new Blob([dataViewEX.buffer], { type: "application/octet-stream" });
+			const link = document.createElement('a');
+			link.href = URL.createObjectURL(blob);
+			link.download = upFileName;
+			link.click();
+		}
+
+      function readString(dataView, offset, length) {
+			let result = '';
+			for (let i = 0; i < length; i++) {
+				const byte = dataView.getUint8(offset + i);
+				if (byte === 0) break; // Stop at null terminator if present
+				result += String.fromCharCode(byte);
+			}
+			return result;
+		}
+		
 		// Function to generate a grayscale image from height data
+		function generateAlphaMapImage(alphaArray, layer) {
+				const targetSize = 128; // Downscaled size
+				const imgLayer = document.getElementById('layer' + layer);
+				imgLayer.width = targetSize; // Set canvas width
+				imgLayer.height = targetSize; // Set canvas height
+				const context = imgLayer.getContext('2d');
+
+				// Clear the canvas
+				context.clearRect(0, 0, imgLayer.width, imgLayer.height);
+
+				// Create ImageData for the target size
+				const imageData = context.createImageData(targetSize, targetSize);
+
+				// Bilinear interpolation loop
+				for (let y = 0; y < targetSize; y++) {
+					for (let x = 0; x < targetSize; x++) {
+						// Map target pixel (x, y) to source coordinates
+						const sourceX = (x / targetSize) * (size - 1); // Scaled x-coordinate in source
+						const sourceY = (y / targetSize) * (size - 1); // Scaled y-coordinate in source
+
+						// Find the four nearest pixels in the source
+						const x1 = Math.floor(sourceX);
+						const x2 = Math.min(Math.ceil(sourceX), size - 1); // Clamp to bounds
+						const y1 = Math.floor(sourceY);
+						const y2 = Math.min(Math.ceil(sourceY), size - 1); // Clamp to bounds
+
+						// Values at the four corners
+						const v1 = alphaArray[x1 + y1 * size]; // Top-left
+						const v2 = alphaArray[x2 + y1 * size]; // Top-right
+						const v3 = alphaArray[x1 + y2 * size]; // Bottom-left
+						const v4 = alphaArray[x2 + y2 * size]; // Bottom-right
+
+						// Interpolate to get the value for the target pixel
+						const interpolatedValue = bilinearInter(
+							x1, y1, x2, y2,
+							sourceX, sourceY,
+							v1, v2, v3, v4
+						);
+
+						// Assign the interpolated value to the target pixel
+						const destIndex = (x + y * targetSize) * 4;
+						imageData.data[destIndex] = interpolatedValue;    // Red
+						imageData.data[destIndex + 1] = 0;               // Green
+						imageData.data[destIndex + 2] = 0;               // Blue
+						imageData.data[destIndex + 3] = 255;             // Alpha
+					}
+				}
+
+				context.putImageData(imageData, 0, 0);
+				imgLayer.style.display = 'block'; // Show the grayscale canvas
+			}
+
+			
 		function generateGreyscaleImage() {
 			const greyscaleCanvas = document.getElementById('greyscaleCanvas');
 			const context = greyscaleCanvas.getContext('2d');
@@ -214,24 +751,84 @@
 
 			context.putImageData(imageData, 0, 0);
 			greyscaleCanvas.style.display = 'block'; // Show the grayscale canvas
+			   // Ensure the drag functionality is enabled
+			greyscaleImageData = imageData;
+			enableGreyscaleDragging();
 		}
 
-		// Bilinear interpolation function
-		function bilinearInter(x1, y1, x2, y2, x, y, v1, v2, v3, v4) {
-			let w11 = (((x2 - x) * (y2 - y)) / ((x2 - x1) * (y2 - y1))) * v1; // x1 y1 
-			let w21 = (((x - x1) * (y2 - y)) / ((x2 - x1) * (y2 - y1))) * v2; // x2 y1
-			let w12 = (((x2 - x) * (y - y1)) / ((x2 - x1) * (y2 - y1))) * v3; // x1 y2
-			let w22 = (((x - x1) * (y - y1)) / ((x2 - x1) * (y2 - y1))) * v4; // x2 y2
-			return w11 + w21 + w12 + w22;
+		function exportAlphaMap(layer, scale) {
+			let alphaLayer = [];
+			switch (layer) {
+				case 1:alphaLayer = (!isOffset) ? alphaMap1 : alphaMapOffset1;break;
+				case 2:alphaLayer = (!isOffset) ? alphaMap2 : alphaMapOffset2;break;
+				case 3:alphaLayer = (!isOffset) ? alphaMap3 : alphaMapOffset3; break;
+				case 4:alphaLayer = (!isOffset) ? alphaMap4 : alphaMapOffset4;break;
+				case 5:alphaLayer = (!isOffset) ? alphaMap5 : alphaMapOffset5;break;
+				case 6:alphaLayer = (!isOffset) ? alphaMap6 : alphaMapOffset6;break;
+			}
+			if (alphaLayer.length > 0) {
+				const resizeTo = size * scale;
+				const img1 = new ImageData(resizeTo, resizeTo);
+
+				for (let y = 0; y < resizeTo; y++) {
+					for (let x = 0; x < resizeTo; x++) {
+						const nx = Math.floor(x / scale);
+						const ny = Math.floor(y / scale);
+						const nxedge = (nx !== 255) ? 1 : -255;
+						const nyedge = (ny !== 255) ? 1 : -255;
+
+						const v1 = alphaLayer[nx + (ny * size)];
+						const v2 = alphaLayer[(nx + nxedge) + (ny * size)];
+						const v3 = alphaLayer[nx + ((ny + nyedge) * size)];
+						const v4 = alphaLayer[(nx + (nxedge)) + ((ny + nyedge) * size)];
+
+						const color = bilinearInter(
+							Math.floor(x / scale) * scale,
+							Math.floor(y / scale) * scale,
+							(Math.floor(x / scale) + 1) * scale,
+							(Math.floor(y / scale) + 1) * scale,
+							x, y, v1, v2, v3, v4);
+
+						// Flip the image vertically
+						const flippedY = y;
+
+						img1.data[x * 4 + flippedY * 4 * resizeTo] = color;     // Red
+						img1.data[x * 4 + flippedY * 4 * resizeTo + 1] = 0;     // Green
+						img1.data[x * 4 + flippedY * 4 * resizeTo + 2] = 0;     // Blue
+						img1.data[x * 4 + flippedY * 4 * resizeTo + 3] = 255;   // Alpha
+					}
+				}
+
+				// Create a new canvas for the scaled image
+				const scaledCanvas = document.createElement('canvas');
+				scaledCanvas.width = resizeTo;
+				scaledCanvas.height = resizeTo;
+				const scaledContext = scaledCanvas.getContext('2d');
+				scaledContext.putImageData(img1, 0, 0);
+
+				// Create a link to download the image
+				const link = document.createElement('a');
+				link.download = textureNames[layer-1] + '.png';
+				link.href = scaledCanvas.toDataURL('image/png');
+				link.click();
+			}
 		}
+
+
 
 		// Function to resize and export the grayscale image
-		function exportScaledImage(scale) {
-			const greyscaleCanvas = document.getElementById('greyscaleCanvas');
+		function exportScaledImage() {
+			if (isOffset) {
+				tempMap = mHeightOffset;
+			}
+			else {
+				tempMap = mHeight;
+			}
+			const scale = parseInt(document.getElementById('scaleSlider').value, 10);
 			const resizeTo = size * scale;
 			const img1 = new ImageData(resizeTo, resizeTo);
-			const max = Math.max(...mHeight);
-			const min = Math.min(...mHeight);
+			const max = Math.max(...tempMap);
+			const min = Math.min(...tempMap);
 
 			for (let y = 0; y < resizeTo; y++) {
 				for (let x = 0; x < resizeTo; x++) {
@@ -240,23 +837,17 @@
 					const nxedge = (nx !== 255) ? 1 : -255;
 					const nyedge = (ny !== 255) ? 1 : -255;
 
-					const v1 = mHeight[nx + (ny * size)];
-					const v2 = mHeight[(nx + nxedge) + (ny * size)];
-					const v3 = mHeight[nx + ((ny + nyedge) * size)];
-					const v4 = mHeight[(nx + (nxedge)) + ((ny + nyedge) * size)];
+					const v1 = tempMap[nx + (ny * size)];
+					const v2 = tempMap[(nx + nxedge) + (ny * size)];
+					const v3 = tempMap[nx + ((ny + nyedge) * size)];
+					const v4 = tempMap[(nx + (nxedge)) + ((ny + nyedge) * size)];
 
 					const linval = bilinearInter(
 						Math.floor(x / scale) * scale,
 						Math.floor(y / scale) * scale,
 						(Math.floor(x / scale) + 1) * scale,
 						(Math.floor(y / scale) + 1) * scale,
-						x,
-						y,
-						v1,
-						v2,
-						v3,
-						v4
-					);
+						x,y,v1,v2,v3,v4);
 
 					const dif = max - min;
 					const colRange = 255 / dif;
@@ -285,10 +876,16 @@
 
 		// Function to export height data as a P2 (ASCII) PGM file with scaling
 		function exportPGM() {
+			if(isOffset){
+          	tempMap = mHeightOffset;
+			}
+			else{
+				tempMap = mHeight;
+			}
 			const scale = parseInt(document.getElementById('scaleSlider').value, 10);
 			const resizeTo = size * scale; // New dimensions based on scale
-			const maxHeight = Math.max(...mHeight);
-			const minHeight = Math.min(...mHeight);
+			const maxHeight = Math.max(...tempMap);
+			const minHeight = Math.min(...tempMap);
 			const pgmHeader = `P2\n${resizeTo} ${resizeTo}\n65535\n`;
 
 			let pgmData = '';
@@ -302,10 +899,10 @@
 					const nxEdge = (nx < size - 1) ? 1 : 0;
 					const nyEdge = (ny < size - 1) ? 1 : 0;
 
-					const v1 = mHeight[nx + (ny * size)];
-					const v2 = mHeight[(nx + nxEdge) + (ny * size)];
-					const v3 = mHeight[nx + ((ny + nyEdge) * size)];
-					const v4 = mHeight[(nx + nxEdge) + ((ny + nyEdge) * size)];
+					const v1 = tempMap[nx + (ny * size)];
+					const v2 = tempMap[(nx + nxEdge) + (ny * size)];
+					const v3 = tempMap[nx + ((ny + nyEdge) * size)];
+					const v4 = tempMap[(nx + nxEdge) + ((ny + nyEdge) * size)];
 
 					// Bilinear interpolation
 					const interpolatedValue = bilinearInter(
@@ -313,13 +910,7 @@
 						Math.floor(y / scale) * scale,
 						(Math.floor(x / scale) + 1) * scale,
 						(Math.floor(y / scale) + 1) * scale,
-						x,
-						y,
-						v1,
-						v2,
-						v3,
-						v4
-					);
+						x, y, v1, v2, v3, v4);
 
 					// Normalize height to the range 0-65535
 					const normalizedHeight = Math.floor(((interpolatedValue - minHeight) / (maxHeight - minHeight)) * 65535);
@@ -345,8 +936,6 @@
 			let textData = '';
 
 			for (let y = 0; y < resizeTo; y++) {
-				const row = [];
-
 				for (let x = 0; x < resizeTo; x++) {
 					const nx = Math.floor(x / scale);
 					const ny = Math.floor(y / scale);
@@ -366,19 +955,55 @@
 						Math.floor(y / scale) * scale,
 						(Math.floor(x / scale) + 1) * scale,
 						(Math.floor(y / scale) + 1) * scale,
-						x,
-						y,
-						v1,
-						v2,
-						v3,
-						v4
-					);
+						x, y, v1, v2, v3, v4);
 
 					// Add interpolated value to the row array
-					row.push(interpolatedValue);
+					textData += interpolatedValue + ' ';
 				}
 
-				textData += row.join('\t') + '\n'; // Join row with tabs and add a newline
+				textData += '\n'; // Join row with tabs and add a newline
+			}
+
+        	for (let z = 0; z < textureNames.length; z++) {
+				textData += textureNames[z] + '\n';
+				let layer = z + 1;
+				switch (layer) {
+					case 1:alphaLayer = (!isOffset) ? alphaMap1 : alphaMapOffset1;break;
+					case 2:alphaLayer = (!isOffset) ? alphaMap2 : alphaMapOffset2;break;
+					case 3:alphaLayer = (!isOffset) ? alphaMap3 : alphaMapOffset3;break;
+					case 4:alphaLayer = (!isOffset) ? alphaMap4 : alphaMapOffset4;break;
+					case 5:alphaLayer = (!isOffset) ? alphaMap5 : alphaMapOffset5;break;
+					case 6:alphaLayer = (!isOffset) ? alphaMap6 : alphaMapOffset6;break;
+				}
+
+				for (let y = 0; y < resizeTo; y++) {
+					for (let x = 0; x < resizeTo; x++) {
+						const nx = Math.floor(x / scale);
+						const ny = Math.floor(y / scale);
+
+						// Ensure nx and ny are within bounds
+						const nxEdge = (nx < size - 1) ? 1 : 0;
+						const nyEdge = (ny < size - 1) ? 1 : 0;
+
+						const v1 = alphaLayer[nx + (ny * size)];
+						const v2 = alphaLayer[(nx + nxEdge) + (ny * size)];
+						const v3 = alphaLayer[nx + ((ny + nyEdge) * size)];
+						const v4 = alphaLayer[(nx + nxEdge) + ((ny + nyEdge) * size)];
+
+						// Bilinear interpolation to get the height value
+						const interpolatedValue = bilinearInter(
+							Math.floor(x / scale) * scale,
+							Math.floor(y / scale) * scale,
+							(Math.floor(x / scale) + 1) * scale,
+							(Math.floor(y / scale) + 1) * scale,
+							x, y, v1, v2, v3, v4);
+
+						// Add interpolated value to the row array
+						textData += interpolatedValue + ' ';
+					}
+
+					textData += '\n'; // Join row with tabs and add a newline
+				}
 			}
 
 			// Create a Blob from the text data
@@ -435,7 +1060,6 @@
 			link.click();
 		}
 
-
 		// Function to export the terrain mesh as an STL file
 		function exportStl() {
 			if (!map) {
@@ -480,7 +1104,33 @@
 			link.href = url;
 			link.click();
 		}
-
+      
+		document.getElementById('LayerBtn1').addEventListener('click',  function () {
+				const scale = parseInt(document.getElementById('scaleSlider').value, 10);
+				exportAlphaMap(1, scale);
+			})
+		document.getElementById('LayerBtn2').addEventListener('click',  function () {
+				const scale = parseInt(document.getElementById('scaleSlider').value, 10);
+				exportAlphaMap(2, scale);
+			})
+		document.getElementById('LayerBtn3').addEventListener('click',  function () {
+				const scale = parseInt(document.getElementById('scaleSlider').value, 10);
+				exportAlphaMap(3, scale);
+			})
+		document.getElementById('LayerBtn4').addEventListener('click',  function () {
+				const scale = parseInt(document.getElementById('scaleSlider').value, 10);
+				exportAlphaMap(4, scale);
+			})
+		document.getElementById('LayerBtn5').addEventListener('click',  function () {
+				const scale = parseInt(document.getElementById('scaleSlider').value, 10);
+				exportAlphaMap(5, scale);
+			})
+		document.getElementById('LayerBtn6').addEventListener('click', function () {
+				const scale = parseInt(document.getElementById('scaleSlider').value, 10);
+				exportAlphaMap(6, scale);
+			})
+      
+		document.getElementById('exportTerButton').addEventListener('click', exportTer);
 		// Button to export terrain mesh as STL
 		document.getElementById('exportStlButton').addEventListener('click', exportStl);
 		// Button to export terrain mesh as OBJ
@@ -492,10 +1142,7 @@
 		// Button to export the PGM image
 		document.getElementById('exportPGMButton').addEventListener('click', exportPGM);
 		// Button to export the grayscale image as PNG
-		document.getElementById('exportButton').addEventListener('click', function () {
-			const scale = parseInt(document.getElementById('scaleSlider').value, 10);
-			exportScaledImage(scale);
-		});
+		document.getElementById('exportButton').addEventListener('click', exportScaledImage);
 
 		// Update the scale value display when slider changes
 		document.getElementById('scaleSlider').addEventListener('input', function () {
@@ -522,7 +1169,6 @@
 
 		// Button to toggle between wireframe and shaded view
 		// Create a flat shading material
-
 
 		// Button to toggle between wireframe and shaded view
 		document.getElementById('toggleViewButton').addEventListener('click', function () {
@@ -569,6 +1215,134 @@
 		//		right: 0 // Align to the right side
 		//	}
 		//});
+
+
+
+		let isDragging = false;
+		let dragStart = { x: 0, y: 0 };
+		let imgoffset = { x: 0, y: 0 };
+		let greyscaleImageData;
+      var updateTimeOut = null;
+		function enableGreyscaleDragging() {
+			const greyscaleCanvas = document.getElementById('greyscaleCanvas');
+			const context = greyscaleCanvas.getContext('2d');
+
+			greyscaleCanvas.addEventListener('mousedown', (event) => {
+				isDragging = true;
+				dragStart = { x: event.offsetX, y: event.offsetY };
+			});
+
+			greyscaleCanvas.addEventListener('mousemove', (event) => {
+				if (isDragging) {
+					const dx = event.offsetX - dragStart.x;
+					const dy = event.offsetY - dragStart.y;
+					imgoffset.x = (imgoffset.x + dx) % size; // Wrap horizontally
+					imgoffset.y = (imgoffset.y + dy) % size; // Wrap vertically
+					dragStart = { x: event.offsetX, y: event.offsetY };
+
+					redrawGreyscaleImage(context);
+					updateHeightmapWithOffset();
+					createTerrain2(); 
+				}
+			});
+
+			greyscaleCanvas.addEventListener('mouseup', () => {
+				isDragging = false;
+				updateHeightAlphamapWithOffset();
+			});
+
+			greyscaleCanvas.addEventListener('mouseleave', () => {
+				isDragging = false;
+				updateHeightAlphamapWithOffset();
+			});
+		}
+
+		function redrawGreyscaleImage(context) {
+			if (!greyscaleImageData) return;
+			const tempCanvas = document.createElement('canvas');
+			const tempContext = tempCanvas.getContext('2d');
+			tempCanvas.width = size;
+			tempCanvas.height = size;
+			tempContext.putImageData(greyscaleImageData, 0, 0);
+
+			context.clearRect(0, 0, greyscaleCanvas.width, greyscaleCanvas.height);
+
+			// Draw the image in a wrapping/looping manner
+			for (let y = -size; y <= size; y += size) {
+				for (let x = -size; x <= size; x += size) {
+					context.drawImage(
+						tempCanvas,
+						(x + imgoffset.x) % size,
+						(y + imgoffset.y) % size,
+						size,
+						size
+					);
+				}
+			}
+		}
+		function updateHeightmapWithOffset() {
+			// Normalize the offset to avoid cumulative errors
+			imgoffset.x = ((imgoffset.x % size) + size) % size;
+			imgoffset.y = ((imgoffset.y % size) + size) % size;
+
+			for (let y = 0; y < size; y++) {
+				for (let x = 0; x < size; x++) {
+					// Calculate source indices with normalized wrapping
+					const srcX = (x - imgoffset.x + size) % size;
+					const srcY = (y - imgoffset.y + size) % size; // Subtract offset.y for inverted up/down movement
+
+					const srcIndex = srcY * size + srcX;
+					const destIndex = y * size + x;
+
+					// Update the new height data
+					mHeightOffset[destIndex] = mHeight[srcIndex];
+				}
+			}
+		}
+
+		function updateHeightAlphamapWithOffset() {
+			for(let z = 0; z < textureNames.length; z++){
+				let layer =  z + 1;
+				// Normalize the offset to avoid cumulative errors
+				imgoffset.x = ((imgoffset.x % size) + size) % size;
+				imgoffset.y = ((imgoffset.y % size) + size) % size;
+
+				for (let y = 0; y < size; y++) {
+					for (let x = 0; x < size; x++) {
+						// Calculate source indices with normalized wrapping
+						const srcX = (x - imgoffset.x + size) % size;
+						const srcY = (y - imgoffset.y + size) % size; // Subtract offset.y for inverted up/down movement
+
+						const srcIndex = srcY * size + srcX;
+						const destIndex = y * size + x;
+						// Update the new alpha data
+						switch (layer) {
+							case 1:alphaMapOffset1[destIndex] = alphaMap1[srcIndex];break;
+							case 2:alphaMapOffset2[destIndex] = alphaMap2[srcIndex];break;
+							case 3:alphaMapOffset3[destIndex] = alphaMap3[srcIndex];break;
+							case 4:alphaMapOffset4[destIndex] = alphaMap4[srcIndex];break;
+							case 5:alphaMapOffset5[destIndex] = alphaMap5[srcIndex];break;
+							case 6:alphaMapOffset6[destIndex] = alphaMap6[srcIndex];break;
+						}
+					}
+				}
+				switch (layer) {
+					case 1:generateAlphaMapImage(alphaMapOffset1, layer);break;
+					case 2:generateAlphaMapImage(alphaMapOffset2, layer);break;
+					case 3:generateAlphaMapImage(alphaMapOffset3, layer);break;
+					case 4:generateAlphaMapImage(alphaMapOffset4, layer);break;
+					case 5:generateAlphaMapImage(alphaMapOffset5, layer);break;
+					case 6:generateAlphaMapImage(alphaMapOffset6, layer);break;
+				}
+			}
+		}
+		function bilinearInter(x1, y1, x2, y2, x, y, v1, v2, v3, v4) {
+			let w11 = (((x2 - x) * (y2 - y)) / ((x2 - x1) * (y2 - y1))) * v1; // x1 y1 
+			let w21 = (((x - x1) * (y2 - y)) / ((x2 - x1) * (y2 - y1))) * v2; // x2 y1
+			let w12 = (((x2 - x) * (y - y1)) / ((x2 - x1) * (y2 - y1))) * v3; // x1 y2
+			let w22 = (((x - x1) * (y - y1)) / ((x2 - x1) * (y2 - y1))) * v4; // x2 y2
+			return w11 + w21 + w12 + w22;
+		}
 	</script>
 </body>
 
