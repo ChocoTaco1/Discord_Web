@@ -185,7 +185,8 @@
 		<span style="font-weight: normal; margin-bottom: 5px; display: block; color: white;">Click And Drag GreyScale Preview To Offset</span>
 
 		<button id="exportTerButton">Export New .ter With Offset</button>
-
+		<button id="exportTerFixButton">Flat Spot Fix .ter</button>
+		<button id="exportTerFixButtonCone">Cone/Flat Spot Fix .ter</button>
 	</div>
 	<canvas id="renderCanvas"></canvas>
 	<canvas id="greyscaleCanvas" width="256" height="256"></canvas> <!-- Canvas for grayscale image -->
@@ -250,7 +251,6 @@
 		var mHeightOffset = [];
 		var map; // Reference to the terrain mesh
       var textureNames = [];
-
 		var alphaMap1 = [];
 		var alphaMap2 = [];
 		var alphaMap3 = [];
@@ -343,47 +343,56 @@
 			generateGreyscaleImage(); // Generate the grayscale image
 		}
       
-		function createTerrain2() {
-			   isOffset = 1;
-				// Dispose of the previous terrain mesh if it exists
-				if (map) {
-					map.dispose();
+	function createTerrain2() {
+			isOffset = 1;
+
+			const mapSubX = size; // Points along the X axis (e.g., 256)
+			const mapSubZ = size; // Points along the Z axis (e.g., 256)
+
+			const vertices = [];
+			const indices = [];
+
+			// Create vertices for the mesh (flipping on X-axis)
+			for (let l = 0; l < mapSubZ; l++) {
+				for (let w = 0; w < mapSubX; w++) {
+					const x = -(w - mapSubX * 0.5) * 8; // Flip the X coordinate
+					const z = (l - mapSubZ * 0.5) * 8; // Each vertex is 8m apart
+					const y = mHeightOffset[l * mapSubX + w]; // Use loaded height data
+
+					// Store the vertex position
+					vertices.push(x, y, z);
 				}
+			}
 
-				const mapSubX = size; // Points along the X axis (e.g., 256)
-				const mapSubZ = size; // Points along the Z axis (e.g., 256)
+			// Create triangles by defining indices (Clockwise winding order)
+			for (let l = 0; l < mapSubZ - 1; l++) {
+				for (let w = 0; w < mapSubX - 1; w++) {
+					const topLeft = l * mapSubX + w;
+					const topRight = topLeft + 1;
+					const bottomLeft = (l + 1) * mapSubX + w;
+					const bottomRight = bottomLeft + 1;
 
-				const vertices = [];
-				const indices = [];
-
-				// Create vertices for the mesh (flipping on X-axis)
-				for (let l = 0; l < mapSubZ; l++) {
-					for (let w = 0; w < mapSubX; w++) {
-						const x = -(w - mapSubX * 0.5) * 8; // Flip the X coordinate
-						const z = (l - mapSubZ * 0.5) * 8; // Each vertex is 8m apart
-						const y = mHeightOffset[l * mapSubX + w]; // Use loaded height data
-
-						// Store the vertex position
-						vertices.push(x, y, z);
-					}
+					// Adjusted triangle definitions (clockwise winding order)
+					indices.push(bottomLeft, topRight, topLeft); // First triangle
+					indices.push(bottomLeft, bottomRight, topRight); // Second triangle
 				}
+			}
 
-				// Create triangles by defining indices (Clockwise winding order)
-				for (let l = 0; l < mapSubZ - 1; l++) {
-					for (let w = 0; w < mapSubX - 1; w++) {
-						const topLeft = l * mapSubX + w;
-						const topRight = topLeft + 1;
-						const bottomLeft = (l + 1) * mapSubX + w;
-						const bottomRight = bottomLeft + 1;
+			if (map) {
+				// Update the existing mesh
+				const vertexData = new BABYLON.VertexData();
+				vertexData.positions = vertices;
+				vertexData.indices = indices;
 
-						// Adjusted triangle definitions (clockwise winding order)
-						indices.push(bottomLeft, topRight, topLeft); // First triangle
-						indices.push(bottomLeft, bottomRight, topRight); // Second triangle
-					}
-				}
+				// Compute normals for smooth shading
+				vertexData.normals = [];
+				BABYLON.VertexData.ComputeNormals(vertexData.positions, vertexData.indices, vertexData.normals);
 
-				// Create the mesh using the vertices and indices
-				const terrainMesh = new BABYLON.Mesh("terrain", scene);
+				// Apply updated vertex data to the existing mesh
+				vertexData.applyToMesh(map, true); // 'true' ensures mesh data is updated
+			} else {
+				// Create the mesh if it doesn't exist
+				map = new BABYLON.Mesh("terrain", scene);
 				const vertexData = new BABYLON.VertexData();
 				vertexData.positions = vertices;
 				vertexData.indices = indices;
@@ -393,7 +402,7 @@
 				BABYLON.VertexData.ComputeNormals(vertexData.positions, vertexData.indices, vertexData.normals);
 
 				// Apply the vertex data to the mesh
-				vertexData.applyToMesh(terrainMesh);
+				vertexData.applyToMesh(map);
 
 				// Create a material with smooth shading and double-sided rendering
 				flatMaterial = new BABYLON.StandardMaterial("flatMaterial", scene);
@@ -403,11 +412,10 @@
 				flatMaterial.emissiveColor = new BABYLON.Color3(0, 0, 0); // No emissive color
 
 				// Apply the material to the terrain mesh
-				terrainMesh.material = flatMaterial;
-
-				// Update the map variable to reference the newly created terrain mesh
-				map = terrainMesh;
+				map.material = flatMaterial;
 			}
+		}
+
 		// Function to load and parse the .ter file
 		function loadTerFile(file) {
 			isOffset = 0;
@@ -558,12 +566,256 @@
 
 			reader.readAsArrayBuffer(file);
 		}
+		function vectorDistXYZ(x1, y1, z1, x2, y2, z2) {
+			let x = parseFloat(x2) - parseFloat(x1);
+			let y = parseFloat(y2) - parseFloat(y1);
+			let z = parseFloat(z2) - parseFloat(z1);
+			return Math.sqrt(x * x + y * y + z * z);
+		}
+		function outputConeZone(tempMap) {
+			var gridsize = 8;
+			for (let y = 0; y < 256; y++) {
+				for (let x = 0; x < 256; x++) {
+					var midx = Math.floor(x / (gridsize * 2)) === 0 ? gridsize : gridsize + (Math.floor(x / (gridsize * 2)) * (gridsize * 2));
+					var midy = Math.floor(y / (gridsize * 2)) === 0 ? gridsize : gridsize + (Math.floor(y / (gridsize * 2)) * (gridsize * 2));
+					var dist = vectorDistXYZ(x, y, 0, midx, midy, 0) * 8;
+					var offset = dist * Math.sin((2 * Math.PI) / 180);
+					tempMap[x + (y * 256)] = tempMap[x + (y * 256)] + offset;
+				}
+			}
+			return tempMap;
+		}
+
+		function exportTerFlatSpotCone() {
+			var tempMap = (isOffset) ? mHeightOffset.slice() : mHeight.slice();
+			tempMap = outputConeZone(tempMap);
+			tempMap = spotFix(tempMap);
+
+
+			var alphaMapT1 = (isOffset) ? alphaMapOffset1 : alphaMap1;
+			var alphaMapT2 = (isOffset) ? alphaMapOffset2 : alphaMap2;
+			var alphaMapT3 = (isOffset) ? alphaMapOffset3 : alphaMap3;
+			var alphaMapT4 = (isOffset) ? alphaMapOffset4 : alphaMap4;
+			var alphaMapT5 = (isOffset) ? alphaMapOffset5 : alphaMap5;
+			var alphaMapT6 = (isOffset) ? alphaMapOffset6 : alphaMap6;
+
+			let hm = [];
+         var tempStartOffSet = alphaOffsetStart;
+			for (let row = size - 1; row >= 0; row--) { //flip back to og
+				for (let col = 0; col < size; col++) {
+					hm.push(tempMap[row * size + col]);
+				}
+			}
+
+			let off = 1;// skip the version 
+			for (let i = 0; i < size * size; i++) {
+				var height = Math.floor(hm[i] / 0.03125);
+				dataViewEX.setUint16(off, height, true); // true for little-endian
+				off += 2;
+			}
+
+			if (textureNames.length > 0) {
+				let tA = [];
+				for (let row = size - 1; row >= 0; row--) {//flip back to og
+					for (let col = 0; col < size; col++) {
+						tA.push(alphaMapT1[row * size + col]);
+					}
+				}
+				for (let i = 0; i < size * size; i++) {
+					dataViewEX.setUint8(tempStartOffSet++, tA[i]);
+					off += 2;
+				}
+			}
+
+			if (textureNames.length > 1) {
+				let tA = [];
+				for (let row = size - 1; row >= 0; row--) {//flip back to og
+					for (let col = 0; col < size; col++) {
+						tA.push(alphaMapT2[row * size + col]);
+					}
+				}
+				for (let i = 0; i < size * size; i++) {
+					dataViewEX.setUint8(tempStartOffSet++, tA[i]);
+					off += 2;
+				}
+			}
+
+			if (textureNames.length > 2) {
+				let tA = [];
+				for (let row = size - 1; row >= 0; row--) {//flip back to og
+					for (let col = 0; col < size; col++) {
+						tA.push(alphaMapT3[row * size + col]);
+					}
+				}
+				for (let i = 0; i < size * size; i++) {
+					dataViewEX.setUint8(tempStartOffSet++, tA[i]);
+					off += 2;
+				}
+			}
+
+			if (textureNames.length > 3) {
+				let tA = [];
+				for (let row = size - 1; row >= 0; row--) {//flip back to og
+					for (let col = 0; col < size; col++) {
+						tA.push(alphaMapT4[row * size + col]);
+					}
+				}
+				for (let i = 0; i < size * size; i++) {
+					dataViewEX.setUint8(tempStartOffSet++, tA[i]);
+					off += 2;
+				}
+			}
+
+			if (textureNames.length > 4) {
+				let tA = [];
+				for (let row = size - 1; row >= 0; row--) {//flip back to og
+					for (let col = 0; col < size; col++) {
+						tA.push(alphaMapT5[row * size + col]);
+					}
+				}
+				for (let i = 0; i < size * size; i++) {
+					dataViewEX.setUint8(tempStartOffSet++, tA[i]);
+					off += 2;
+				}
+			}
+
+			if (textureNames.length > 5) {
+				let tA = [];
+				for (let row = size - 1; row >= 0; row--) {//flip back to og
+					for (let col = 0; col < size; col++) {
+						tA.push(alphaMapT6[row * size + col]);
+					}
+				}
+				for (let i = 0; i < size * size; i++) {
+					dataViewEX.setUint8(tempStartOffSet++, tA[i]);
+					off += 2;
+				}
+			}
+
+			const blob = new Blob([dataViewEX.buffer], { type: "application/octet-stream" });
+			const link = document.createElement('a');
+			link.href = URL.createObjectURL(blob);
+			link.download = upFileName;
+			link.click();
+		}
+
+		function exportTerFlatSpot() {
+			var tempMap = (isOffset) ? mHeightOffset.slice() : mHeight.slice();
+			tempMap = spotFix(tempMap);
+
+
+			var alphaMapT1=  (isOffset) ? alphaMapOffset1 : alphaMap1;
+			var alphaMapT2 = (isOffset) ? alphaMapOffset2 : alphaMap2;
+			var alphaMapT3 = (isOffset) ? alphaMapOffset3 : alphaMap3;
+			var alphaMapT4 = (isOffset) ? alphaMapOffset4 : alphaMap4;
+			var alphaMapT5 = (isOffset) ? alphaMapOffset5 : alphaMap5;
+			var alphaMapT6 = (isOffset) ? alphaMapOffset6 : alphaMap6;
+
+			let hm = [];
+			var tempStartOffSet = alphaOffsetStart;
+			for (let row = size - 1; row >= 0; row--) { //flip back to og
+				for (let col = 0; col < size; col++) {
+					hm.push(tempMap[row * size + col]);
+				}
+			}
+
+			let off = 1;// skip the version 
+			for (let i = 0; i < size * size; i++) {
+				var height = Math.floor(hm[i] / 0.03125);
+				dataViewEX.setUint16(off, height, true); // true for little-endian
+				off += 2;
+			}
+
+			if (textureNames.length > 0) {
+				let tA = [];
+				for (let row = size - 1; row >= 0; row--) {//flip back to og
+					for (let col = 0; col < size; col++) {
+						tA.push(alphaMapT1[row * size + col]);
+					}
+				}
+				for (let i = 0; i < size * size; i++) {
+					dataViewEX.setUint8(tempStartOffSet++, tA[i]);
+					off += 2;
+				}
+			}
+
+			if (textureNames.length > 1) {
+				let tA = [];
+				for (let row = size - 1; row >= 0; row--) {//flip back to og
+					for (let col = 0; col < size; col++) {
+						tA.push(alphaMapT2[row * size + col]);
+					}
+				}
+				for (let i = 0; i < size * size; i++) {
+					dataViewEX.setUint8(tempStartOffSet++, tA[i]);
+					off += 2;
+				}
+			}
+
+			if (textureNames.length > 2) {
+				let tA = [];
+				for (let row = size - 1; row >= 0; row--) {//flip back to og
+					for (let col = 0; col < size; col++) {
+						tA.push(alphaMapT3[row * size + col]);
+					}
+				}
+				for (let i = 0; i < size * size; i++) {
+					dataViewEX.setUint8(tempStartOffSet++, tA[i]);
+					off += 2;
+				}
+			}
+
+			if (textureNames.length > 3) {
+				let tA = [];
+				for (let row = size - 1; row >= 0; row--) {//flip back to og
+					for (let col = 0; col < size; col++) {
+						tA.push(alphaMapT4[row * size + col]);
+					}
+				}
+				for (let i = 0; i < size * size; i++) {
+					dataViewEX.setUint8(tempStartOffSet++, tA[i]);
+					off += 2;
+				}
+			}
+
+			if (textureNames.length > 4) {
+				let tA = [];
+				for (let row = size - 1; row >= 0; row--) {//flip back to og
+					for (let col = 0; col < size; col++) {
+						tA.push(alphaMapT5[row * size + col]);
+					}
+				}
+				for (let i = 0; i < size * size; i++) {
+					dataViewEX.setUint8(tempStartOffSet++, tA[i]);
+					off += 2;
+				}
+			}
+
+			if (textureNames.length > 5) {
+				let tA = [];
+				for (let row = size - 1; row >= 0; row--) {//flip back to og
+					for (let col = 0; col < size; col++) {
+						tA.push(alphaMapT6[row * size + col]);
+					}
+				}
+				for (let i = 0; i < size * size; i++) {
+					dataViewEX.setUint8(tempStartOffSet++, tA[i]);
+					off += 2;
+				}
+			}
+
+			const blob = new Blob([dataViewEX.buffer], { type: "application/octet-stream" });
+			const link = document.createElement('a');
+			link.href = URL.createObjectURL(blob);
+			link.download = upFileName;
+			link.click();
+		}
 
 		function exportTer() {
 			if(!isOffset)
 				return;
 			let hm = [];
-			//let v = dataViewEX.getUint8(0);
+			var tempStartOffSet = alphaOffsetStart;
 			for (let row = size - 1; row >= 0; row--) { //flip back to og
 				for (let col = 0; col < size; col++) {
 					hm.push(mHeightOffset[row * size + col]);
@@ -585,7 +837,7 @@
 					}
 				}
 				for (let i = 0; i < size * size; i++) {
-					dataViewEX.setUint8(alphaOffsetStart++, tA[i]);
+					dataViewEX.setUint8(tempStartOffSet++, tA[i]);
 					off += 2;
 				}
 			}
@@ -598,7 +850,7 @@
 					}
 				}
 				for (let i = 0; i < size * size; i++) {
-					dataViewEX.setUint8(alphaOffsetStart++, tA[i]);
+					dataViewEX.setUint8(tempStartOffSet++, tA[i]);
 					off += 2;
 				}
 			}
@@ -611,7 +863,7 @@
 					}
 				}
 				for (let i = 0; i < size * size; i++) {
-					dataViewEX.setUint8(alphaOffsetStart++, tA[i]);
+					dataViewEX.setUint8(tempStartOffSet++, tA[i]);
 					off += 2;
 				}
 			}
@@ -624,7 +876,7 @@
 					}
 				}
 				for (let i = 0; i < size * size; i++) {
-					dataViewEX.setUint8(alphaOffsetStart++, tA[i]);
+					dataViewEX.setUint8(tempStartOffSet++, tA[i]);
 					off += 2;
 				}
 			}
@@ -637,7 +889,7 @@
 					}
 				}
 				for (let i = 0; i < size * size; i++) {
-					dataViewEX.setUint8(alphaOffsetStart++, tA[i]);
+					dataViewEX.setUint8(tempStartOffSet++, tA[i]);
 					off += 2;
 				}
 			}
@@ -650,7 +902,7 @@
 					}
 				}
 				for (let i = 0; i < size * size; i++) {
-					dataViewEX.setUint8(alphaOffsetStart++, tA[i]);
+					dataViewEX.setUint8(tempStartOffSet++, tA[i]);
 					off += 2;
 				}
 			}
@@ -1104,6 +1356,187 @@
 			link.href = url;
 			link.click();
 		}
+
+		function radToDeg(rad) {
+			return (rad * 180) / Math.PI;
+		}
+
+		function sNormalFlip(x, y, tempMap) {
+			var sqSize = 8;
+			if (y % 2 === 0) {
+				if (x % 2 === 0) {
+					//[0,0]
+					var pos1 = [(x * sqSize), (y * sqSize), tempMap[x + (y * 256)]];
+					//[1,0]
+					var pos2 = [((x + 1) * sqSize), (y * sqSize), tempMap[(x + 1) + (y * 256)]];
+					//[1,1]
+					var pos3 = [((x + 1) * sqSize), ((y + 1) * sqSize), tempMap[(x + 1) + ((y + 1) * 256)]];
+				}
+				else {
+					//[1,0]
+					var pos1 = [((x + 1) * sqSize), (y * sqSize), tempMap[(x + 1) + (y * 256)]];
+					//[1,1]
+					var pos2 = [((x + 1) * sqSize), ((y + 1) * sqSize), tempMap[(x + 1) + ((y + 1) * 256)]];
+					//[0,1]
+					var pos3 = [(x * sqSize), ((y + 1) * sqSize), tempMap[x + ((y + 1) * 256)]];
+				}
+			}
+			else {
+				if (x % 2 === 1) {
+					//[0,0]
+					var pos1 = [(x * sqSize), (y * sqSize), tempMap[x + (y * 256)]];
+					//[1,0]
+					var pos2 = [((x + 1) * sqSize), (y * sqSize), tempMap[(x + 1) + (y * 256)]];
+					//[1,1]
+					var pos3 = [((x + 1) * sqSize), ((y + 1) * sqSize), tempMap[(x + 1) + ((y + 1) * 256)]];
+				}
+				else {
+					//[1,0]
+					var pos1 = [((x + 1) * sqSize), (y * sqSize), tempMap[(x + 1) + (y * 256)]];
+					//[1,1]
+					var pos2 = [((x + 1) * sqSize), ((y + 1) * sqSize), tempMap[(x + 1) + ((y + 1) * 256)]];
+					//[0,1]
+					var pos3 = [(x * sqSize), ((y + 1) * sqSize), tempMap[x + ((y + 1) * 256)]];
+				}
+			}
+			var sub2 = [pos3[0] - pos1[0], pos3[1] - pos1[1], pos3[2] - pos1[2]];
+			var sub1 = [pos2[0] - pos1[0], pos2[1] - pos1[1], pos2[2] - pos1[2]];
+			var cross = [(sub1[1] * sub2[2]) - (sub1[2] * sub2[1]), (sub1[2] * sub2[0]) - (sub1[0] * sub2[2]), (sub1[0] * sub2[1]) - (sub1[1] * sub2[0])];
+
+			var squared = cross[0] * cross[0] + cross[1] * cross[1] + cross[2] * cross[2];
+			if (squared !== 0) {
+				var factor = 1 / Math.sqrt(squared);
+				cross[0] *= factor;
+				cross[1] *= factor;
+				cross[2] *= factor;
+			} else {
+				cross[0] = 0;
+				cross[1] = 0;
+				cross[2] = 1;
+			}
+			var up = [0, 0, 1];
+			var dot = cross[0] * up[0] + cross[1] * up[1] + cross[2] * up[2];
+			var angleRad = Math.acos(dot);
+			var angleDeg = radToDeg(angleRad);
+			return angleDeg;
+		}
+		function sNormal(x, y, tempMap) {
+			var sqSize = 8;
+			if (y % 2 === 0) {
+				if (x % 2 === 0) {
+					//[0,0]
+					var pos1 = [(x * sqSize), (y * sqSize), tempMap[x + (y * 256)]];
+					//[0,1]
+					var pos2 = [(x * sqSize), ((y + 1) * sqSize), tempMap[x + ((y + 1) * 256)]];
+					//[1,1]
+					var pos3 = [((x + 1) * sqSize), ((y + 1) * sqSize), tempMap[(x + 1) + ((y + 1) * 256)]];
+				}
+				else {
+					//[0,0]
+					var pos1 = [(x * sqSize), (y * sqSize), tempMap[x + (y * 256)]];
+					//[0,1]
+					var pos2 = [(x * sqSize), ((y + 1) * sqSize), tempMap[x + ((y + 1) * 256)]];
+					//[1,0]
+					var pos3 = [((x + 1) * sqSize), (y * sqSize), tempMap[(x + 1) + (y * 256)]];
+				}
+			}
+			else {
+				if (x % 2 === 1) {
+					//[0,0]
+					var pos1 = [(x * sqSize), (y * sqSize), tempMap[x + (y * 256)]];
+					//[0,1]
+					var pos2 = [(x * sqSize), ((y + 1) * sqSize), tempMap[x + ((y + 1) * 256)]];
+					//[1,1]
+					var pos3 = [((x + 1) * sqSize), ((y + 1) * sqSize), tempMap[(x + 1) + ((y + 1) * 256)]];
+				}
+				else {
+					//[0,0]
+					var pos1 = [(x * sqSize), (y * sqSize), tempMap[x + (y * 256)]];
+					//[0,1]
+					var pos2 = [(x * sqSize), ((y + 1) * sqSize), tempMap[x + ((y + 1) * 256)]];
+					//[1,0]
+					var pos3 = [((x + 1) * sqSize), (y * sqSize), tempMap[(x + 1) + (y * 256)]];
+				}
+			}
+			var sub1 = [pos3[0] - pos1[0], pos3[1] - pos1[1], pos3[2] - pos1[2]];
+			var sub2 = [pos2[0] - pos1[0], pos2[1] - pos1[1], pos2[2] - pos1[2]];
+			var cross = [(sub1[1] * sub2[2]) - (sub1[2] * sub2[1]), (sub1[2] * sub2[0]) - (sub1[0] * sub2[2]), (sub1[0] * sub2[1]) - (sub1[1] * sub2[0])];
+
+			var squared = cross[0] * cross[0] + cross[1] * cross[1] + cross[2] * cross[2];
+			if (squared !== 0) {
+				var factor = 1 / Math.sqrt(squared);
+				cross[0] *= factor;
+				cross[1] *= factor;
+				cross[2] *= factor;
+			} else {
+				cross[0] = 0;
+				cross[1] = 0;
+				cross[2] = 1;
+			}
+			var up = [0, 0, 1];
+			var dot = cross[0] * up[0] + cross[1] * up[1] + cross[2] * up[2];
+			var angleRad = Math.acos(dot);
+			var angleDeg = radToDeg(angleRad);
+			return angleDeg;
+		}
+
+		function spotFix(tempMap) {
+			var mrx = 0;
+			var nextPass = 0;
+			var fixCount = 0;
+			var fixCountM = 0;
+			var fixCountF = 0;
+			for (let pass = 1; pass < 50; pass++) {
+				nextPass = 0;
+				fixCount = 0;
+				mrx = 0;
+				fixCountM = 0;
+				fixCountF = 0;
+				var minAng = (pass === 1) ? 1 : 0.5;// first pas adjust verts by 1 degree then on other passes loose the tollerance  to reduce passes
+				for (let y = 0; y < 255; y++) {
+					for (let x = 0; x < 255; x++) {
+						var he = tempMap[x + (y * 256)];
+						var terAng = sNormal(x, y, tempMap);
+						var terAngFlip = sNormalFlip(x, y, tempMap);
+						mrx = x + y;
+						if (terAng <= minAng || terAngFlip <= minAng) {
+							nextPass = 1;
+							fixCount++;
+							if (terAng <= minAng) {
+								fixCountM++;
+							}
+							if (terAngFlip <= minAng) {
+								fixCountF++;
+							}
+							for (let z = 1; z < 100; z++) {
+								if (mrx % 2 === 0) {
+									tempMap[x + (y * 256)] = he + (0.1397 * z);
+								}
+								else {
+									tempMap[x + (y * 256)] = he - (0.1397 * z);
+									if (sNormalFlip(x, y, tempMap) <= minAng) {
+										tempMap[(x + 1) + ((y) * 256)] = he + (0.1397 * z);
+									}
+								}
+								var rx = sNormal(x, y, tempMap);
+								var tx = sNormalFlip(x, y, tempMap);
+								if (rx > 1 && tx > 1) {
+									break;
+								}
+							}
+						}
+					}
+				}
+				if (nextPass === 0) {
+					console.log('pass count done= ' + pass);
+					break;
+				}
+				 else {
+					console.log('pass count =' + pass + ' fix count ' + fixCount + ' mcount ' + fixCountM + ' fcount ' + fixCountF);
+				}
+			}
+			return tempMap;
+		}
       
 		document.getElementById('LayerBtn1').addEventListener('click',  function () {
 				const scale = parseInt(document.getElementById('scaleSlider').value, 10);
@@ -1130,6 +1563,8 @@
 				exportAlphaMap(6, scale);
 			})
       
+		document.getElementById('exportTerFixButton').addEventListener('click', exportTerFlatSpot);
+		document.getElementById('exportTerFixButtonCone').addEventListener('click', exportTerFlatSpotCone);
 		document.getElementById('exportTerButton').addEventListener('click', exportTer);
 		// Button to export terrain mesh as STL
 		document.getElementById('exportStlButton').addEventListener('click', exportStl);
