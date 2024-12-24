@@ -3,7 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>TribesNext Server List</title>
+    <title>T2 Server list</title>
+    
 <style>
     body {
         font-family: Arial, sans-serif;
@@ -16,7 +17,8 @@
 		line-height: 1.5em;
         text-shadow: 4px 4px 6px #011a1a;
         background-image: url("images/servers/background-xlarge.jpg");
-        background-size: cover;
+        background-size: 100%, 100%;
+
     }
     table {
         width: 100%;
@@ -27,7 +29,7 @@
         border: 1px solid #005f5f; /* Dark teal borders */
     }
     th {
-        background-color: #004040; /* Darker green for table headers */
+        background-color: #038e9b25; /* Darker green for table headers */
         font-family: 'Source Sans Pro', sans-serif;
 		font-weight: 300;
 		color: #e2e5e5;
@@ -106,9 +108,9 @@
         text-align: right;
         margin-top: 10px;
         font-family: 'Source Sans Pro', sans-serif;
-		font-size: 21pt;
 		font-weight: 300;
 		line-height: 1.75em;
+        font-size: 1.5em;
         text-shadow: 2px 2px 4px #011a1a;
     }
 
@@ -117,8 +119,8 @@
 	input[type="reset"],
 	button,
 	.modal-close button {
-	    width: 120px; /* Fixed width */
-        height: 40px; /* Fixed height */
+	    width: 100px; /* Fixed width */
+        height: 30px; /* Fixed height */
 		position: relative;
 		display: inline-block;
 		border-radius: 0.15em;
@@ -126,6 +128,7 @@
         text-shadow: 2px 2px 4px #011a1a;
 		text-decoration: none;
 		padding: 0.0em 1.5em 0.0em 1.5em;
+        font-size: 0.7em;
 		background-color: #038f9b;
 		border: 0;
 		cursor: pointer;
@@ -137,6 +140,7 @@
 		-webkit-transition: background-color 0.35s ease-in-out;
 		-ms-transition: background-color 0.35s ease-in-out;
 		transition: background-color 0.35s ease-in-out;
+        box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
 	}
 
 		input[type="button"]:hover,
@@ -157,12 +161,93 @@
 			background-color: #21b388;
             text-shadow: 2px 2px 4px #011a1a;
 		}
+        a:link {
+		  color: #2ccedc;
+		  background-color: transparent;
+		  text-decoration: none;
+		}
+
+		a:visited {
+		  color: #22A7B3;
+		  background-color: transparent;
+		  text-decoration: none;
+		}
+
+		a:hover {
+		  color: #2CDCB8;
+		  background-color: transparent;
+		  text-decoration: underline;
+		}
+
+		a:active {
+		  color: #27BB9D;
+		  background-color: transparent;
+		  text-decoration: underline;
+		}
+        #logo .image {
+				position: relative;
+				margin: 0 0 0.5em 0;
+		}
+        #logo {
+				margin: 1.5em 1.25em 1.25em 1.25em;
+		}
+        #logo {
+		position: relative;
+		margin: 1.75em 1.5em 1.5em 1.5em;
+		min-height: 48px;
+		cursor: default;
+	    }
+
+		#logo h1 {
+			position: relative;
+			color: #fff;
+			font-weight: 600;
+			font-size: 1.7em;
+			line-height: 1em;
+            margin: 0em 0em 0em 2.5em;
+
+		}
+
+		#logo p {
+			position: relative;
+			display: block;
+			font-size: 1.5em;
+			color: rgba(255, 255, 255, 0.5);
+			line-height: 1.25em;
+			margin: 0em 0em 0em 2.9em;
+		}
+
+		#logo .image {
+			position: absolute;
+			left: 0;
+			top: 0;
+		}
+		.image.avatar54 {
+			width: 54px;
+			height: 54px;
+		}
+
+        .image.avatar54 img {
+            width: 54px;
+            height: 54px;
+        }
+        #nav ul li a span:before {
+						left: 100%;
+						margin-left: -1.25em;
+						line-height: 2.25em;
+		}
+        
 </style>
 
 </head>
 <body>
-    <h1>TribesNext Server List</h1>
-    <p>Total Players: <span id="tplayers">0</span></p>
+    <!-- Logo -->
+    <div id="logo">
+        <span class="image avatar54"><img src="images/avatar.svg" alt="" /></span>
+        <h1><a href="https://www.tribesnext.com/" style="text-decoration: none">TribesNext Server List</a></h1>
+        <p>Total Players: <span id="tplayers">0</span></p>
+    </div>
+
     <table id="serverlist">
         <thead>
             <tr>
