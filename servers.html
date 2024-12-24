@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TribesNext Server List</title>
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        margin: 20px;
+        padding: 0;
+        background-color: #002b2b; /* Dark green background */
+        font-family: 'Source Sans Pro', sans-serif;
+		font-weight: 300;
+		color: #e2e5e5;
+		line-height: 1.5em;
+        text-shadow: 4px 4px 6px #011a1a;
+    }
+    table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-bottom: 20px;
+    }
+    table, th, td {
+        border: 1px solid #005f5f; /* Dark teal borders */
+    }
+    th {
+        background-color: #004040; /* Darker green for table headers */
+        font-family: 'Source Sans Pro', sans-serif;
+		font-weight: 300;
+		color: #e2e5e5;
+		line-height: 1.5em;
+        text-shadow: 2px 2px 4px #003030;
+    }
+    td {
+        font-family: 'Source Sans Pro', sans-serif;
+		font-weight: 300;
+		color: #e2e5e5;
+		line-height: 1.5em;
+        text-shadow: 2px 2px 4px #011a1a;
+    }
+    tr:hover {
+        background-color: #21b388; /* Slightly brighter green on hover */
+        background-image: -moz-linear-gradient(top, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.15)), url("images/overlay.png");
+		background-image: -webkit-linear-gradient(top, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.15)), url("images/overlay.png");
+		background-image: -ms-linear-gradient(top, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.15)), url("images/overlay.png");
+		background-image: linear-gradient(top, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.15)), url("images/overlay.png");
+		-moz-transition: background-color 0.35s ease-in-out;
+		-webkit-transition: background-color 0.35s ease-in-out;
+		-ms-transition: background-color 0.35s ease-in-out;
+		transition: background-color 0.35s ease-in-out;
+    }
+    tr.selected {
+        background-color: #038f9b; /* Highlight selected row with a brighter teal */
+        font-weight: 300;
+		color: #e2e5e5;
+		line-height: 1.5em;
+        text-shadow: 2px 2px 4px #011a1a;
+    }
+    .modal {
+        display: none;
+        position: relative;
+        z-index: 1000;
+        left: 50%;
+        top: 50%;
+        transform: translate(-50%, -50%);
+        width: auto; /* Allow the width to adjust based on content */
+		min-width: 300px; /* Ensure the width does not shrink too small */
+		max-width: 1000px; /* Limit the maximum width to 800px */
+        background-color: #001f1f; /* Dark greenish background */
+        border: 1px solid #005f5f; /* Same border as table */
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+        padding: 20px;
+    }
+    .modal-header {
+        font-weight: bold;
+        margin-bottom: 10px;
+        font-family: 'Source Sans Pro', sans-serif;
+		font-weight: 300;
+		color: #e2e5e5;
+		line-height: 1.5em;
+        text-shadow: 2px 2px 4px #011a1a;
+    }
+    .modal-body ul {
+        list-style-type: none;
+        padding: 0;
+        font-family: 'Source Sans Pro', sans-serif;
+		font-weight: 300;
+		color: #e2e5e5;
+		line-height: 1.5em;
+        text-shadow: 2px 2px 4px #011a1a;
+    }
+    .modal-body li {
+        margin-bottom: 5px;
+    }
+    .info_players {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 10px;
+    }
+    .modal-close {
+        display: block;
+        font-weight: bold;
+        text-align: right;
+        margin-top: 10px;
+        font-family: 'Source Sans Pro', sans-serif;
+		font-size: 21pt;
+		font-weight: 300;
+		line-height: 1.75em;
+        text-shadow: 2px 2px 4px #011a1a;
+    }
+
+    input[type="button"],
+	input[type="submit"],
+	input[type="reset"],
+	button,
+	.modal-close button {
+	    width: 120px; /* Fixed width */
+        height: 40px; /* Fixed height */
+		position: relative;
+		display: inline-block;
+		border-radius: 0.15em;
+		color: #e4e4e4 !important;
+        text-shadow: 2px 2px 4px #011a1a;
+		text-decoration: none;
+		padding: 0.0em 1.5em 0.0em 1.5em;
+		background-color: #038f9b;
+		border: 0;
+		cursor: pointer;
+		background-image: -moz-linear-gradient(top, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.15)), url("images/overlay.png");
+		background-image: -webkit-linear-gradient(top, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.15)), url("images/overlay.png");
+		background-image: -ms-linear-gradient(top, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.15)), url("images/overlay.png");
+		background-image: linear-gradient(top, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.15)), url("images/overlay.png");
+		-moz-transition: background-color 0.35s ease-in-out;
+		-webkit-transition: background-color 0.35s ease-in-out;
+		-ms-transition: background-color 0.35s ease-in-out;
+		transition: background-color 0.35s ease-in-out;
+	}
+
+		input[type="button"]:hover,
+		input[type="submit"]:hover,
+		input[type="reset"]:hover,
+		button:hover,
+		.modal-close button:hover {
+			color: #e4e4e4 !important;
+			background-color: #21b388;
+            text-shadow: 2px 2px 4px #011a1a;
+		}
+
+		input[type="button"]:active,
+		input[type="submit"]:active,
+		input[type="reset"]:active,
+		.modal-close button:active,
+		.button:active {
+			background-color: #21b388;
+            text-shadow: 2px 2px 4px #011a1a;
+		}
+</style>
+
+</head>
+<body>
+    <h1>TribesNext Server List</h1>
+    <p>Total Players: <span id="tplayers">0</span></p>
+    <table id="serverlist">
+        <thead>
+            <tr>
+                <th>Server Name</th>
+                <th>Players/Bots</th>
+                <th>Map</th>
+                <th>Type</th>
+                <th>Mod</th>
+                <th>IP Address</th>
+            </tr>
+        </thead>
+        <tbody></tbody>
+    </table>
+
+    <div id="serverModal" class="modal">
+        <div class="modal-header">Server Details</div>
+        <div class="modal-body">
+            <div class="info_desc"></div>
+            <div class="info_players"></div>
+            <div class="modal-close">
+                <button id="closeModal">Close</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        async function updateServerlist() {
+            try {
+                const response = await fetch("https://www.tribesnext.com/list.json");
+                const data = await response.json();
+                const tbody = document.querySelector('#serverlist tbody');
+                const tplayers = document.querySelector('#tplayers');
+                const modal = document.getElementById('serverModal');
+                const infoDesc = modal.querySelector('.info_desc');
+                const infoPlayers = modal.querySelector('.info_players');
+                const closeModalButton = document.getElementById('closeModal');
+
+                let totalPlayers = 0;
+                let totalBots = 0;
+
+                tbody.innerHTML = '';
+
+                for (const [sid, sobj] of Object.entries(data)) {
+                    totalPlayers += parseInt(sobj.num_players || 0, 10);
+                    totalBots += parseInt(sobj.num_bots || 0, 10);
+
+                    const row = document.createElement('tr');
+                    row.setAttribute('sid', sid);
+                    row.innerHTML = `
+                        <th scope="row">${sobj.info_hostname}</th>
+                        <td>${sobj.num_players}/${sobj.info_flags.max_players} (${sobj.num_bots})</td>
+                        <td>${sobj.info_map}</td>
+                        <td>${sobj.info_maptype}</td>
+                        <td>${sobj.info_mod}</td>
+                        <td>${sobj.s_ipa}</td>
+                    `;
+
+                    row.addEventListener('click', () => {
+                        document.querySelectorAll('#serverlist tr').forEach(tr => tr.classList.remove('selected'));
+                        row.classList.add('selected');
+
+                        infoDesc.textContent = sobj.info_desc || 'No description available';
+
+                        if (sobj.info_players instanceof Object) {
+                            const playerGroups = Object.entries(sobj.info_players)
+                                .filter(([key]) => key !== "name" && key !== "score")
+                                .map(([team, players]) => {
+                                    const teamName = players.name || 'Unknown Team';
+                                    const teamScore = players.score || 0;
+                                    const playerList = Object.entries(players)
+                                        .filter(([key]) => !isNaN(key))
+                                        .map(([key, player]) => `<div>${player.name} (Score: ${player.score})</div>`)
+                                        .join('');
+                                    return `<div><strong>${teamName} (Score: ${teamScore})</strong>${playerList}</div>`;
+                                })
+                                .join('');
+                            infoPlayers.innerHTML = playerGroups;
+                        } else {
+                            infoPlayers.textContent = 'No player information available';
+                        }
+
+                        modal.style.display = 'block';
+                    });
+
+                    tbody.appendChild(row);
+                }
+
+                tplayers.textContent = `${totalPlayers} (${totalBots})`;
+
+                closeModalButton.addEventListener('click', () => {
+                    modal.style.display = 'none';
+                });
+
+                window.addEventListener('click', (event) => {
+                    if (event.target === modal) {
+                        modal.style.display = 'none';
+                    }
+                });
+
+            } catch (error) {
+                console.error('Error fetching server list:', error);
+            }
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            updateServerlist();
+        });
+    </script>
+</body>
+</html>
