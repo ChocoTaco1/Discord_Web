@@ -32,11 +32,11 @@
         border: 1px solid #005f5f; /* Dark teal borders */
     }
     th {
-        background-color: #038e9b25; /* Darker green for table headers */
+        background-color: #005f5f; /* Solid dark teal color for table headers */
         font-family: 'Source Sans Pro', sans-serif;
-		font-weight: 300;
-		color: #e2e5e5;
-		line-height: 1.5em;
+        font-weight: 300;
+        color: #e2e5e5;
+        line-height: 1.5em;
         text-shadow: 2px 2px 4px #003030;
     }
     td {
@@ -303,7 +303,7 @@
                     const row = document.createElement('tr');
                     row.setAttribute('sid', sid);
                     row.innerHTML = `
-                        <th scope="row">${sobj.info_hostname}</th>
+                        <td scope="row">${sobj.info_hostname}</td>
                         <td>${sobj.num_players}/${sobj.info_flags.max_players} (${sobj.num_bots})</td>
                         <td>${sobj.info_map}</td>
                         <td>${sobj.info_maptype}</td>
@@ -363,4 +363,4 @@
         });
     </script>
 </body>
-</html>
+</html> 
